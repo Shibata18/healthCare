@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs');
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 const jwt = require('jsonwebtoken');
-const moment = require('moment');
+const moment = require("moment");
 
 const UserSchema = mongoose.Schema({
     name: {
@@ -32,12 +33,26 @@ const UserSchema = mongoose.Schema({
     tokenExp :{
         type: Number
     }
-});
-UserSchema.pre('save',async function(next){
-    const hash = await bcrypt.hash(this.password,10);
-    this.password=hash;
-    next();
 })
+
+UserSchema.pre('save', function( next ) {
+    var user = this;
+    
+    if(user.isModified('password')){    
+        // console.log('password changed')
+        bcrypt.genSalt(saltRounds, function(err, salt){
+            if(err) return next(err);
+    
+            bcrypt.hash(user.password, salt, function(err, hash){
+                if(err) return next(err);
+                user.password = hash 
+                next()
+            })
+        })
+    } else {
+        next()
+    }
+});
 
 UserSchema.methods.comparePassword = function(plainPassword,cb){
     bcrypt.compare(plainPassword, this.password, function(err, isMatch){
@@ -69,5 +84,5 @@ UserSchema.statics.findByToken = function (token, cb) {
         })
     })
 }
-
-module.exports = mongoose.model('User',UserSchema)
+const User =  mongoose.model('User', UserSchema);
+module.exports = {User}

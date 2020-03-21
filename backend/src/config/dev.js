@@ -1,3 +1,3 @@
 module.exports={
-    mongoURI:'mongodb+srv://healthCare:healthcare@cluster0-qy0eh.mongodb.net/health?retryWrites=true&w=majority',
+    mongoURI:'mongodb+srv://admin:admin@cluster0-tf64h.mongodb.net/test?retryWrites=true&w=majority',
 }

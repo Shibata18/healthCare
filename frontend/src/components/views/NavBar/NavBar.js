@@ -34,7 +34,7 @@ function NavBar() {
         >
         </Button>
         <Drawer
-          title="Basic Drawer"
+          title="Menu Lateral"
           placement="right"
           className="menu_drawer"
           closable={false}

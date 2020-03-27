@@ -1,0 +1,49 @@
+.login-container{
+    position: absolute;
+    width: 673px;
+    height: 700px;
+    left: 0px;
+    top: 0px;
+    background: #E5E5E5;
+}
+.login-container .login-content{
+    position: absolute;
+    width: 169px;
+    height: 219px;
+    left: 846px;
+    top: 49px;
+    background: url('../../assets/logo.svg');
+}
+.login-container.login-content p{
+    position: absolute;
+width: 259px;
+height: 28px;
+left: 788px;
+top: 287px;
+
+font-family: Roboto;
+font-style: normal;
+font-weight: 300;
+font-size: 24px;
+line-height: 28px;
+
+color: #00BCD4;
+}
+.login-container .login-content form input{
+    position: absolute;
+    width: 280px;
+    height: 0px;
+    left: 782px;
+    top: 406px;
+
+    border: 1px solid #C4C4C4;
+}
+.login-container .login-content form button{
+    position: absolute;
+    width: 254px;
+    height: 52px;
+    left: 791px;
+    top: 507px;
+
+    background: #00BCD4;
+}

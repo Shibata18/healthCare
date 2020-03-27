@@ -1,0 +1,45 @@
+.container-lateral{
+    background: #C4C4C4;
+}
+
+.container-lateral img {
+    position: absolute;
+    width: 178px;
+    height: 203px;
+    left: 55px;
+    top: 27px;
+}
+.register-container .content{
+    position: absolute;
+    width: 852px;
+    height: 700px;
+    left: 300px;
+    top: 0px;
+    background: #E5E5E5;
+}
+.register-container .content h1{
+    position: absolute;
+    width: 294px;
+    height: 33px;
+    left: 326px;
+    top: 46px;
+
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 28px;
+
+    color: #000000;
+}
+.register-container .content form input{
+    position: absolute;
+    width: 449.58px;
+    height: 37.33px;
+    left: 360.52px;
+    top: 203px;
+
+    background: #FFFFFF;
+    border: 1px solid #C4C4C4;
+    box-sizing: border-box;
+}

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import './style.css';
 import logosvg from '../../assets/logo.svg';
 import api from '../../services/api';
@@ -52,36 +52,52 @@ export default function Register() {
         }
     }
     return (
-        <>
-            <div className="container-lateral">
-                <img src={logosvg} alt='Logo' />
-                <Link to='/'>Pacientes</Link>
+            <div className='register-container'>
+                <div className="container-lateral">
+                    <img src={logosvg} alt='Logo' />
+               {/*  <Link to='/'>Pacientes</Link>
                 <Link to='/'>Profissionais</Link>
                 <Link to='/agenda'>Agenda</Link>
                 <Link to='/'>Consultas</Link>
                 <Link to='/'>Prontuário</Link>
                 <Link to='/'>Sobre</Link>
-                <Link to='/'>Ajuda</Link>
-            </div>
-            <div className='register-container'>
+                <Link to='/'>Ajuda</Link> */}
+                </div>
                 <div className='content'>
                     <h1>Cadastro</h1>
                     <form onSubmit={handleRegister}>
+                        <p>
                         <input placeholder='Nome' type='text' value={name} onChange={e => setName(e.target.value)} />
+                        </p>
+                        <p>
                         <input placeholder='CPF' minLength='11' maxLength='11' value={cpf} onChange={e => setCpf(e.target.value)} />
+                        </p>
+                        <p>
                         <input type='email' placeholder='E-mail' value={email} onChange={e => setEmail(e.target.value)} />
+                        </p>
+                        <p>
                         <input type='password' placeholder='Senha' value={senha} onChange={e => setSenha(e.target.value)} />
+                        </p>
+                        <p>
                         <input placeholder='telefone' value={telefone} onChange={e => setTelefone(e.target.value)} />
+                        </p>
+                        <p>
                         <input placeholder='Conselho' value={conselho} onChange={e => setConselho(e.target.value)} />
+                        </p>
+                        <p>
                         <input placeholder='Registro' value={registro} onChange={e => setRegistro(e.target.value)} />
+                        </p>
+                        <p>
                         <input placeholder='Especialidade' value={especialidade} onChange={e => setEspecialidade(e.target.value)} />
+                        </p>
+                        <p>
                         <input placeholder='imagem' value={imagem} onChange={e => setImagem(e.target.value)} />
+                        </p>
                         <button type='submit' onSubmit={handleRegister} >Cadastrar</button>
                         <button type='submit' onSubmit={handleUpdate} >Atualizar</button>
                         <button type='submit' onSubmit={handleDelete}>Inativar</button>
                     </form>
                 </div>
             </div>
-        </>
     )
 }

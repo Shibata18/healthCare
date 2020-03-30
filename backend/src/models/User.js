@@ -33,7 +33,7 @@ const userSchema = mongoose.Schema({
     especialidade:{
         type:String,
     },
-    role : {
+    id : {
         type:Number,
         default: 0 
     },

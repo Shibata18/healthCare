@@ -11,7 +11,7 @@ const { auth } = require("../middleware/auth");
 router.get("/auth", auth, (req, res) => {
     res.status(200).json({
         _id: req.user._id,
-        isAdmin: req.user.role === 0 ? false : true,
+        isAdmin: req.user.id === 0 ? false : true,
         isAuth: true,
         email: req.user.email,
         name: req.user.name,
@@ -19,7 +19,7 @@ router.get("/auth", auth, (req, res) => {
         especialidade: req.user.especialidade,
         conselho: req.user.conselho,
         telefone: req.user.telefone,
-        role: req.user.role,
+        id: req.user.id,
         image: req.user.image,
     });
 });
@@ -36,8 +36,8 @@ router.post("/register", (req, res) => {
     });
 });
 router.put("/login", (req, res) => {
-    const {email,cpf,senha} = req.body
-    User.findOneAndUpdate({email,cpf,senha},)
+    const {email,senha,telefone} = req.body
+    User.findOneAndUpdate({email,telefone,senha})
 });
 router.post("/login", (req, res) => {
     User.findOne({ email: req.body.email }, (err, user) => {

@@ -8,7 +8,10 @@ const io = require("socket.io")(server);
 const config = require("./config/key");
 
 const mongoose = require("mongoose");
-const connect = mongoose.connect(config.mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
+const connect = mongoose.connect(config.mongoURI, { 
+  useNewUrlParser: true, useUnifiedTopology: true,
+  useCreateIndex:true,useFindAndModify:true,
+})
   .then(() => console.log('MongoDB Conectado...'))
   .catch(err => console.log(err));
 
@@ -89,11 +92,11 @@ app.use('/uploads', express.static('uploads'));
 if (process.env.NODE_ENV === "production") {
 
   // Set static folder
-  app.use(express.static("../client/build"));
+  app.use(express.static("../web/build"));
 
   // index.html for all page routes
   app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "../client", "build", "index.html"));
+    res.sendFile(path.resolve(__dirname, "../web", "build", "index.html"));
   });
 }
 

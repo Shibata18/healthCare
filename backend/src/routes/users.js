@@ -16,15 +16,13 @@ router.get("/auth", auth, (req, res) => {
         email: req.user.email,
         name: req.user.name,
         cpf: req.user.cpf,
-        especialidade: req.user.especialidade,
-        conselho: req.user.conselho,
         telefone: req.user.telefone,
         id: req.user.id,
         image: req.user.image,
     });
 });
 
-router.post("/register", (req, res) => {
+router.post("/registerUser", (req, res) => {
 
     const user = new User(req.body);
 

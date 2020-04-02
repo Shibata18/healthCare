@@ -2,15 +2,16 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
-
+const cors = require("cors");
 const server = require("http").createServer(app);
 const io = require("socket.io")(server);
 const config = require("./config/key");
+const routes = require('./routes/doctors');
 
 const mongoose = require("mongoose");
 const connect = mongoose.connect(config.mongoURI, { 
   useNewUrlParser: true, useUnifiedTopology: true,
-  useCreateIndex:true,useFindAndModify:true,
+  useCreateIndex:true,useFindAndModify:false,
 })
   .then(() => console.log('MongoDB Conectado...'))
   .catch(err => console.log(err));
@@ -18,7 +19,8 @@ const connect = mongoose.connect(config.mongoURI, {
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
-
+app.use(routes);
+app.use(cors());
 const { Chat } = require("./models/Chat");
 const { auth } = require("./middleware/auth");
 

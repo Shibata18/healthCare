@@ -45,8 +45,7 @@ function LoginPage(props) {
         setTimeout(() => {
           let dataToSubmit = {
             email: values.email,
-            password: values.password,
-            cpf:values.cpf,
+            password: values.password
           };
 
           dispatch(loginUser(dataToSubmit))
@@ -106,23 +105,6 @@ function LoginPage(props) {
                   <div className="input-feedback">{errors.email}</div>
                 )}
               </Form.Item>
-
-              <Form.Item required>
-                <Input
-                  id="CPF"
-                  placeholder="Digite o seu CPF"
-                  type="text"
-                  value={values.cpf}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  className={
-                    errors.cpf && touched.cpf ? 'text-input error' : 'text-input'
-                  }
-                />
-                {errors.cpf && touched.cpf && (
-                  <div className="input-feedback">{errors.cpf}</div>
-                )}
-              </Form.Item>
               <Form.Item required>
                 <Input
                   id="password"
@@ -154,7 +136,7 @@ function LoginPage(props) {
                     Entrar <FaSignInAlt size={12}  />
                 </Button>
                 </div>
-                Ou <Link to="/register">Cadastre-se Agora!</Link>
+                Ou <Link to="/registerUser">Cadastre-se Agora!</Link>
               </Form.Item>
             </form>
           </div>

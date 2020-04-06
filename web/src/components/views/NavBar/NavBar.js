@@ -1,55 +1,32 @@
-import React, { useState } from 'react';
-import LeftMenu from './Sections/LeftMenu';
+import React from 'react';
+import { Navbar, Nav } from 'react-bootstrap'
+import {Link} from 'react-router-dom';
 import RightMenu from './Sections/RightMenu';
-import { Drawer, Button } from 'antd';
-import { FiMenu } from 'react-icons/fi'
-import './Sections/Navbar.css';
 import logo from '../../../assets/images/logo.svg'
 
-function NavBar() {
-  const [visible, setVisible] = useState(false)
-
-  const showDrawer = () => {
-    setVisible(true)
-  };
-
-  const onClose = () => {
-    setVisible(false)
-  };
-
+export default function NavBarPage() {
   return (
-    <nav className="menu" style={{ position: 'fixed', zIndex: 1, width: '100%'}}>
-      <div className="menu__logo">
-        <a href="/"><img src={logo} alt='logo' width='100%' height='25%' /> </a>
-      </div>
-      <div className="menu__container">
-        <div className="menu_left">
-          <LeftMenu mode="horizontal" />
-        </div>
-        <div className="menu_rigth">
-          <RightMenu mode="horizontal" />
-        </div>
-        <Button
-          className="menu__mobile-button"
-          type="primary"
-          onClick={showDrawer}
-        >
-          <FiMenu size={20} />
-        </Button>
-        <Drawer
-          title="Menu Lateral"
-          placement="right"
-          className="menu_drawer"
-          closable={false}
-          onClose={onClose}
-          visible={visible}
-        >
-          <LeftMenu mode="inline" />
-          <RightMenu mode="inline" />
-        </Drawer>
-      </div>
-    </nav>
+    <Navbar collapseOnSelect expand="lg" bg="" variant="light">
+      <Navbar.Brand> <Link to='/'><img src={logo} alt="Logo" width="90" height="90" className="d-inline-block align-top" /></Link> </Navbar.Brand>
+      <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+      <Navbar.Collapse id="responsive-navbar-nav">
+        <Nav className="mr-auto">
+          <Nav.Link> <Link to="/chat">Chat</Link>  </Nav.Link>
+          {/* <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
+            <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+            <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
+            <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+            <NavDropdown.Divider />
+            <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
+          </NavDropdown> */}
+        </Nav>
+        <Nav>
+          <RightMenu/>
+          {/* <Nav.Link> <Link to="/login">Login</Link>  </Nav.Link>
+          <Nav.Link> <Link to="/register">Registrar Médico</Link>  </Nav.Link>
+          <Nav.Link> <Link to="/registerUser">Registrar Paciente</Link>  </Nav.Link> */}
+        </Nav>
+      </Navbar.Collapse>
+    </Navbar>
   )
 }
-
-export default NavBar

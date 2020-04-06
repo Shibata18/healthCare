@@ -5,7 +5,7 @@ import {
     AUTH_USER,
     LOGOUT_USER,
 } from './types';
-import { USER_SERVER } from '../components/Config.js';
+import { USER_SERVER, DOCTOR_SERVER } from '../components/Config.js';
 
 export function registerUser(dataToSubmit){
     const request = axios.post(`${USER_SERVER}/registerUser`,dataToSubmit)
@@ -18,7 +18,7 @@ export function registerUser(dataToSubmit){
 }
 
 export function registerDoctor(dataToSubmit){
-    const request = axios.post(`${USER_SERVER}/register`,dataToSubmit)
+    const request = axios.post(`${DOCTOR_SERVER}/register`,dataToSubmit)
         .then(response => response.data);
     
     return {
@@ -27,7 +27,7 @@ export function registerDoctor(dataToSubmit){
     }
 }
 export function getDoctor(){
-    const request = axios.get(`${USER_SERVER}/register`)
+    const request = axios.get(`${DOCTOR_SERVER}/register`)
         .then(response => response.data);
     
     return {
@@ -36,7 +36,7 @@ export function getDoctor(){
     }
 }
 export function getDoctorByCpf(dataToSubmit){
-    const request = axios.get(`${USER_SERVER}/findbycpf`,dataToSubmit)
+    const request = axios.get(`${DOCTOR_SERVER}/findbycpf`,dataToSubmit)
         .then(response => response.data);
     
     return {
@@ -45,7 +45,7 @@ export function getDoctorByCpf(dataToSubmit){
     }
 }
 export function updateDoctor(dataToSubmit){
-    const request = axios.put(`${USER_SERVER}/register`,dataToSubmit)
+    const request = axios.put(`${DOCTOR_SERVER}/register`,dataToSubmit)
         .then(response => response.data);
     
     return {
@@ -54,7 +54,7 @@ export function updateDoctor(dataToSubmit){
     }
 }
 export function deleteDoctor(dataToSubmit){
-    const request = axios.delete(`${USER_SERVER}/register`,dataToSubmit)
+    const request = axios.delete(`${DOCTOR_SERVER}/register`,dataToSubmit)
         .then(response => response.data);
     
     return {

@@ -25,6 +25,7 @@ const { Chat } = require("./models/Chat");
 const { auth } = require("./middleware/auth");
 
 app.use('/api/users', require('./routes/users'));
+app.use('/api/doctors', require('./routes/doctors'));
 app.use('/api/chat', require('./routes/chat'));
 
 
@@ -94,11 +95,11 @@ app.use('/uploads', express.static('uploads'));
 if (process.env.NODE_ENV === "production") {
 
   // Set static folder
-  app.use(express.static("../web/build"));
+  app.use(express.static("web/build"));
 
   // index.html for all page routes
   app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "../web", "build", "index.html"));
+    res.sendFile(path.resolve(__dirname,"build", "index.html"));
   });
 }
 

@@ -1,10 +1,5 @@
 import axios from 'axios';
-import {
-    LOGIN_USER,
-    REGISTER_USER,
-    AUTH_USER,
-    LOGOUT_USER,
-} from './types';
+import {    LOGIN_USER,    REGISTER_USER,    AUTH_USER,    LOGOUT_USER,} from './types';
 import { USER_SERVER, DOCTOR_SERVER } from '../components/Config.js';
 
 export function registerUser(dataToSubmit){
@@ -63,6 +58,25 @@ export function deleteDoctor(dataToSubmit){
     }
 }
 
+export function loginDoctor(dataToSubmit){
+    const request = axios.post(`${DOCTOR_SERVER}/login`,dataToSubmit)
+                .then(response => response.data);
+
+    return {
+        type: LOGIN_USER,
+        payload: request
+    }
+}
+
+export function authDoctor(){
+    const request = axios.get(`${DOCTOR_SERVER}/auth`)
+    .then(response => response.data);
+
+    return {
+        type: AUTH_USER,
+        payload: request
+    }
+}
 export function loginUser(dataToSubmit){
     const request = axios.post(`${USER_SERVER}/login`,dataToSubmit)
                 .then(response => response.data);
@@ -93,3 +107,13 @@ export function logoutUser(){
     }
 }
 
+
+export function logoutDoctor(){
+    const request = axios.get(`${DOCTOR_SERVER}/logout`)
+    .then(response => response.data);
+
+    return {
+        type: LOGOUT_USER,
+        payload: request
+    }
+}

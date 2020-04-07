@@ -2,7 +2,7 @@
 import React from 'react';
 import { Menu } from 'antd';
 import axios from 'axios';
-import { USER_SERVER } from '../../../Config';
+import { USER_SERVER,DOCTOR_SERVER } from '../../../Config';
 import { withRouter, Link } from 'react-router-dom';
 import { useSelector } from "react-redux";
 
@@ -18,7 +18,15 @@ function RightMenu(props) {
       }
     });
   };
-
+  const logoutDHandler = () => {
+    axios.get(`${DOCTOR_SERVER}/logout`).then(response => {
+      if (response.status === 200) {
+        props.history.push("/login");
+      } else {
+        alert('Log Out Failed')
+      }
+    });
+  };
   if (user.userData && !user.userData.isAuth) {
     return (
       <Menu mode={props.mode}>
@@ -35,6 +43,7 @@ function RightMenu(props) {
       <Menu mode={props.mode}>
         <Menu.Item key="logout">
           <a onClick={logoutHandler}>Sair</a>
+          <a onClick={logoutDHandler}>Sair</a>
         </Menu.Item>
       </Menu>
     )

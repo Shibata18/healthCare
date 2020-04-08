@@ -10,22 +10,26 @@ module.exports = {
         return res.json({ cpf_paciente,name_paciente,telefone_paciente });
     },
     async  index(req, res) {
-        const doctors = await connection('doctors').select('*');
+        const pacientes = await connection('pacientes').select('*');
 
-        return res.json(doctors);
+        return res.json(pacientes);
     },
     async delete(req, res) {
         const { cpf_paciente } = req.body;
 
-        await connection('doctors').where('cpf_paciente', cpf_paciente).delete();
+        await connection('pacientes').where('cpf_paciente', cpf_paciente).delete();
 
         return res.status(204).send();
     },
 
     async update(req, res) {
-        const { cpf_paciente } = req.body;
+        const { cpf_paciente,telefone_paciente,email,senha } = req.body;
 
-        await connection('doctors').where('cpf_paciente', cpf_paciente).update('ativo_paciente',true);
+        await connection('pacientes').where('cpf_paciente', cpf_paciente)
+          .update('telefone_paciente',telefone_paciente)
+          .update('email',email)
+          .update('senha',senha)
+
 
         return res.status(204).send();
     }

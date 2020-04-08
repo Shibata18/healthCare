@@ -54,8 +54,8 @@ router.get('/findbycpf',async (req,res)=>{
         }
 });
 router.put("/register",async (req,res)=>{
-    const {cpf,telefone,senha} = req.body;
-    await Doctor.findOneAndUpdate({cpf},{telefone,senha})
+    const {cpf,email, name, password, especialidade, conselho, registro, telefone} = req.body;
+    await Doctor.findOneAndUpdate({cpf},{email, name, password, especialidade, conselho, registro, telefone})
     try {
         res.json({success:"Alterado com sucesso"})
     } catch (error) {

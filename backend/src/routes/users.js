@@ -33,7 +33,7 @@ router.post("/registerUser", (req, res) => {
         });
     });
 });
-router.put("/login", (req, res) => {
+router.put("/registerUser", (req, res) => {
     const {email,senha,telefone} = req.body
     User.findOneAndUpdate({email,telefone,senha})
 });

@@ -8,7 +8,12 @@ const agendaSchema = mongoose.Schema({
         type: Date,
     },
     id : {
-        type:Number,
+        type:Schema.Types.ObjectId,
+        ref:'Doctor'
+    },
+    idPaciente: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
     },
     motivo:String,
     image: String,

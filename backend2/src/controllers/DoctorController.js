@@ -1,13 +1,15 @@
 const connection = require('../database/connection');
+const bcrypt = require('bcryptjs');
 
 module.exports = {
     async create(req, res) {
-        const { cpf, name, email, senha, telefone, conselho, registro, especialidade, imagem } = req.body;
+        const senha = bcrypt.hashSync(req.body.senha, 10);
+        const { cpf_medico, name_medico, email,telefone_medico, conselho, registro, especialidade  } = req.body;
         await connection('doctors').insert({
-            cpf, name, email, senha, telefone, conselho, registro, especialidade, imagem
+            cpf_medico, name_medico, email, senha, telefone_medico, conselho, registro, especialidade
         })
 
-        return res.json({ name, especialidade });
+        return res.json({ name_medico, especialidade });
     },
     async  index(req, res) {
         const doctors = await connection('doctors').select('*');
@@ -15,20 +17,20 @@ module.exports = {
         return res.json(doctors);
     },
     async delete(req, res) {
-        const { cpf } = req.body;
+        const { cpf_medico } = req.body;
 
-        await connection('doctors').where('cpf', cpf).delete();
+        await connection('doctors').where('cpf_medico', cpf_medico).delete();
 
-        return res.status(204).send();
+        return res.status(204).send('Deletado');
     },
     async update(req, res) {
-        const { cpf, email, senha, telefone } = req.body;
+        const { cpf_medico, email, senha, telefone_medico } = req.body;
         await connection('doctors')
-            .where('cpf', cpf)
+            .where('cpf_medico', cpf_medico)
             .update('email', email)
             .update('senha', senha)
-            .update('telefone',telefone)
+            .update('telefone_medico',telefone_medico)
 
-        return res.status(204).send();
+        return res.status(204).send("atualizado");
     }
 }

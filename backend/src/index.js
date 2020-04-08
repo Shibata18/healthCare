@@ -9,18 +9,18 @@ const config = require("./config/key");
 const routes = require('./routes/doctors');
 
 const mongoose = require("mongoose");
-const connect = mongoose.connect(config.mongoURI, { 
+const connect = mongoose.connect(config.mongoURI, {
   useNewUrlParser: true, useUnifiedTopology: true,
   useCreateIndex:true,useFindAndModify:false,
 })
   .then(() => console.log('MongoDB Conectado...'))
   .catch(err => console.log(err));
-
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(routes);
-app.use(cors());
+//app.use(cors());
 const { Chat } = require("./models/Chat");
 const { auth } = require("./middleware/auth");
 
@@ -47,7 +47,7 @@ var storage = multer.diskStorage({
   //   cb(null, true)
   // }
 })
- 
+
 var upload = multer({ storage: storage }).single("file")
 
 app.post("/api/chat/uploadfiles", auth ,(req, res) => {

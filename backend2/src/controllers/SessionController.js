@@ -17,5 +17,8 @@ module.exports = {
             return res.status(400).json({error:"Nenhum paciente encontrado"});
         } */
         return res.json(loginDoctors);
+    },
+    async desativar(req,res){
+      
     }
 }

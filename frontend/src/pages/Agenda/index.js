@@ -4,7 +4,9 @@ import { Accordion, Card, Container,Nav,Navbar } from 'react-bootstrap'
 import logo from '../../assets/logo.svg';
 import api from '../../services/api';
 
+
 export default function agenda() {
+    const email = localStorage.getItem('doctorEmail');
     return (
         <>
             <Container>
@@ -16,7 +18,7 @@ export default function agenda() {
                             <Nav className="mr-auto">
                                 {/*<Nav.Link> <Link to="/chat">Chat</Link>  </Nav.Link>
            <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
-            <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+            <NavDropdown.Item href="#action/3.1">{email}</NavDropdown.Item>
             <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
             <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
             <NavDropdown.Divider />
@@ -28,7 +30,7 @@ export default function agenda() {
                                     <Nav.Link><Link to='/agenda'>Registrar</Link></Nav.Link>
                                 </Nav.Item>
                                 <Nav.Item>
-                                    <Nav.Link><Link to='/agenda'>Registrar</Link></Nav.Link>
+                                    <Nav.Link><Link to='/agenda'>{email}</Link></Nav.Link>
                                 </Nav.Item>
                                 <Nav.Item>
                                     <Nav.Link><Link to='/agenda'>Registrar</Link></Nav.Link>
@@ -45,7 +47,7 @@ export default function agenda() {
                 <Accordion defaultActiveKey="0">
                     <Card>
                         <Accordion.Toggle as={Card.Header} eventKey="0">
-                            Click me!
+                            Seja bem vindo {email}
           </Accordion.Toggle>
                         <Accordion.Collapse eventKey="0">
                             <Card.Body>Hello! I'm the body</Card.Body>

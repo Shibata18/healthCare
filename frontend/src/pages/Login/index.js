@@ -16,13 +16,16 @@ export default function Login() {
     const data = { email, senha };
 
     try {
-      const response = api.post('sessions', data);
+      const response = api.post('session', data);
       localStorage.setItem('doctorEmail', email);
       localStorage.setItem('doctorSenha', senha);
-      localStorage.setItem('doctorName', response.data.name);
+      //localStorage.setItem('doctorName', response.data.name);
+      console.log(response);
       history.push('/agenda');
 
     } catch (error) {
+      console.log(error);
+      console.error(error);
       alert('Falha no login, tente novamente');
     }
   }

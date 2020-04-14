@@ -9,7 +9,7 @@ module.exports = {
                 'email':email,
                 'senha':senha
             })
-            .select('name')
+            .select('name_medico')
         if(!loginDoctors){
             return res.status(400).json({error:"Nenhum médico encontrado"});
         }
@@ -19,6 +19,6 @@ module.exports = {
         return res.json(loginDoctors);
     },
     async desativar(req,res){
-      
+
     }
 }

@@ -12,7 +12,7 @@ module.exports = {
         return res.json({ name_medico, especialidade });
     },
     async  index(req, res) {
-        const doctors = await connection('doctors').select('*');
+	const doctors = await connection('doctors').select('*');
 
         return res.json(doctors);
     },

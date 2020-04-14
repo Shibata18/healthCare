@@ -5,17 +5,15 @@ import logo from '../../../assets/logo.svg'
 import api from '../../../services/api';
 
 export default function ListDoctor() {
-  const [cpf, setCpf] = useState('');
+  const [cpf_medico, setcpf_medico] = useState('');
   //const history = useHistory();
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    const data = { cpf };
-
     try {
-      const response = api.get('doctors', data);
+      const response = await api.get('doctors',cpf_medico);
       console.log(response);
-
+      console.log(response.data);
       //  history.push('/login');
 
     } catch (error) {
@@ -65,14 +63,14 @@ export default function ListDoctor() {
 
       <Form onSubmit={handleSubmit}>
         <Form.Group as={Row}>
-          <Form.Label column sm={2}> CPF </Form.Label>
+          <Form.Label column sm={2}> cpf_medico </Form.Label>
           <Col sm={10}>
-            <Form.Control type="text" name="cpf" placeholder='Digite o seu CPF' id="cpf" value={cpf} onChange={e => setCpf(e.target.value)} required />
+            <Form.Control type="text" name="cpf_medico" placeholder='Digite o seu cpf_medico' id="cpf_medico" value={cpf_medico} onChange={e => setcpf_medico(e.target.value)} required />
           </Col>
         </Form.Group>
         <Form.Group as={Row}>
           <Col sm={{ span: 10, offset: 2 }}>
-            <Button type="submit" variant='success'>Cadastrar</Button>
+            <Button type="submit" variant='success'>Pesquisar</Button>
           </Col>
         </Form.Group>
       </Form>

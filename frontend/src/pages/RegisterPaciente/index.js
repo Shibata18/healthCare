@@ -46,7 +46,7 @@ export default function Login() {
                 <Nav.Link><Link to='/registerPaciente'>Registrar Paciente</Link></Nav.Link>
               </Nav.Item>
               <Nav.Item>
-                <Nav.Link><Link to='/registerDoctor'>Atualizar Dados do Paciente</Link></Nav.Link>
+                <Nav.Link><Link to='/registerPaciente'>Atualizar Dados do Paciente</Link></Nav.Link>
               </Nav.Item>
               <Nav.Item>
                 <Nav.Link><Link to='/registerPaciente'>Inativar Paciente</Link></Nav.Link>

@@ -6,24 +6,24 @@ import api from '../../../services/api';
 
 export default function RegisterDoctor() {
   const [email, setEmail] = useState('');
-  const [name, setName] = useState('');
-  const [cpf, setCpf] = useState('');
+  const [name_medico, setName_medico] = useState('');
+  const [cpf_medico, setcpf_medico] = useState('');
   const [senha, setSenha] = useState('');
   const [especialidade, setEspecialidade] = useState('');
-  const [telefone, setTelefone] = useState('');
+  const [telefone_medico, setTelefone_medico] = useState('');
   const [conselho, setConselho] = useState('');
   const [registro, setRegistro] = useState('');
   const history = useHistory();
 
   function handleSubmit(e) {
     e.preventDefault();
-    const data = { email, senha, name, cpf, especialidade, conselho, registro, telefone };
+    const data = {cpf_medico, name_medico, email, senha, telefone_medico, conselho, registro, especialidade };
 
     try {
       const response = api.post('doctors', data);
       console.log(response);
-      
-      history.push('/login');
+
+      history.push('/');
 
     } catch (error) {
       alert('Falha no Cadastro, tente novamente');
@@ -84,16 +84,16 @@ export default function RegisterDoctor() {
             Nome
     </Form.Label>
           <Col sm={10}>
-            <Form.Control type="text" name="name" id="name" placeholder='Digite o seu Nome' value={name} onChange={e => setName(e.target.value)} required />
+            <Form.Control type="text" name="name_medico" id="name_medico" placeholder='Digite o seu Nome' value={name_medico} onChange={e => setName_medico(e.target.value)} required />
           </Col>
         </Form.Group>
 
         <Form.Group as={Row}>
           <Form.Label column sm={2}>
             CPF
-    </Form.Label>
+          </Form.Label>
           <Col sm={10}>
-            <Form.Control type="text" name="cpf" placeholder='Digite o seu CPF' id="cpf" value={cpf} onChange={e => setCpf(e.target.value)} required />
+            <Form.Control type="text" name="cpf_medico" placeholder='Digite o seu CPF' id="cpf_medico" value={cpf_medico} onChange={e => setcpf_medico(e.target.value)} required />
           </Col>
         </Form.Group>
 
@@ -110,7 +110,7 @@ export default function RegisterDoctor() {
             Telefone
     </Form.Label>
           <Col sm={10}>
-            <Form.Control type="number" name="telefone" placeholder='Digite o seu Telefone' id="telefone" value={telefone} onChange={e => setTelefone(e.target.value)} required />
+            <Form.Control type="number" name="telefone_medico" placeholder='Digite o seu Telefone' id="telefone_medico" value={telefone_medico} onChange={e => setTelefone_medico(e.target.value)} required />
           </Col>
         </Form.Group>
 

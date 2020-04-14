@@ -5,11 +5,8 @@ module.exports = {
         const {email,senha} = req.body;
 
         const loginDoctors = await connection('doctors')
-            .where({
-                'email':email,
-                'senha':senha
-            })
-            .select('name_medico')
+            .where({email,senha })
+            .select('*')
         if(!loginDoctors){
             return res.status(400).json({error:"Nenhum médico encontrado"});
         }

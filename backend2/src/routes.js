@@ -11,7 +11,7 @@ routes.post('/doctors',DoctorsController.create);
 routes.delete('/doctors',DoctorsController.delete);
 routes.put('/doctors',DoctorsController.update);
 //Login
-routes.post('/session',SessionController.create);
+routes.get('/session',SessionController.create);
 routes.post('/sessionPaciente',SessionPacienteController.create);
 //Pacientes
 routes.post('/pacientes',PacienteController.create);

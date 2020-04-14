@@ -16,10 +16,9 @@ export default function Login() {
     const data = { email, senha };
 
     try {
-      const response = api.post('session', data);
+      const response = api.get('session', data);
       localStorage.setItem('doctorEmail', email);
       localStorage.setItem('doctorSenha', senha);
-      //localStorage.setItem('doctorName', response.data.name);
       console.log(response);
       history.push('/agenda');
 

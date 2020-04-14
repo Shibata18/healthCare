@@ -1,7 +1,7 @@
 // Comando feito para criar npx knex migrate:make create_docs
 exports.up = function (knex) {
     return knex.schema.createTable('prontuario', function (table) {
-        table.increments('id_agenda').primary();
+        table.increments('id_prontuario').primary();
         //table.string('consulta').notNullable();
         //table.string('consulta').notNullable();
         //table.string('cpf_medico_fk').notNullable();

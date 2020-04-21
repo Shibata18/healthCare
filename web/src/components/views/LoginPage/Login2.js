@@ -26,7 +26,6 @@ function LoginPage(props) {
     <Formik
       initialValues={{
         email: initialEmail,
-        cpf:'',
         password: '',
       }}
       validationSchema={Yup.object().shape({
@@ -36,10 +35,6 @@ function LoginPage(props) {
         password: Yup.string()
           .min(6, 'Senha com no mínimo 6 caracteres')
           .required('Senha necessária'),
-          cpf: Yup.string()
-            .min(11)
-            .max(11)
-            .required('CPF Necessário')
       })}
       onSubmit={(values, { setSubmitting }) => {
         setTimeout(() => {
@@ -147,5 +142,3 @@ function LoginPage(props) {
 };
 
 export default withRouter(LoginPage);
-
-

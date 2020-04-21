@@ -6,15 +6,15 @@ function ChatCard(props) {
     return (
         <div style={{ width: '100%' }}>
             <Comment
-                author={props.sender.name}
+                author={props.sender.namePaciente}
                 avatar={
                     <Avatar
-                        src={props.sender.image} alt={props.sender.name}
+                        src={props.sender.image} alt={props.sender.namePaciente}
                     />
                 }
                 content={
                     props.message.substring(0, 8) === "uploads/" ?
-                        // this will be either video or image 
+                        // this will be either video or image
 
                         props.message.substring(props.message.length - 3, props.message.length) === 'mp4' ?
                             <video
@@ -44,4 +44,3 @@ function ChatCard(props) {
 }
 
 export default ChatCard;
-

@@ -1,5 +1,5 @@
 const express = require('express');
-const router = express.Router();
+const rotas = express.Router();
 const { User } = require("../models/User");
 
 const { auth } = require("../middleware/auth");
@@ -8,36 +8,64 @@ const { auth } = require("../middleware/auth");
 //             User
 //=================================
 
-router.get("/auth", auth, (req, res) => {
+rotas.post('/paciente',async (req,res)=>{
+  const data = new User(req.body);
+  try {
+      await data.save((err, doc) => {
+          if (err) return res.json({ success: false, err });
+          return res.status(200).json({
+              success: true,
+              data
+          });
+      });
+  } catch (error) {
+      res.status(500).send(err);
+
+  }
+
+});
+rotas.get("/paciente", async (req, res) => {
+    const find = await User.find();
+    try {
+        res.json(find);
+    } catch (error) {
+        res.status(500).send(error);
+    }
+});
+rotas.put("/paciente/:id",async (req,res)=>{
+   const id = req.params.id
+    const {email, namePaciente, password, telefonePaciente,ativoPaciente} = req.body;
+    await User.findOneAndUpdate(id,{email, namePaciente, password, telefonePaciente,ativoPaciente})
+    try {
+        res.json({success:"Alterado com sucesso"})
+    } catch (error) {
+        res.status(500).send(error);
+    }
+});
+rotas.delete("/paciente/:id",async (req,res)=>{
+    //const {cpf} = req.body;
+    const id = req.params.id;
+    const deletar =  await User.findOneAndDelete(id);
+        try {
+            deletar.remove();
+            res.json({success:"deletado com sucesso"})
+        } catch (error) {
+            res.status(500).send(error);
+        }
+});
+rotas.get("/auth", auth, (req, res) => {
     res.status(200).json({
         _id: req.user._id,
         isAdmin: req.user.id === 0 ? false : true,
         isAuth: true,
         email: req.user.email,
-        name: req.user.name,
-        cpf: req.user.cpf,
-        telefone: req.user.telefone,
-        id: req.user.id,
+        namePaciente: req.user.namePaciente,
+        cpfPaciente: req.user.cpfPaciente,
+        telefonePaciente: req.user.telefonePaciente,
         image: req.user.image,
     });
 });
-
-router.post("/registerUser", (req, res) => {
-
-    const user = new User(req.body);
-
-    user.save((err, doc) => {
-        if (err) return res.json({ success: false, err });
-        return res.status(200).json({
-            success: true
-        });
-    });
-});
-router.put("/registerUser", (req, res) => {
-    const {email,senha,telefone} = req.body
-    User.findOneAndUpdate({email,telefone,senha})
-});
-router.post("/login", (req, res) => {
+rotas.post("/loginUser", (req, res) => {
     User.findOne({ email: req.body.email }, (err, user) => {
         if (!user)
             return res.json({
@@ -63,7 +91,7 @@ router.post("/login", (req, res) => {
     });
 });
 
-router.get("/logout", auth, (req, res) => {
+rotas.get("/logout", auth, (req, res) => {
     User.findOneAndUpdate({ _id: req.user._id }, { token: "", tokenExp: "" }, (err, doc) => {
         if (err) return res.json({ success: false, err });
         return res.status(200).send({
@@ -72,4 +100,4 @@ router.get("/logout", auth, (req, res) => {
     });
 });
 
-module.exports = router;
+module.exports = rotas;

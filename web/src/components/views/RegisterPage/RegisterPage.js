@@ -41,7 +41,7 @@ function RegisterPage(props) {
     <Formik
       initialValues={{
         email: '',
-        cpf: '',
+        cpfPaciente: '',
         name: '',
         password: '',
         confirmPassword: ''
@@ -49,8 +49,8 @@ function RegisterPage(props) {
       validationSchema={Yup.object().shape({
         name: Yup.string()
           .required('Nome obrigatório'),
-        cpf: Yup.string()
-          .required('cpf Obrigatório'),
+        cpfPaciente: Yup.string()
+          .required('cpfPaciente Obrigatório'),
         email: Yup.string()
           .email('Email is invalid')
           .required('email Obrigatório'),
@@ -68,7 +68,7 @@ function RegisterPage(props) {
             email: values.email,
             password: values.password,
             name: values.name,
-            cpf: values.cpf,
+            cpfPaciente: values.cpfPaciente,
             image: `http://gravatar.com/avatar/${moment().unix()}?d=identicon`
           };
 
@@ -118,20 +118,20 @@ function RegisterPage(props) {
                 )}
               </Form.Item>
 
-              <Form.Item required label="CPF">
+              <Form.Item required label="cpfPaciente">
                 <Input
-                  id="cpf"
-                  placeholder="CPF"
+                  id="cpfPaciente"
+                  placeholder="cpfPaciente"
                   type="text"
-                  value={values.cpf}
+                  value={values.cpfPaciente}
                   onChange={handleChange}
                   onBlur={handleBlur}
                   className={
-                    errors.cpf && touched.cpf ? 'text-input error' : 'text-input'
+                    errors.cpfPaciente && touched.cpfPaciente ? 'text-input error' : 'text-input'
                   }
                 />
-                {errors.cpf && touched.cpf && (
-                  <div className="input-feedback">{errors.cpf}</div>
+                {errors.cpfPaciente && touched.cpfPaciente && (
+                  <div className="input-feedback">{errors.cpfPaciente}</div>
                 )}
               </Form.Item>
 

@@ -8,7 +8,6 @@ import { useSelector } from "react-redux";
 
 function RightMenu(props) {
   const user = useSelector(state => state.user)
-
   const logoutHandler = () => {
     axios.get(`${USER_SERVER}/logout`).then(response => {
       if (response.status === 200) {
@@ -27,7 +26,7 @@ function RightMenu(props) {
       }
     });
   };
-  if (user.userData && !user.userData.isAuth) {
+  if ((user.userData && !user.userData.isAuth)) {
     return (
       <Menu mode={props.mode}>
         <Menu.Item key="mail">
@@ -51,4 +50,3 @@ function RightMenu(props) {
 }
 
 export default withRouter(RightMenu);
-

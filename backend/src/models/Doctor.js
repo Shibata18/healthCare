@@ -4,36 +4,42 @@ const saltRounds = 10;
 const jwt = require('jsonwebtoken');
 
 const DoctorSchema = mongoose.Schema({
-    name: {
+    nameDoctor: {
         type:String,
-        maxlength:100
+        require:true,
     },
-    cpf:{
+    cpfDoctor:{
         type:String,
-        maxlength:11,
-        minglength:11,
+        maxglength: 11,
+        minglength: 11,
+        require:true,
         unique:1
     },
     email: {
         type:String,
         trim:true,
-        unique: 1 
+        unique: 1,
+        require:true,
     },
     password: {
         type: String,
-        minglength: 5
+        minglength: 5,
+        require:true,
     },
     conselho:{
         type:String,
+        require:true,
     },
-    telefone:{
+    telefoneDoctor:{
         type:String,
     },
     registro:{
         type:String,
+        require:true,
     },
     especialidade:{
         type:String,
+        require:true,
     },
     image: String,
     token : {
@@ -41,21 +47,25 @@ const DoctorSchema = mongoose.Schema({
     },
     tokenExp :{
         type: Number
-    },  
-})
+    },
+    ativo_medico:{
+      type: Boolean,
+      default:true
+    }
+},{ timestamps: true })
 
 
 DoctorSchema.pre('save', function( next ) {
     var user = this;
-    
-    if(user.isModified('password')){    
+
+    if(user.isModified('password')){
 
         bcrypt.genSalt(saltRounds, function(err, salt){
             if(err) return next(err);
-    
+
             bcrypt.hash(user.password, salt, function(err, hash){
                 if(err) return next(err);
-                user.password = hash 
+                user.password = hash
                 next()
             })
         })
@@ -72,8 +82,8 @@ DoctorSchema.methods.comparePassword = function(plainPassword,cb){
 }
 
 DoctorSchema.methods.generateToken = function(cb) {
-    var user = this;
-    var token =  jwt.sign(user._id.toHexString(),'secret')
+    let user = this;
+    let token =  jwt.sign(user._id.toHexString(),'secret')
 
     user.token = token;
     user.save(function (err, user){
@@ -83,7 +93,7 @@ DoctorSchema.methods.generateToken = function(cb) {
 }
 
 DoctorSchema.statics.findByToken = function (token, cb) {
-    var user = this;
+    let user = this;
 
     jwt.verify(token,'secret',function(err, decode){
         user.findOne({"_id":decode, "token":token}, function(err, user){
@@ -92,6 +102,11 @@ DoctorSchema.statics.findByToken = function (token, cb) {
         })
     })
 }
+DoctorSchema.method("toJSON", function() {
+    const { __v, _id, ...object } = this.toObject();
+    object.id = _id;
+    return object;
+  });
 
 const Doctor = mongoose.model('Doctor', DoctorSchema);
 

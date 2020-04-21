@@ -62,8 +62,6 @@ export default function RegisterDoctor() {
         </Nav>
         <Nav>
         <Nav.Link><Link to='/registerDoctor'>Registrar Médico</Link></Nav.Link>
-        <Nav.Link><Link to='/updateDoctor'>Atualizar Dados do Médico</Link></Nav.Link>
-        <Nav.Link><Link to='/deleteDoctor'>Inativar Médico</Link></Nav.Link>
         <Nav.Link><Link to='/listDoctor'>Listar Médicos</Link></Nav.Link>
         </Nav>
       </Navbar.Collapse>

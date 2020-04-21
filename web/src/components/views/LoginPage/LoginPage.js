@@ -1,62 +1,145 @@
 import React, { useState } from "react";
-import {Form,Col,Row,Button, Container} from 'react-bootstrap';
-import {Link, useHistory} from 'react-router-dom';
-import api from '../../../services/api';
-//import { loginUser,loginDoctor } from "../../../_actions/user_actions";
-export default function LoginPage(){
-  const [email,setEmail] = useState('');
-  const [password,setPassword] = useState('');
-  const history = useHistory();
-  async function handleLogin(e) {
-      e.preventDefault();
-      try {
-          const response = await api.post('/login',{email,password});
-          localStorage.setItem('id',response.data._id);
-          localStorage.setItem('Dnome',response.data.name);
-          localStorage.setItem('Demail',response.data.email);
-          localStorage.setItem('Despecialidade',response.data.especialidade);
-          localStorage.setItem('Dcpf',response.data.cpf);
-          history.push('/')
-      } catch (error) {
-          alert('Falha no login, tente novamente')
-      }
-  }
+import { withRouter, Link } from "react-router-dom";
+import { loginDoctors } from "../../../_actions/doctors_actions";
+import { Formik } from 'formik';
+import * as Yup from 'yup';
+import { Form, Input, Button, Checkbox, Typography } from 'antd';
+import { useDispatch } from "react-redux";
+import { FaSignInAlt } from 'react-icons/fa';
 
-    return (
-<Container>
-<Form onSubmit={handleLogin}>
-  <Form.Group as={Row}>
-    <Form.Label column sm={4}>
-      Email
-    </Form.Label>
-    <Col sm={4}>
-      <Form.Control type="email" id='email' placeholder="Email" value={email} onChange={e=>setEmail(e.target.value)} />
-    </Col>
-  </Form.Group>
+const { Title } = Typography;
 
-  <Form.Group as={Row}>
-    <Form.Label column sm={4}>
-      Senha
-    </Form.Label>
-    <Col sm={4}>
-      <Form.Control type="password" id='password' placeholder="senha" value={password} onChange={e=>setPassword(e.target.value)} />
-    </Col>
-  </Form.Group>
-{/* 
-  <Form.Group as={Row} controlId="formHorizontalCheck">
-    <Col sm={{ span: 4, offset: 4 }}>
-      <Form.Check label="Remember me" />
-    </Col>
-  </Form.Group>
- */}
-  <Form.Group as={Row}>
-    <Col sm={{ span: 4, offset: 4 }}>
-      <Button type="submit">Entrar</Button>
-      <Button style={{margin:10}} variant='outline-info' ><Link to='/register'>Registre-se</Link> </Button>
-    </Col>
-  </Form.Group>
-</Form>
-</Container>
+function LoginPage(props) {
+  const dispatch = useDispatch();
+  const rememberMeChecked = localStorage.getItem("rememberMe") ? true : false;
 
-    )
-}
+  const [formErrorMessage, setFormErrorMessage] = useState('')
+  const [rememberMe, setRememberMe] = useState(rememberMeChecked)
+
+  const handleRememberMe = () => {
+    setRememberMe(!rememberMe)
+  };
+  const initialEmail = localStorage.getItem("rememberMe") ? localStorage.getItem("rememberMe") : '';
+
+  return (
+    <Formik
+      initialValues={{
+        email: initialEmail,
+        password: '',
+      }}
+      validationSchema={Yup.object().shape({
+        email: Yup.string()
+          .email('Email inválido')
+          .required('Email obrigatório'),
+        password: Yup.string()
+          .min(6, 'Senha com no mínimo 6 caracteres')
+          .required('Senha necessária'),
+      })}
+      onSubmit={(values, { setSubmitting }) => {
+        setTimeout(() => {
+          let dataToSubmit = {
+            email: values.email,
+            password: values.password
+          };
+
+          dispatch(loginDoctors(dataToSubmit))
+            .then(response => {
+              if (response.payload.loginSuccesDoctor) {
+                if (rememberMe === true) {
+                  window.localStorage.setItem('rememberMe', values.id);
+                } else {
+                  localStorage.removeItem('rememberMe');
+                }
+                localStorage.setItem('emailDoctor2',this.email)
+                console.log(response);
+                props.history.push("/");
+              } else {
+                setFormErrorMessage('Verifique a sua conta ou a sua senha novamente')
+              }
+            })
+            .catch(err => {
+              setFormErrorMessage('Verifique a sua conta ou a sua senha novamente')
+              setTimeout(() => {
+                setFormErrorMessage("")
+              }, 3000);
+            });
+          setSubmitting(false);
+        }, 500);
+      }}
+    >
+      {props => {
+        const {
+          values,
+          touched,
+          errors,
+          //dirty,
+          isSubmitting,
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          //handleReset,
+        } = props;
+        return (
+          <div className="app">
+
+            <Title level={2}>Entrar</Title>
+            <form onSubmit={handleSubmit} style={{ width: '350px' }}>
+
+              <Form.Item required>
+                <Input
+                  id="email"
+                  placeholder="Digite o seu r email"
+                  type="email"
+                  value={values.email}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  className={
+                    errors.email && touched.email ? 'text-input error' : 'text-input'
+                  }
+                />
+                {errors.email && touched.email && (
+                  <div className="input-feedback">{errors.email}</div>
+                )}
+              </Form.Item>
+              <Form.Item required>
+                <Input
+                  id="password"
+                  placeholder="Digite a sua Senha"
+                  type="password"
+                  value={values.password}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  className={
+                    errors.password && touched.password ? 'text-input error' : 'text-input'
+                  }
+                />
+                {errors.password && touched.password && (
+                  <div className="input-feedback">{errors.password}</div>
+                )}
+              </Form.Item>
+
+              {formErrorMessage && (
+                <label ><p style={{ color: '#ff0000bf', fontSize: '0.7rem', border: '1px solid', padding: '1rem', borderRadius: '10px' }}>{formErrorMessage}</p></label>
+              )}
+
+              <Form.Item>
+                <Checkbox id="rememberMe" onChange={handleRememberMe} checked={rememberMe} >Manter-me Conectado</Checkbox>
+               {/*  <a className="login-form-forgot" href="/reset_user" style={{ float: 'right' }}>
+                  forgot password
+                  </a> */}
+                <div>
+                  <Button type="primary" htmlType="submit" className="login-form-button" style={{ minWidth: '100%' }} disabled={isSubmitting} onSubmit={handleSubmit}>
+                    Entrar <FaSignInAlt size={12}  />
+                </Button>
+                </div>
+                Ou <Link to="/register">Cadastre-se Agora!</Link>
+              </Form.Item>
+            </form>
+          </div>
+        );
+      }}
+    </Formik>
+  );
+};
+
+export default withRouter(LoginPage);

@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
-import { auth, authDoctor } from '../_actions/user_actions';
+import { auth } from '../_actions/user_actions';
+import { authDoctors } from '../_actions/doctors_actions';
 import { useSelector, useDispatch } from "react-redux";
 
 export default function (ComposedClass, reload, adminRoute = null) {
@@ -10,7 +11,7 @@ export default function (ComposedClass, reload, adminRoute = null) {
 
         useEffect(() => {
 
-            dispatch(authDoctor()).then(async response => {
+            dispatch(authDoctors()).then(async response => {
                 if (await !response.payload.isAuth) {
                     if (reload) {
                         props.history.push('/register_login')
@@ -26,7 +27,7 @@ export default function (ComposedClass, reload, adminRoute = null) {
                     }
                 }
             })
-            
+
         }, [dispatch, props.history, user.googleAuth])
         useEffect(() => {
 
@@ -46,7 +47,7 @@ export default function (ComposedClass, reload, adminRoute = null) {
                     }
                 }
             })
-            
+
         }, [dispatch, props.history, user.googleAuth])
 
         return (
@@ -55,5 +56,3 @@ export default function (ComposedClass, reload, adminRoute = null) {
     }
     return AuthenticationCheck
 }
-
-

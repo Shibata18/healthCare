@@ -1,4 +1,5 @@
 const { User } = require('../models/User');
+const { Doctor } = require("../models/Doctor");
 
 let auth = (req, res, next) => {
   let token = req.cookies.w_auth;
@@ -17,4 +18,20 @@ let auth = (req, res, next) => {
   });
 };
 
-module.exports = { auth };
+let authDoc = (req, res, next) => {
+  let token = req.cookies.w_auth;
+
+  Doctor.findByToken(token, (err, doctor) => {
+    if (err) throw err;
+    if (!doctor)
+      return res.json({
+        isAuth: false,
+        error: true
+      });
+
+    req.token = token;
+    req.doctor = doctor;
+    next();
+  });
+};
+module.exports = { auth, authDoc };

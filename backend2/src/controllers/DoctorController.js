@@ -27,9 +27,7 @@ module.exports = {
         const { cpf_medico, email, senha, telefone_medico } = req.body;
         await connection('doctors')
             .where('cpf_medico', cpf_medico)
-            .update('email', email)
-            .update('senha', senha)
-            .update('telefone_medico',telefone_medico)
+            .update({name_medico, email, senha, telefone_medico, conselho, registro, especialidade})
 
         return res.status(204).send("atualizado");
     }

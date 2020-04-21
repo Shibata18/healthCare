@@ -7,6 +7,8 @@ const server = require("http").createServer(app);
 const io = require("socket.io")(server);
 const config = require("./config/key");
 const routes = require('./routes/doctors');
+const routesUsers = require('./routes/users');
+const routesAgenda = require('./routes/agenda');
 
 const mongoose = require("mongoose");
 const connect = mongoose.connect(config.mongoURI, {
@@ -20,7 +22,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(routes);
-//app.use(cors());
+app.use(routesUsers);
+app.use(routesAgenda);
 const { Chat } = require("./models/Chat");
 const { auth } = require("./middleware/auth");
 

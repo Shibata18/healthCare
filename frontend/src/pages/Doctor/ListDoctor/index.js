@@ -1,80 +1,76 @@
-import React, { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
-import { Container, Form, Row, Col, Button, Nav, Navbar } from 'react-bootstrap'
-import logo from '../../../assets/logo.svg'
+import React, { useState, useEffect } from 'react'
+import { Container, Row, Col } from 'reactstrap'
+import ModalForm from '../Modals/Modal'
+import DataTable from '../Tables/DataTable'
+import { CSVLink } from "react-csv"
 import api from '../../../services/api';
 
-export default function ListDoctor() {
-  const [cpf_medico, setcpf_medico] = useState('');
-  //const history = useHistory();
+function Doctor(props) {
 
-  async function handleSubmit(e) {
-    e.preventDefault();
-    try {
-      const response = await api.get('doctors',cpf_medico);
-      console.log(response);
-      console.log(response.data);
-      //  history.push('/login');
+  const [items, setItems] = useState([])
+  /*async function getItems(){
+    const res = await api.get('/doctors')
+        .then(response => {
+            console.log(response.data);
+        }, error => {
+          console.log(error);
+        });
+      return res;
+  }*/
 
-    } catch (error) {
-      alert('Falha no Cadastro, tente novamente');
-    }
+  const getItems= () => {
+    fetch('http://localhost:3333/doctors')
+      .then(response => response.json())
+      .then(items => setItems(items))
+      .catch(err => console.log(err))
   }
+
+  const addItemToState = (item) => {
+    setItems([...items, item])
+  }
+
+  const updateState = (item) => {
+    const itemIndex = items.findIndex(data => data.id === item.id)
+    const newArray = [...items.slice(0, itemIndex), item, ...items.slice(itemIndex + 1)]
+    setItems(newArray)
+  }
+
+  const deleteItemFromState = (id) => {
+    const updatedItems = items.filter(item => item.id !== id)
+    setItems(updatedItems)
+  }
+
+  useEffect(() => {
+    getItems()
+  }, []);
+
   return (
-
-    <Container>
-      {/*   <Nav fill variant="pills">
-          <Nav.Item>
-          <Nav.Link><Link to='/registerPaciente'>Registrar Médico</Link></Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link><Link to='/registerDoctor'>Atualizar Dados do Médico</Link></Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link><Link to='/registerPaciente'>Inativar Médico</Link></Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link><Link to='/registerPaciente'>Listar Médicos</Link></Nav.Link>
-          </Nav.Item>
-        </Nav> */}
-      <Navbar collapseOnSelect expand="lg" bg="" variant="light">
-        <Navbar.Brand> <Link to='/'><img src={logo} alt="Logo" width="90" height="90" className="d-inline-block align-top" /></Link> </Navbar.Brand>
-        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-        <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="mr-auto">
-            {/*<Nav.Link> <Link to="/chat">Chat</Link>  </Nav.Link>
-           <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
-            <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-            <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-            <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-            <NavDropdown.Divider />
-            <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-          </NavDropdown> */}
-          </Nav>
-          <Nav>
-
-            <Nav.Link><Link to='/registerDoctor'>Registrar Médico</Link></Nav.Link>
-            <Nav.Link><Link to='/updateDoctor'>Atualizar Dados do Médico</Link></Nav.Link>
-            <Nav.Link><Link to='/deleteDoctor'>Inativar Médico</Link></Nav.Link>
-            <Nav.Link><Link to='/listDoctor'>Listar Médicos</Link></Nav.Link>
-          </Nav>
-        </Navbar.Collapse>
-      </Navbar>
-
-      <Form onSubmit={handleSubmit}>
-        <Form.Group as={Row}>
-          <Form.Label column sm={2}> cpf_medico </Form.Label>
-          <Col sm={10}>
-            <Form.Control type="text" name="cpf_medico" placeholder='Digite o seu cpf_medico' id="cpf_medico" value={cpf_medico} onChange={e => setcpf_medico(e.target.value)} required />
+      <Container className="App">
+        <Row>
+          <Col>
+            <h1 style={{margin: "20px 0"}}>CRUD Médico</h1>
           </Col>
-        </Form.Group>
-        <Form.Group as={Row}>
-          <Col sm={{ span: 10, offset: 2 }}>
-            <Button type="submit" variant='success'>Pesquisar</Button>
+        </Row>
+        <Row>
+          <Col>
+            <DataTable items={items} updateState={updateState} deleteItemFromState={deleteItemFromState} />
           </Col>
-        </Form.Group>
-      </Form>
-    </Container>
-
+        </Row>
+        <Row>
+          <Col>
+            <CSVLink
+              filename={"db.csv"}
+              color="primary"
+              style={{float: "left", marginRight: "10px"}}
+              className="btn btn-primary"
+              data={items}>
+              Download CSV
+            </CSVLink>
+            <ModalForm buttonLabel="Add Item" addItemToState={addItemToState}/>
+          </Col>
+        </Row>
+      </Container>
   )
 }
+
+export default Doctor

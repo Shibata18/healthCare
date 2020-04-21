@@ -10,6 +10,7 @@ exports.up = function(knex) {
       table.foreign('cpf_medico_fk').references('cpf_medico').inTable('doctors');
       table.foreign('prontuario_fk').references('id_prontuario').inTable('prontuario');
       table.foreign('cpf_paciente_fk').references('cpf_paciente').inTable('pacientes');
+      table.timestamps();
   })
 };
 

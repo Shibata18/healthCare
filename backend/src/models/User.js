@@ -3,27 +3,30 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const jwt = require('jsonwebtoken');
 
-const userSchema = mongoose.Schema({
-    name: {
+const UserSchema = mongoose.Schema({
+    namePaciente: {
         type:String,
-        maxlength:100
+        require:true,
     },
-    cpf:{
+    cpfPaciente:{
         type:String,
-        maxlength:11,
+        minglength:11,
         unique:1,
-        minlenght:11,
+        require:true,
+        minglength: 11,
     },
     email: {
         type:String,
         trim:true,
-        unique: 1 
+        unique: 1,
+        require:true,
     },
     password: {
         type: String,
-        minglength: 5
+        minglength: 5,
+        require:true,
     },
-    telefone:{
+    telefonePaciente:{
         type:String,
     },
     image: String,
@@ -33,20 +36,24 @@ const userSchema = mongoose.Schema({
     tokenExp :{
         type: Number
     },
-})
+    ativoPaciente:{
+      type:Boolean,
+      default:true
+    }
+},{timestamps:true})
 
 
-userSchema.pre('save', function( next ) {
+UserSchema.pre('save', function( next ) {
     var user = this;
-    
-    if(user.isModified('password')){    
+
+    if(user.isModified('password')){
 
         bcrypt.genSalt(saltRounds, function(err, salt){
             if(err) return next(err);
-    
+
             bcrypt.hash(user.password, salt, function(err, hash){
                 if(err) return next(err);
-                user.password = hash 
+                user.password = hash
                 next()
             })
         })
@@ -55,14 +62,14 @@ userSchema.pre('save', function( next ) {
     }
 });
 
-userSchema.methods.comparePassword = function(plainPassword,cb){
+UserSchema.methods.comparePassword = function(plainPassword,cb){
     bcrypt.compare(plainPassword, this.password, function(err, isMatch){
         if (err) return cb(err);
         cb(null, isMatch)
     })
 }
 
-userSchema.methods.generateToken = function(cb) {
+UserSchema.methods.generateToken = function(cb) {
     var user = this;
     var token =  jwt.sign(user._id.toHexString(),'secret')
 
@@ -73,7 +80,7 @@ userSchema.methods.generateToken = function(cb) {
     })
 }
 
-userSchema.statics.findByToken = function (token, cb) {
+UserSchema.statics.findByToken = function (token, cb) {
     var user = this;
 
     jwt.verify(token,'secret',function(err, decode){
@@ -83,7 +90,13 @@ userSchema.statics.findByToken = function (token, cb) {
         })
     })
 }
+UserSchema.method("toJSON", function() {
+    const { __v, _id, ...object } = this.toObject();
+    object.id = _id;
+    return object;
+  });
 
-const User = mongoose.model('User', userSchema);
+
+const User = mongoose.model('User', UserSchema);
 
 module.exports = { User }

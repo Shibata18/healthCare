@@ -1,13 +1,13 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+const mongooseDateFormat = require('mongoose-date-format');
 
 const agendaSchema = mongoose.Schema({
-    namePaciente: {
-        type:String,
-    },
     hora:{
         type: Date,
+        default: new Date()
     },
-    id : {
+    idDoctor : {
         type:Schema.Types.ObjectId,
         ref:'Doctor'
     },
@@ -16,11 +16,13 @@ const agendaSchema = mongoose.Schema({
         ref: 'User'
     },
     motivo:String,
-    image: String,
+    ativo:{
+        type:Boolean,
+        default:true,
+    }
 })
 
-
-
+agendaSchema.plugin(mongooseDateFormat);  // format: YYYY-MM-DD HH:mm:ss
 const Agenda = mongoose.model('Agenda', agendaSchema);
 
 module.exports = { Agenda }

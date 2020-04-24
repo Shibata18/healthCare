@@ -14,11 +14,15 @@
 */
 
 const Ws = use('Ws')
-
-Ws.channel('chat', ({ socket }) => {
+Ws.channel('chat', 'ChatController')
+Ws.channel('testando:*', ({ socket }) => {
+  console.log(socket.topic)
+})
+Ws.channel('teste', ({ socket }) => {
   console.log('user joined with %s socket id', socket.id)
 
   socket.on('message', (data) => {
+    console.log(data);
   })
 
   // emit events

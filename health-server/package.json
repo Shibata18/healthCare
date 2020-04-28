@@ -8,11 +8,15 @@
     "start": "node server.js",
     "test": "node ace test"
   },
+  "engines": {
+    "node":"12.x",
+    "npm":"6.x"
+  },
   "keywords": [
     "adonisjs",
     "adonis-app"
   ],
-  "author": "",
+  "author": "Douglas",
   "license": "UNLICENSED",
   "private": true,
   "dependencies": {

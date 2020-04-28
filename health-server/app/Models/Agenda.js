@@ -10,6 +10,12 @@ class Agenda extends Model {
     paciente() {
         return this.belongsTo('App/Models/Paciente')
     }
+    file(){
+        return this.hasMany('App/Models/File')
+    }
+    chat(){
+        return this.hasMany('App/Models/Chat')
+    }
 }
 
 module.exports = Agenda

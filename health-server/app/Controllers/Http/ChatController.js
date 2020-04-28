@@ -1,16 +1,16 @@
 'use strict'
-const Agenda = use('App/Models/Agenda');
+const Chat = use('App/Models/Chat')
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
 
 /**
- * Resourceful controller for interacting with agenda
+ * Resourceful controller for interacting with chats
  */
-class AgendaController {
+class ChatController {
   /**
-   * Show a list of all agenda.
-   * GET agenda
+   * Show a list of all chats.
+   * GET chats
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -18,57 +18,56 @@ class AgendaController {
    * @param {View} ctx.view
    */
   async index ({ request, response, view }) {
-    const agenda = Agenda.all();
-
-    return agenda;
+    const chat = Chat.all(); 
+    return chat
   }
 
   /**
-   * Render a form to be used for creating a new agenda.
-   * GET agenda/create
+   * Render a form to be used for creating a new chat.
+   * GET chats/create
    *
    * @param {object} ctx
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    * @param {View} ctx.view
-   *
+   */
   async create ({ request, response, view }) {
-  }*/
+  }
 
   /**
-   * Create/save a new agenda.
-   * POST agenda
+   * Create/save a new chat.
+   * POST chats
    *
    * @param {object} ctx
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
   async store ({ request, response }) {
-    const data = request.only(['user_id', 'paciente_id', 'horario']);
+    const data = request.only(['agenda_id', 'file_id', 'mensagem']);
 
-    const paciente = await Agenda.create(data);
+    const paciente = await Chat.create(data);
 
     return paciente;
   }
 
   /**
-   * Display a single agenda.
-   * GET agenda/:id
+   * Display a single chat.
+   * GET chats/:id
    *
    * @param {object} ctx
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async show ({ params }) {
-    const agenda = await Agenda.findOrFail(params.id);
-    await agenda.load('file')
+  async show ({ params, request, response, view }) {
+    const agenda = await Chat.findOrFail(params.id);
+    await agenda.load('agenda')
     return agenda
   }
 
   /**
-   * Render a form to update an existing agenda.
-   * GET agenda/:id/edit
+   * Render a form to update an existing chat.
+   * GET chats/:id/edit
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -79,30 +78,30 @@ class AgendaController {
   }
 
   /**
-   * Update agenda details.
-   * PUT or PATCH agenda/:id
+   * Update chat details.
+   * PUT or PATCH chats/:id
    *
    * @param {object} ctx
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-    async update ({ params, request, response }) {
-      const property = await Agenda.findOrFail(params.id)
+  async update ({ params, request, response }) {
+    const property = await Chat.findOrFail(params.id)
     
-      const data = request.only([
-        'user_id', 'paciente_id', 'horario'
-      ])
-    
-      property.merge(data)
-    
-      await property.save()
-    
-      return property
-    }
+    const data = request.only([
+      'mensagem'
+    ])
+  
+    property.merge(data)
+  
+    await property.save()
+  
+    return property
+  }
 
   /**
-   * Delete a agenda with id.
-   * DELETE agenda/:id
+   * Delete a chat with id.
+   * DELETE chats/:id
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -112,4 +111,4 @@ class AgendaController {
   }
 }
 
-module.exports = AgendaController
+module.exports = ChatController

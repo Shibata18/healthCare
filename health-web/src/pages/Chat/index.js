@@ -1,49 +1,88 @@
-import React,{useState,useEffect} from 'react';
-import { Card, Button, CardTitle, CardText, Row, Col, Container } from 'reactstrap';
+import React, { Component } from "react";
+import socket from "./wesocket";
 import Navbar from '../Navbar'
-import {Link} from 'react-router-dom';
-import Ws from '@adonisjs/websocket-client'
+import url from '../../services/url';
+import {Box} from '@material-ui/core';
+import { Form, Col, Row, Button, Container } from 'react-bootstrap';
 
-export default function Teste(){
-  const sw = Ws('ws://localhost:3333',{
-    path:"ws"
-  })
-  sw.connect();
-  const socket = sw.subscribe('chat');
-  const [mensagem,setMensagem] = useState('');
-  const [chat,setChat] = useState([]);
-  const messages = [];
+class ChatApp extends Component {
+  constructor() {
+    super();
+    this.state = { msg: "", chat: []}
+  }
 
-  useEffect(() => {
-   async function loadMensagens() {
-     //const response = await api.get('/devs')
-
-     //setChat(response.data)
-   }
-   loadMensagens();
- }, []);
- async function handleMensagem(data) {
-   //const response = await api.post('/dev', data)
-
-   //setChat([...devs, response.data])
-   //console.log(response.data);
- }
-    socket.on('message',(data)=>{
-      messages.push(data)
+  componentDidMount() {
+    socket.on("message", ({msg }) => {
+      this.setState({
+        chat: [...this.state.chat, {msg }]
+      });
     });
-    function enviarMensagens(){
-      const data = {mensagem};
-      socket.emit('message',data);
-      chat.push(data);
-    }
+  }
+  handleDrop = files => this.setState({ files });
+
+  onTextChange = e => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
+
+  onMessageSubmit = async () => {
+    const {msg } = this.state;
+    socket.emit("message", {msg });
+    this.setState({ msg: "" });
+    await url.post('/chat',{
+      'agenda_id':1,
+      'file_id':1,
+      "mensagem":msg
+    }).then(res=>console.log(res)).catch(err=>console.error(err))
+  };
+  onLoading=()=>{
+    return url.get('/chat').then(res=>console.log(res)).catch(err=>console.error(err))
+  }
+  renderChat() {
+    return (
+      <div>
+        <span style={{ color: "green" }}> {this.onLoading} </span>
+      </div>
+    );
+  }
+  render() {
     return (
       <>
       <Navbar/>
       <Container>
-        <p>{ mensagem}        </p>
-        <input type='text' id='mensagens' value={mensagem} onChange={e=>setMensagem(e.target.value)} />
-        <button onClick={enviarMensagens()}>enviarMensagens</button>
+        <p>Usuário </p>
+          <div>
+            <Box color="text.primary" component="div" m={1} border={1} style={{padding:80}}>
+            {this.renderChat()}
+          </Box>
+          </div>
+
+      </Container>
+      <Container>
+        <Form >
+          <Form.Group as={Row}>
+            <Form.Label column sm={4}>
+              Mensagem
+            </Form.Label>
+            <Col sm={4}>
+              <Form.Control id="margin-dense"
+              style={{ margin: 8 }}
+              placeholder="Digite a sua Mensagem"
+              margin="normal"
+              name="msg"
+              onChange={e => this.onTextChange(e)}
+              value={this.state.msg}/>
+            </Col>
+          </Form.Group>
+
+          <Form.Group as={Row}>
+            <Col sm={{ span: 4, offset: 4 }}>
+              <Button  style={{ margin: 10 }} variant='light' onClick={this.onMessageSubmit}>Send</Button>
+            </Col>
+          </Form.Group>
+        </Form>
       </Container>
       </>
-    )
+    );
+  }
 }
+export default ChatApp;

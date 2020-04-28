@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 //import api from "../../../../services/api";
-
+import url from '../../services/url'
 class AddEditForm extends React.Component {
     state = {
         id: 0,
@@ -22,7 +22,7 @@ class AddEditForm extends React.Component {
 
     submitFormAdd = e => {
         e.preventDefault()
-        fetch('http://localhost:3333/doctors', {
+        fetch(`${url}/doctors`, {
             method: 'post',
             headers: {
                 'Content-Type': 'application/json'
@@ -44,7 +44,7 @@ class AddEditForm extends React.Component {
 
     submitFormEdit = e => {
         e.preventDefault()
-        fetch(`http://localhost:3333/doctors/${this.state.id}`, {
+        fetch(`${url}/doctors/${this.state.id}`, {
             method: 'put',
             headers: {
                 'Content-Type': 'application/json'

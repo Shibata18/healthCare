@@ -29,6 +29,14 @@ function AddEditForm(props) {
         password: form.password,
       })
         .then(response => response.data, setTimeout(function () { alert('Cadastrado Com sucesso');window.location.reload() }, 1000))
+        .then(item => {
+          if(Array.isArray(item)) {
+            props.addItemToState(item[0])
+            props.toggle()
+          } else {
+            console.log('failure')
+          }
+        })
           .catch(err => console.log(err))
   }
 

@@ -20,7 +20,7 @@ const Example = (props) => {
     function renderActions() {
         return (
             <Button color="#222" onClick={handleLogout}>
-              <i className="fa fa-times" />
+              Sair <i className="fa fa-times" />
             </Button>
         );
       }
@@ -37,15 +37,21 @@ const Example = (props) => {
                         <NavItem>
                             <NavLink href="/chat">Chat</NavLink>
                         </NavItem>
+                        <NavItem>
+                            <NavLink href="/doctors">Crud Médico</NavLink>
+                        </NavItem>
+                        <NavItem>
+                            <NavLink href="/paciente">Crud Paciente</NavLink>
+                        </NavItem>
                     </Nav>
                     <UncontrolledDropdown>
                         <DropdownToggle nav caret>Options</DropdownToggle>
                         <DropdownMenu>
                             <DropdownItem>
-                                <Link to='/doctors'>Ver Perfil</Link>
+                                <Link to='/doctorPerfil'>Perfil Médico</Link>
                             </DropdownItem>
                             <DropdownItem>
-                                <Link to='/paciente'>Ver Perfil</Link>
+                                <Link to='/paciente'>Crud Paciente</Link>
                             </DropdownItem>
                             <DropdownItem divider />
                             <DropdownItem>         {renderActions()}</DropdownItem>

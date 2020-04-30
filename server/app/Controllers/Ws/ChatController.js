@@ -9,7 +9,6 @@ class ChatController {
     this.socket.broadcast('message',message)
     console.log(this.socket.id);
    console.log(message);
-
   }
 }
 

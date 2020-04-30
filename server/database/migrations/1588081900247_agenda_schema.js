@@ -8,18 +8,18 @@ class AgendaSchema extends Schema {
     this.create('agenda', (table) => {
       table.increments()
       table
-        .integer('doctor_id')
+        .string('doctor_cpf')
         .unsigned()
-        .references('id')
+        .references('cpfDoctor')
         .inTable('doctors')
         .onUpdate('CASCADE')
       table
-        .integer('paciente_id')
+        .string('paciente_cpf')
         .unsigned()
-        .references('id')
+        .references('cpfPaciente')
         .inTable('pacientes')
         .onUpdate('CASCADE')
-      table.datetime('horario',{precision: 6}).notNullable()
+      table.datetime('horario',{precision: 6}).unique()
       table.timestamps()
     })
   }

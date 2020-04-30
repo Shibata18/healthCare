@@ -4,6 +4,10 @@
 const Model = use('Model')
 
 class Chat extends Model {
+    agenda(){
+        return this.belongsTo('App/Models/Agenda')
+    }
+
 }
 
 module.exports = Chat

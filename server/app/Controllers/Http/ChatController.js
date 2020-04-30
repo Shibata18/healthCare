@@ -1,5 +1,4 @@
-'use strict'
-
+const Chat = use('App/Models/Chat')
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
@@ -18,6 +17,8 @@ class ChatController {
    * @param {View} ctx.view
    */
   async index ({ request, response, view }) {
+    const chat = Chat.all(); 
+    return chat
   }
 
   /**
@@ -41,6 +42,11 @@ class ChatController {
    * @param {Response} ctx.response
    */
   async store ({ request, response }) {
+    const data = request.only(['agenda_id','mensagem']);
+
+    const paciente = await Chat.create(data);
+
+    return paciente;
   }
 
   /**
@@ -53,6 +59,9 @@ class ChatController {
    * @param {View} ctx.view
    */
   async show ({ params, request, response, view }) {
+    const agenda = await Chat.findOrFail(params.id);
+    await agenda.load('agenda')
+    return agenda
   }
 
   /**
@@ -76,6 +85,17 @@ class ChatController {
    * @param {Response} ctx.response
    */
   async update ({ params, request, response }) {
+    const property = await Chat.findOrFail(params.id)
+    
+    const data = request.only([
+      'mensagem'
+    ])
+  
+    property.merge(data)
+  
+    await property.save()
+  
+    return property
   }
 
   /**

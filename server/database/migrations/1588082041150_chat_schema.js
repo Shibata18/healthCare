@@ -7,6 +7,13 @@ class ChatSchema extends Schema {
   up () {
     this.create('chats', (table) => {
       table.increments()
+      table
+      .integer('agenda_id')
+      .unsigned()
+      .references('id')
+      .inTable('agenda')
+      .onUpdate('CASCADE')
+      table.string('mensagem').notNullable()
       table.timestamps()
     })
   }

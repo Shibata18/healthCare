@@ -38,7 +38,7 @@ class SignUp extends Component {
           {this.state.error && <p>{this.state.error}</p>}
           <input
             type="text"
-            placeholder="CPF"
+            placeholder='CPF: 000.000.000-00' pattern="\d{3}\.\d{3}\.\d{3}-\d{2}"
             onChange={e => this.setState({ cpfUser: e.target.value })}
           />
           <input

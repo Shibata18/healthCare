@@ -1,82 +1,71 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Container, Row, Col } from 'reactstrap'
 import ModalForm from './Modal';
 import DataTable from './Table';
 import { CSVLink } from "react-csv";
 import Navbar from '../Navbar/index';
 import api from '../../services/api';
-class App extends Component {
-    state = {
-        items: []
-    }
 
-    async getItems() {
+function App(props) {
+
+  const [items, setItems] = useState([])
+
+  const getItems= async () => {
         await api.get('/doctors')
             .then(response => response.data)
-            .then(items => this.setState({ items }))
+            .then(items => setItems(items))
             .catch(err => console.log(err))
     }
 
-    addItemToState = (item) => {
-        this.setState(prevState => ({
-            items: [...prevState.items, item]
-        }))
-    }
+  const addItemToState = (item) => {
+    setItems([...items, item])
+  }
 
-    updateState = (item) => {
-        const itemIndex = this.state.items.findIndex(data => data.id === item.id)
-        const newArray = [
-            // destructure all items from beginning to the indexed item
-            ...this.state.items.slice(0, itemIndex),
-            // add the updated item to the array
-            item,
-            // add the rest of the items to the array from the index after the replaced item
-            ...this.state.items.slice(itemIndex + 1)
-        ]
-        this.setState({ items: newArray })
-    }
+  const updateState = (item) => {
+    const itemIndex = items.findIndex(data => data.id === item.id)
+    const newArray = [...items.slice(0, itemIndex), item, ...items.slice(itemIndex + 1)]
+    setItems(newArray)
+  }
 
-    deleteItemFromState = (id) => {
-        const updatedItems = this.state.items.filter(item => item.id !== id)
-        this.setState({ items: updatedItems })
-    }
+  const deleteItemFromState = (id) => {
+    const updatedItems = items.filter(item => item.id !== id)
+    setItems(updatedItems)
+  }
 
-    componentDidMount() {
-        this.getItems()
-    }
+  useEffect(() => {
+    getItems()
+  }, []);
 
-    render() {
-        return (
-            <>
-                <Navbar />
-                <Container className="App">
-                    <Row>
-                        <Col>
-                            <h1 style={{ margin: "20px 0" }}>CRUD Médico</h1>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col>
-                            <DataTable items={this.state.items} updateState={this.updateState} />
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col>
-                            <CSVLink
-                                filename={"db_Doctor.csv"}
-                                color="primary"
-                                style={{ float: "left", marginRight: "10px" }}
-                                className="btn btn-primary"
-                                data={this.state.items}>
-                                Download CSV
+  return (
+    <>
+    <Navbar/>
+      <Container className="App">
+        <Row>
+          <Col>
+            <h1 style={{margin: "20px 0"}}>CRUD Médico</h1>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <DataTable items={items} updateState={updateState} deleteItemFromState={deleteItemFromState} />
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <CSVLink
+              filename={"db_medico.csv"}
+              color="primary"
+              style={{float: "left", marginRight: "10px"}}
+              className="btn btn-primary"
+              data={items}>
+              Download CSV
             </CSVLink>
-                            <ModalForm buttonLabel="Adicionar Médico" addItemToState={this.addItemToState} />
-                        </Col>
-                    </Row>
-                </Container>
-            </>
-        )
-    }
+            <ModalForm buttonLabel="Add Médico" addItemToState={addItemToState}/>
+          </Col>
+        </Row>
+      </Container>
+      </>
+  )
 }
 
 export default App

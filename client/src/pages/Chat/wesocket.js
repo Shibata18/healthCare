@@ -5,7 +5,7 @@ const sw = Ws(`ws://${host}`, {
     path: "ws"
 })
 sw.connect();
-sw.close()
+sw.close();
 const socket = sw.subscribe('chat');
 
 export default socket;

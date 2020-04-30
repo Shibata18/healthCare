@@ -1,29 +1,10 @@
-import React, { Component } from 'react'
-import { Table } from 'reactstrap';
+import React from 'react'
 import ModalForm from './Modal'
-import api from "../../services/api";
+import { Table} from 'reactstrap';
 
+function DataTable(props){
 
-class DataTable extends Component {
-
-  deleteItem = id => {
-    let confirmDelete = window.confirm('Delete item forever?')
-    if (confirmDelete) {
-      api.delete('/doctors', {
-        id
-      })
-        .then(response => response.json())
-        .then(item => {
-          this.props.deleteItemFromState(id)
-        })
-        .catch(err => console.log(err))
-    }
-
-  }
-
-  render() {
-
-    const items = this.props.items.map(item => {
+    const items = props.items.map(item => {
       return (
         <tr key={item.id}>
           <th scope="row">{item.id}</th>
@@ -39,7 +20,7 @@ class DataTable extends Component {
           <td>{item.updated_at}</td>
           <td>
             <div style={{ width: "10%" }}>
-              <ModalForm buttonLabel="Edit" item={item} updateState={this.props.updateState} />
+              <ModalForm buttonLabel="Edit" item={item} updateState={props.updateState}/>
               {/* <Button color="danger" onClick={() => this.deleteItem(item.id)}>Del</Button> */}
             </div>
           </td>
@@ -70,7 +51,6 @@ class DataTable extends Component {
         </tbody>
       </Table>
     )
-  }
 }
 
 export default DataTable

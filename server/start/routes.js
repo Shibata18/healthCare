@@ -16,6 +16,7 @@
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
 
+//Route.any('*', ({ view }) => view.render(Helpers.publicPath(__dirname,'client','build')))
 Route.get('/', () => {
   return { greeting: 'Hello world in JSON' }
 })

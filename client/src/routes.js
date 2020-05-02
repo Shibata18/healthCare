@@ -39,7 +39,7 @@ const Routes = () => (
       <Route path="/agenda" component={Agenda} />
       <Route path="/main" component={Main} />
       <Route path="/chat" component={ChatPage} />
-      */}
+      <Route path='/doctorPerfil' component={DoctorPerfil} /> */}
       <Route path="*" component={() => <h1>Page not found</h1>} />
     </Switch>
   </BrowserRouter>

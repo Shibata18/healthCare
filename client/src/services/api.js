@@ -1,8 +1,7 @@
 import axios from "axios";
 import { getToken } from "./auth";
-const host = process.env.NODE_ENV === 'production' ? window.location.host : 'http://localhost:3333'
 const api = axios.create({
-  baseURL: host
+  baseURL:  process.env.REACT_APP_API_URL
 });
 
 api.interceptors.request.use(async config => {

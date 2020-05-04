@@ -1,8 +1,13 @@
 import React from "react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
-import SignUp from './pages/SignUp';
-import SignIn from './pages/SignIn';
+import SignUpAdmin from './pages/SignUpAdmin';
+import SignInAdmin from './pages/SignInAdmin';
+import LandingPage from './pages/LandingPage';
+import LoginDoctor from './pages/LoginDoctor';
+import RegisterDoctor from './pages/RegisterDoctor';
 import Doctors from './pages/Doctor';
+import LoginPaciente from './pages/LoginPaciente';
+import RegisterPaciente from './pages/RegisterPaciente';
 import Main from './pages/Main';
 import Paciente from './pages/Paciente';
 import ChatPage from './pages/Chat'
@@ -26,8 +31,13 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
 const Routes = () => (
   <BrowserRouter>
     <Switch>
-      <Route exact path="/" component={SignIn} />
-      <Route path="/signup" component={SignUp} />
+      <Route exact path="/" component={LandingPage} />
+      <Route path="/signInAdmin" component={SignInAdmin} />
+      <Route path="/signupAdmin" component={SignUpAdmin} />
+      <Route path="/loginDoctor" component={LoginDoctor} />
+      <Route path="/registerDoctor" component={RegisterDoctor} />
+      <Route path="/loginPaciente" component={LoginPaciente} />
+      <Route path="/registerPaciente" component={RegisterPaciente} />
       <PrivateRoute path="/agenda" component={Agenda} />
       <PrivateRoute path="/doctors" component={Doctors} />
       <PrivateRoute path="/paciente" component={Paciente} />
@@ -40,7 +50,7 @@ const Routes = () => (
       <Route path="/main" component={Main} />
       <Route path="/chat" component={ChatPage} />
       <Route path='/doctorPerfil' component={DoctorPerfil} /> */}
-      <Route path="*" component={() => <h1>Page not found</h1>} />
+      <Route path="*" component={() => <h1>Página não encontrada ou não existe</h1>} />
     </Switch>
   </BrowserRouter>
 );

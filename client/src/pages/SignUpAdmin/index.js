@@ -22,10 +22,10 @@ class SignUp extends Component {
     } else {
       try {
         await api.post("/user", { cpfUser, email, password });
-        this.props.history.push("/");
+        this.props.history.push("/signupAdmin");
       } catch (err) {
         console.log(err);
-        this.setState({ error: "Ocorreu um erro ao registrar sua conta. T.T" });
+        this.setState({ error: "Ocorreu um erro ao registrar sua conta." });
       }
     }
   };
@@ -38,22 +38,22 @@ class SignUp extends Component {
           {this.state.error && <p>{this.state.error}</p>}
           <input
             type="text"
-            placeholder='CPF: 000.000.000-00' pattern="\d{3}\.\d{3}\.\d{3}-\d{2}"
+            placeholder='CPF: 000.000.000-00' pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" required
             onChange={e => this.setState({ cpfUser: e.target.value })}
           />
           <input
             type="email"
-            placeholder="Endereço de e-mail"
+            placeholder="Endereço de e-mail" required
             onChange={e => this.setState({ email: e.target.value })}
           />
           <input
             type="password"
-            placeholder="Senha"
+            placeholder="Senha" required
             onChange={e => this.setState({ password: e.target.value })}
           />
-          <button type="submit">Cadastrar grátis</button>
+          <button type="submit">Cadastrar</button>
           <hr />
-          <Link to="/">Fazer login</Link>
+          <Link to="/signInAdmin">Fazer login</Link>
         </Form>
       </Container>
     );

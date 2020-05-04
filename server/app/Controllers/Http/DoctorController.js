@@ -101,11 +101,11 @@ class DoctorController {
 
       await user.delete()*/
   }
-  async login({params,auth}){
+ /*  async login({params,auth}){
     const user = await Doctor.findOrFail(params.id)
     const token = await auth.generate(user);
     return token
-  }
+  } */
 }
 
 module.exports = DoctorController

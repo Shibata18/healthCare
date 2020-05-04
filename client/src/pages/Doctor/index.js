@@ -60,7 +60,7 @@ function App(props) {
               data={items}>
               Download CSV
             </CSVLink>
-            <ModalForm buttonLabel="Add Médico" addItemToState={addItemToState}/>
+            <ModalForm buttonLabel="Adicionar Médico" addItemToState={addItemToState}/>
           </Col>
         </Row>
       </Container>

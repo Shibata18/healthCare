@@ -20,14 +20,22 @@ const Route = use('Route')
 Route.get('/', () => {
   return { greeting: 'Hello world in JSON' }
 })
-Route.post('/sessions/:id','SessionController.login');
+//ADMIN
 Route.post('/sessions','SessionController.create');
-Route.resource('user','UserController').apiOnly()
+Route.post('/user','UserController.store');
+Route.resource('user','UserController').apiOnly().middleware('auth:jwt')
+//Doctor
+Route.post('/loginDoctor','LoginDoctorController.login');
+Route.post('doctors','DoctorController.store')
 Route.resource('doctors', 'DoctorController')
-  .apiOnly().middleware('auth')
+  .apiOnly().middleware('auth:doctor,auth:jwt')
+//Paciente
+Route.post('/loginPaciente','LoginPacienteController.login');
+Route.post("/paciente",'PacienteController.store')
 Route.resource('paciente', 'PacienteController')
-  .apiOnly().middleware('auth')
+  .apiOnly().middleware('auth:paciente,auth:jwt')
+//Agenda
 Route.resource('agenda', 'AgendaController')
-  .apiOnly().middleware('auth')
+    .apiOnly().middleware('auth:paciente,auth:jwt')
 //Route.resource('chat','ChatController').apiOnly()
 //Route.resource('files','FileController')

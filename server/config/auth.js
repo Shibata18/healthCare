@@ -69,10 +69,30 @@ module.exports = {
     serializer: 'lucid',
     model: 'App/Models/User',
     scheme: 'jwt',
-    uid: 'email',
+    uid: 'cpfUser',
     password: 'password',
     options: {
       secret: Env.get('APP_KEY')
+    }
+  },
+  paciente: {
+    serializer: 'lucid',
+    model: 'App/Models/Paciente',
+    scheme: 'jwt',
+    uid: 'cpfPaciente',
+    password: 'password',
+    options: {
+      secret: Env.get('APP_KEY') + 'paciente' // <
+    }
+  },
+  doctor: {
+    serializer: 'lucid',
+    model: 'App/Models/Doctor',
+    scheme: 'jwt',
+    uid: 'cpfDoctor',
+    password: 'password',
+    options: {
+      secret: Env.get('APP_KEY') + 'doctor' // <-
     }
   },
 

@@ -28,6 +28,7 @@ Route.resource('user','UserController').apiOnly().middleware('auth:jwt')
 Route.post('/loginDoctor','LoginDoctorController.login');
 Route.post('doctors','DoctorController.store')
 Route.get('/agendaDoctor','LoginDoctorController.teste').middleware('auth:doctor,auth:jwt')
+Route.get('/perfilDoctor',"DoctorController.perfil").middleware('auth:doctor')
 Route.resource('doctors', 'DoctorController')
   .apiOnly().middleware('auth:doctor,auth:jwt')
 //Paciente

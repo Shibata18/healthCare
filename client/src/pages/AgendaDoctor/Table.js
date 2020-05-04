@@ -8,14 +8,16 @@ function DataTable(props){
       return (
         <tr key={item.id}>
           <th scope="row">{item.id}</th>
-          <td>{item.doctor_cpf}</td>
-          <td>{item.paciente_cpf}</td>
-          <td>{item.horario}</td>
+          <td>{item.cpfPaciente}</td>
+          <td>{item.namePaciente}</td>
+          <td>{item.email}</td>
+          <td>{item.telefonePaciente}</td>
+          <td>{item.ativo_paciente?`Ativo`:`Inativo`}</td>
           <td>{item.created_at}</td>
           <td>{item.updated_at}</td>
           <td>
             <div style={{ width: "10%" }}>
-              <ModalForm buttonLabel="Editar" item={item} updateState={props.updateState}/>
+              <ModalForm buttonLabel="Edit" item={item} updateState={props.updateState}/>
               {/*<Button color="danger" onClick={() => deleteItem(item.id)}>Del</Button>*/ }
             </div>
           </td>
@@ -28,10 +30,11 @@ function DataTable(props){
         <thead>
           <tr>
             <th>ID</th>
-            <th>CPF Doctor</th>
-            <th>CPF Paciente</th>
-            <th>Horario</th>
-            {/*<th>Status</th>*/}
+            <th>CPF</th>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Telefone</th>
+            <th>Status</th>
             <th>Criado</th>
             <th>Atualizado</th>
             <th>Editar</th>

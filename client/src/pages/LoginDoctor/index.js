@@ -22,6 +22,7 @@ class SignIn extends Component {
     } else {
       try {
         const response = await api.post("/loginDoctor", { cpfDoctor, password });
+        localStorage.setItem('doctor_cpf',cpfDoctor);
         login(response.data.token);
         this.props.history.push("/agenda");
       } catch (err) {

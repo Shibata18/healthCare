@@ -33,7 +33,7 @@ class Doctor extends Model {
     return this.hasMany('App/Models/Token')
   }
   agendaDoctor () {
-    return this.hasMany('App/Models/Agenda')
+    return this.hasMany('App/Models/Agenda','cpfDoctor','doctor_cpf')
   }
 }
 

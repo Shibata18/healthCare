@@ -60,12 +60,10 @@ class PacienteController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async show ({ params, request, response, view }) {
-    const paciente = await Paciente.findOrFail(params.id)
-
-    await paciente.load('agendaPaciente')
-
-    return paciente
+  async agendaPaciente ({ params, request, response, view }) {
+    const user = await Paciente.findByOrFail("cpfPaciente",request.body.cpfPaciente)
+    await user.load('agendaPaciente');
+    return user
   }
 
   /**

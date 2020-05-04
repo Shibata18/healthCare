@@ -21,7 +21,7 @@ class Paciente extends Model {
         })
     }
     agendaPaciente() {
-        return this.hasMany('App/Models/Agenda')
+        return this.hasMany('App/Models/Agenda','cpfPaciente','paciente_cpf')
     }
     tokens() {
         return this.hasMany('App/Models/Token')

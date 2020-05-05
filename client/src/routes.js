@@ -1,20 +1,23 @@
 import React from "react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
-import SignUpAdmin from './pages/SignUpAdmin';
-import SignInAdmin from './pages/SignInAdmin';
-import LandingPage from './pages/LandingPage';
-import LoginDoctor from './pages/LoginDoctor';
-import RegisterDoctor from './pages/RegisterDoctor';
-import Doctors from './pages/Doctor';
-import LoginPaciente from './pages/LoginPaciente';
-import RegisterPaciente from './pages/RegisterPaciente';
-import Main from './pages/Main';
-import Paciente from './pages/Paciente';
-import ChatPage from './pages/Chat'
-import Agenda from './pages/Agenda';
-import DoctorPerfil from './pages/DoctorPerfil';
-import PacientePerfil from './pages/PacientePerfil';
 import { isAuthenticated } from "./services/auth";
+import LandingPage from './pages/LandingPage';
+import ChatPage from './pages/Chat'
+//ADMIN
+import SignUpAdmin from './pages/Admin/SignUpAdmin';
+import SignInAdmin from './pages/Admin/SignInAdmin';
+import Main from './pages/Admin/Main';
+import Agenda from './pages/Admin/Agenda';
+//Doctors
+import LoginDoctor from './pages/Medico/LoginDoctor';
+import RegisterDoctor from './pages/Medico/RegisterDoctor';
+import Doctors from './pages/Medico/Doctor';
+import DoctorPerfil from './pages/Medico/DoctorPerfil';
+//Paciente
+import LoginPaciente from './pages/Paciente/LoginPaciente';
+import RegisterPaciente from './pages/Paciente/RegisterPaciente';
+import Paciente from './pages/Paciente/PacienteCRU';
+import PacientePerfil from './pages/Paciente/PacientePerfil';
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
@@ -46,12 +49,6 @@ const Routes = () => (
       <PrivateRoute path="/chat" component={ChatPage} />
       <PrivateRoute path="/doctorPerfil" component={DoctorPerfil} />
       <PrivateRoute path="/pacientePerfil" component={PacientePerfil} />
-      {/*  <Route path="/doctors" component={Doctors} />
-      <Route path="/paciente" component={Paciente} />
-      <Route path="/agenda" component={Agenda} />
-      <Route path="/main" component={Main} />
-      <Route path="/chat" component={ChatPage} />
-      <Route path='/doctorPerfil' component={DoctorPerfil} /> */}
       <Route path="*" component={() => <h1>Página não encontrada ou não existe</h1>} />
     </Switch>
   </BrowserRouter>

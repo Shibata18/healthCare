@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'reactstrap'
-import ModalForm from './Modal';
+//import ModalForm from './Modal';
 import DataTable from './Table';
 import { CSVLink } from "react-csv";
 import Navbar from '../Navbar/index';
@@ -15,9 +15,9 @@ function App(props) {
             .then(items => setItems(items))
             .catch(err => console.log(err))
     }
-    const addItemToState = (item) => {
+  /*  const addItemToState = (item) => {
           setItems([...items, item])
-        }
+        }*/
 
          const updateState = (item) => {
            const itemIndex = items.findIndex(data => data.id === item.id)
@@ -59,7 +59,7 @@ function App(props) {
                               data={items}>
                               Download CSV
                             </CSVLink>
-                            <ModalForm buttonLabel="Adicionar agenda" addItemToState={addItemToState}/>
+                            {/*<ModalForm buttonLabel="Adicionar agenda" addItemToState={addItemToState}/>*/}
                           </Col>
                         </Row>
                       </Container>

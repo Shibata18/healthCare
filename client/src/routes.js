@@ -13,6 +13,7 @@ import Paciente from './pages/Paciente';
 import ChatPage from './pages/Chat'
 import Agenda from './pages/Agenda';
 import DoctorPerfil from './pages/DoctorPerfil';
+import PacientePerfil from './pages/PacientePerfil';
 import { isAuthenticated } from "./services/auth";
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
@@ -44,6 +45,7 @@ const Routes = () => (
       <PrivateRoute path="/main" component={Main} />
       <PrivateRoute path="/chat" component={ChatPage} />
       <PrivateRoute path="/doctorPerfil" component={DoctorPerfil} />
+      <PrivateRoute path="/pacientePerfil" component={PacientePerfil} />
       {/*  <Route path="/doctors" component={Doctors} />
       <Route path="/paciente" component={Paciente} />
       <Route path="/agenda" component={Agenda} />

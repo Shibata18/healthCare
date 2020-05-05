@@ -51,7 +51,7 @@ const Example = (props) => {
                                 <Link to='/doctorPerfil'>Perfil Médico</Link>
                             </DropdownItem>
                             <DropdownItem>
-                                <Link to='/paciente'>Crud Paciente</Link>
+                                <Link to='/pacientePerfil'>Perfil Paciente</Link>
                             </DropdownItem>
                             <DropdownItem divider />
                             <DropdownItem>         {renderActions()}</DropdownItem>

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Table  } from 'reactstrap';
-import ModalForm from './Modal'
+//import ModalForm from './Modal'
 
 function DataTable(props){
 
@@ -15,8 +15,8 @@ function DataTable(props){
           <td>{item.updated_at}</td>
           <td>
             <div style={{ width: "10%" }}>
-              <ModalForm buttonLabel="Editar" item={item} updateState={props.updateState}/>
-              {/*<Button color="danger" onClick={() => deleteItem(item.id)}>Del</Button>*/ }
+              {/*<ModalForm buttonLabel="Editar" item={item} updateState={props.updateState}/>
+              <Button color="danger" onClick={() => deleteItem(item.id)}>Del</Button>*/ }
             </div>
           </td>
         </tr>

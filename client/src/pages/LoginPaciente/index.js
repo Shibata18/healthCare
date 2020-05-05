@@ -22,8 +22,9 @@ class SignIn extends Component {
     } else {
       try {
         const response = await api.post("/loginPaciente", { cpfPaciente, password });
+        localStorage.setItem('paciente_cpf',cpfPaciente);
         login(response.data.token);
-        this.props.history.push("/agenda");
+        this.props.history.push("/pacientePerfil");
       } catch (err) {
         console.log(err);
         this.setState({

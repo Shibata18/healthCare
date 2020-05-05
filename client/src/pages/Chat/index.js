@@ -52,6 +52,7 @@ class ChatApp extends Component {
         <p>Usuário </p>
           <div>
             <Box color="text.primary" component="div" m={1} border={1} style={{padding:80}}>
+              <h1>....Loading....</h1>
             {this.renderChat()}
           </Box>
           </div>

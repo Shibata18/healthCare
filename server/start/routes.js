@@ -37,6 +37,7 @@ Route.post("/paciente",'PacienteController.store')
 Route.get('/agendaPaciente','PacienteController.agendaPaciente').middleware('auth:paciente,auth:jwt')
 Route.resource('paciente', 'PacienteController')
   .apiOnly().middleware('auth:paciente,auth:jwt')
+Route.get('/perfilPaciente',"PacienteController.perfil").middleware('auth:paciente')
 //Agenda
 Route.resource('agenda', 'AgendaController')
     .apiOnly().middleware('auth:doctor,auth:paciente,auth:jwt')

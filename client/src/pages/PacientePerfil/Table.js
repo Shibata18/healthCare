@@ -45,13 +45,13 @@ export default function DataTable(props){
                   {item.id}
                 </Avatar>
               }
-              title={item.nameDoctor}
-              subheader={item.cpfDoctor}
+              title={item.namePaciente}
+              subheader={item.cpfPaciente}
             />
           <CardContent>
               <Typography variant="body2" color="textSecondary" component="p">
                   <p>Email: {item.email}</p>
-                  <p>Status: {item.ativo_medico?`Ativo`:`Inativo`}</p>
+                  <p>Status: {item.ativo_paciente?`Ativo`:`Inativo`}</p>
               </Typography>
           </CardContent>
         <IconButton
@@ -80,10 +80,7 @@ export default function DataTable(props){
             <p>{item.nameDoctor}</p>
           <h4>Email</h4>
             <p>{item.email}</p>*/}
-            <p>Telefone: {item.telefoneDoctor}</p>
-            <p>Conselho: {item.conselho}</p>
-            <p>Especialidade: {item.especialidade}</p>
-            <p>Registro: {item.registro}</p>
+            <p>Telefone: {item.telefonePaciente}</p>
             <p>Criado: {item.created_at}</p>
           <p>Atualizado: {item.updated_at}</p>
       </Collapse>

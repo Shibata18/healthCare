@@ -3,8 +3,9 @@ import { Container, Row, Col } from 'reactstrap'
 import ModalForm from './Modal';
 import DataTable from './Table';
 import { CSVLink } from "react-csv";
-import Navbar from '../NavbarDoctor/index';
-import api from '../../../services/api'
+import Navbar from '../Navbar/index';
+import api from '../../../services/api';
+
 function App(props) {
 
   const [items, setItems] = useState([])

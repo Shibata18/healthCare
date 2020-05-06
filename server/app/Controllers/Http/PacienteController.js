@@ -116,9 +116,14 @@ class PacienteController {
   async destroy ({ params, request, response }) {
   }*/
    async perfil({request}){
-    const user = await Paciente.findByOrFail("cpfPaciente",request.header("a"));
+    const user = await Paciente.findByOrFail("cpfPaciente",request.header("perfil"));
     return user
   } 
+  async agendaPaciente({request}){
+    const user = await Paciente.findByOrFail("cpfPaciente",request.header("agenda"))
+    await user.load('agendaPaciente');
+    return user
+  }
 }
 
 module.exports = PacienteController

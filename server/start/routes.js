@@ -27,7 +27,7 @@ Route.resource('user','UserController').apiOnly().middleware('auth:jwt')
 //Doctor
 Route.post('/loginDoctor','LoginDoctorController.login');
 Route.post('doctors','DoctorController.store')
-Route.get('/agendaDoctor','LoginDoctorController.teste').middleware('auth:doctor,auth:jwt')
+Route.get('/agendaDoctor','DoctorController.agendaDoctor').middleware('auth:doctor,auth:jwt')
 Route.get('/perfilDoctor',"DoctorController.perfil").middleware('auth:doctor')
 Route.resource('doctors', 'DoctorController')
   .apiOnly().middleware('auth:doctor,auth:jwt')
@@ -41,7 +41,7 @@ Route.get('/perfilPaciente',"PacienteController.perfil").middleware('auth:pacien
 //Agenda
 Route.resource('agenda', 'AgendaController')
     .apiOnly().middleware('auth:doctor,auth:paciente,auth:jwt')
-Route.post('agenda/:id/file', 'FilController.store')
+Route.post('agenda/:id/file', 'FileController.store')
   .middleware('auth:doctor,auth:paciente,auth:jwt')
 //Route.resource('chat','ChatController').apiOnly()
 //Route.resource('files','FileController')

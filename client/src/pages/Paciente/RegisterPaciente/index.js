@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
-import api from '../../../services/api'
+import api from "../../../services/api";
+
 import Logo from "../../../assets/logo.svg";
 
 import { Form, Container } from "./styles";
@@ -38,7 +39,7 @@ class SignUp extends Component {
           {this.state.error && <p>{this.state.error}</p>}
           <input
             type="text"
-            placeholder='CPF: 000.000.000-00' pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" required
+            placeholder='CPF' maxLength='11' minLength='11' required
             onChange={e => this.setState({ cpfPaciente: e.target.value })}
           />
           <input

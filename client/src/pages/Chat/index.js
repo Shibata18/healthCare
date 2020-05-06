@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import socket from "./wesocket";
-import Navbar from '../Paciente/Navbar'
+//import Navbar from '../Navbar'
 import api from '../../services/api';
 import {Box} from '@material-ui/core';
 import { Form, Col, Row, Button, Container } from 'react-bootstrap';
@@ -47,7 +47,6 @@ class ChatApp extends Component {
   render() {
     return (
       <>
-      <Navbar/>
       <Container>
         <p>Usuário </p>
           <div>

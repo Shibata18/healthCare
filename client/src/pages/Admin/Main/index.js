@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, Button, CardTitle, CardText, Row, Col, Container } from 'reactstrap';
-import Navbar from '../NavbarAdm';
+import Navbar from '../Navbar'
 import {Link} from 'react-router-dom';
 
 const Example = (props) => {

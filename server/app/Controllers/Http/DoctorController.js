@@ -1,5 +1,6 @@
 'use strict'
     const Doctor = use("App/Models/Doctor")
+    const Agenda = use('App/Models/Agenda');
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
@@ -102,9 +103,14 @@ class DoctorController {
       await user.delete()*/
   }
   async perfil({request}){
-    const user = await Doctor.findByOrFail("cpfDoctor",request.header("a"));
+    const user = await Doctor.findByOrFail("cpfDoctor",request.header("perfil"));
     return user
   } 
+  async agendaDoctor({request}){
+    const user = await Doctor.findByOrFail("cpfDoctor",request.header("agenda"))
+    await user.load('agendaDoctor');
+    return user
+  }
 }
 
 module.exports = DoctorController

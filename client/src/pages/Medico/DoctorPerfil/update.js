@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
-import api from '../../../services/api'
+import api from "../../../services/api";
 
 function AddEditForm(props) {
   const[form, setValues] = useState({
@@ -72,7 +72,7 @@ function AddEditForm(props) {
       <Form onSubmit={props.item ? submitFormEdit : submitFormAdd}>
           <FormGroup>
               <Label for="cpfDoctor">CPF</Label>
-              <Input type="text" name="cpfDoctor" id="cpfDoctor" onChange={onChange} value={form.cpfDoctor === null ? '' : form.cpfDoctor} required placeholder='000.000.000-00' pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" />
+              <Input type="text" name="cpfDoctor" id="cpfDoctor" onChange={onChange} value={form.cpfDoctor === null ? '' : form.cpfDoctor} required  minLength='11' maxLength='11'  />
           </FormGroup>
           <FormGroup>
               <Label for="nameDoctor">Nome</Label>
@@ -109,7 +109,7 @@ function AddEditForm(props) {
                     <option value={form.ativo_medico = false} onChange={onChange}>Inativar</option>
               </Input>
           </FormGroup>
-          <Button>Submit</Button>
+          <Button>Enviar</Button>
       </Form>
   )
 }

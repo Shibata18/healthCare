@@ -17,7 +17,7 @@ function DataTable(props){
           <td>{item.updated_at}</td>
           <td>
             <div style={{ width: "10%" }}>
-              <ModalForm buttonLabel="Edit" item={item} updateState={props.updateState}/>
+              <ModalForm buttonLabel="Editar" item={item} updateState={props.updateState}/>
               {/*<Button color="danger" onClick={() => deleteItem(item.id)}>Del</Button>*/ }
             </div>
           </td>

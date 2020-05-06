@@ -8,13 +8,6 @@ async login({ request, auth }) {
     const token = await adminAuth.attempt(cpfDoctor, password);
     return token
   }
-  async teste({request}){
-    const user = await Doctor.findByOrFail("cpfDoctor",request.body.cpfDoctor)
-    await user.load('agendaDoctor');
-    return user
-
-  }
-
 }
 
 module.exports = LoginDoctorController

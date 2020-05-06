@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
-import api from '../../../services/api'
+import api from "../../../services/api";
+
 import Logo from "../../../assets/logo.svg";
+
 import { Form, Container } from "./styles";
 
 class SignUp extends Component {
@@ -18,12 +20,12 @@ class SignUp extends Component {
   };
   handleSignUp = async e => {
     e.preventDefault();
-    const { cpfDoctor, email, password,nameDoctor, telefoneDoctor,conselho,especialidade, registro } = this.state;
+    const { cpfDoctor, email, password, nameDoctor, telefoneDoctor, conselho, especialidade, registro } = this.state;
     if (!cpfDoctor || !email || !password || !nameDoctor || !telefoneDoctor || !conselho || !especialidade || !registro) {
       this.setState({ error: "Preencha todos os dados para se cadastrar" });
     } else {
       try {
-        await api.post("/doctors", { cpfDoctor, email, password,nameDoctor, telefoneDoctor,conselho,especialidade, registro });
+        await api.post("/doctors", { cpfDoctor, email, password, nameDoctor, telefoneDoctor, conselho, especialidade, registro });
         this.props.history.push("/loginDoctor");
       } catch (err) {
         console.log(err);
@@ -40,14 +42,14 @@ class SignUp extends Component {
           {this.state.error && <p>{this.state.error}</p>}
           <input
             type="text"
-            placeholder='CPF: 000.000.000-00' pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" required
+            placeholder='CPF' minLength='11' maxLength='11' required
             onChange={e => this.setState({ cpfDoctor: e.target.value })}
           />
           <input
             type="text"
             placeholder='Digite o seu nome' required
             onChange={e => this.setState({ nameDoctor: e.target.value })}
-            />
+          />
           <input
             type="email"
             placeholder="Endereço de e-mail" required
@@ -67,7 +69,7 @@ class SignUp extends Component {
             type="text"
             placeholder="Digite o seu Registro" required
             onChange={e => this.setState({ registro: e.target.value })}
-            />
+          />
           <input
             type="text"
             placeholder='Digite o Conselho' required

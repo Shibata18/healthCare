@@ -27,25 +27,22 @@ const Example = (props) => {
     return (
         <div>
             <Navbar light expand="md">
-                <NavbarBrand href="/perfilPaciente"><img alt='logo' src={logo} width='50%' height='80px' /></NavbarBrand>
+                <NavbarBrand href="/doctorPerfil"><img alt='logo' src={logo} width='50%' height='80px' /></NavbarBrand>
                 <NavbarToggler onClick={toggle} />
                 <Collapse isOpen={isOpen} navbar>
                     <Nav className="mr-auto" navbar>
                         <NavItem>
-                            <NavLink href="/agendaPaciente">Agenda</NavLink>
+                            <NavLink href="/agendaDoctor">Agenda</NavLink>
                         </NavItem>
                         <NavItem>
                             <NavLink href="/chat">Chat</NavLink>
                         </NavItem>
-                        {/* <NavItem>
-                            <NavLink href="/paciente">Crud Paciente</NavLink>
-                        </NavItem> */}
                     </Nav>
                     <UncontrolledDropdown>
                         <DropdownToggle nav caret>Options</DropdownToggle>
                         <DropdownMenu>
                             <DropdownItem>
-                                <Link to='/pacientePerfil'>Meu Perfil</Link>
+                                <Link to='/doctorPerfil'>Perfil Médico</Link>
                             </DropdownItem>
                             <DropdownItem divider />
                             <DropdownItem>         {renderActions()}</DropdownItem>

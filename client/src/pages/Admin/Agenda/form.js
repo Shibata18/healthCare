@@ -1,6 +1,6 @@
 import React from 'react';
 import { Form, FormGroup, Label, Input, FormText, Container, Button } from 'reactstrap';
-import Navbar from '../NavbarAdm';
+import Navbar from '../Navbar';
 const Example = (props) => {
 
   return (

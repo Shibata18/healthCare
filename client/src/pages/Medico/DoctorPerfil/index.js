@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'reactstrap'
 import DataTable from './Table';
-import Navbar from '../NavbarDoctor/index';
+import Navbar from '../Navbar/index';
 import api from '../../../services/api'
 
 export default function App(props) {
@@ -9,7 +9,7 @@ export default function App(props) {
     const  cpfMedico = localStorage.getItem('doctor_cpf') ;
     useEffect(() => {
       async function loadDevs() {
-        const response = await api.get('/perfilDoctor',{headers:{a:cpfMedico}})
+        const response = await api.get('/perfilDoctor',{headers:{perfil:cpfMedico}})
         setItems(response.data)
       }
       loadDevs();

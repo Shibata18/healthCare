@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
 
-import Logo from '../../../assets/logo.svg'
-import api from '../../../services/api'
+import Logo from "../../../assets/logo.svg";
+import api from "../../../services/api";
 import { login } from "../../../services/auth";
+
 import { Form, Container } from "./styles";
 
 class SignIn extends Component {
@@ -35,14 +36,13 @@ class SignIn extends Component {
 
   render() {
     return (
-      <>
       <Container>
         <Form onSubmit={this.handleSignIn}>
           <img src={Logo} alt="logo" />
           {this.state.error && <p>{this.state.error}</p>}
           <input
             type="text"
-            placeholder='CPF: 000.000.000-00' required
+            placeholder='CPF' minLength='11' maxLength='11' required
             onChange={e => this.setState({ cpfUser: e.target.value })}
           />
           <input
@@ -55,7 +55,6 @@ class SignIn extends Component {
           <Link to="/signUpAdmin">Criar conta grátis</Link>
         </Form>
       </Container>
-      </>
     );
   }
 }

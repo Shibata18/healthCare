@@ -21,7 +21,7 @@ function ModalForm(props) {
               onClick={toggle}
               style={{float: "left", marginRight:"10px"}}>{label}
             </Button>
-    title = 'Editar Item'
+    title = 'Editar Médico'
   } else {
     button = <Button
               color="success"

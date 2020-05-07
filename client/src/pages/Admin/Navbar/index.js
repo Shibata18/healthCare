@@ -8,7 +8,7 @@ import {
 } from 'reactstrap';
 import { logout } from "../../../services/auth";
 import logo from '../../../assets/logo.svg'
-import { Link } from 'react-router-dom';
+//import { Link } from 'react-router-dom';
 const Example = (props) => {
     const [isOpen, setIsOpen] = useState(false);
 
@@ -38,21 +38,21 @@ const Example = (props) => {
                             <NavLink href="/chat">Chat</NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink href="/doctors">Crud Médico</NavLink>
+                            <NavLink href="/doctors">Médico</NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink href="/paciente">Crud Paciente</NavLink>
+                            <NavLink href="/paciente">Paciente</NavLink>
                         </NavItem>
                     </Nav>
                     <UncontrolledDropdown>
                         <DropdownToggle nav caret>Options</DropdownToggle>
                         <DropdownMenu>
-                            <DropdownItem>
+                       {/*      <DropdownItem>
                                 <Link to='/doctorPerfil'>Perfil Médico</Link>
                             </DropdownItem>
                             <DropdownItem>
                                 <Link to='/pacientePerfil'>Perfil Paciente</Link>
-                            </DropdownItem>
+                            </DropdownItem> */}
                             <DropdownItem divider />
                             <DropdownItem>         {renderActions()}</DropdownItem>
                         </DropdownMenu>

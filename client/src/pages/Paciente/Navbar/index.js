@@ -27,7 +27,7 @@ const Example = (props) => {
     return (
         <div>
             <Navbar light expand="md">
-                <NavbarBrand href="/perfilPaciente"><img alt='logo' src={logo} width='50%' height='80px' /></NavbarBrand>
+                <NavbarBrand href="/pacientePerfil"><img alt='logo' src={logo} width='50%' height='80px' /></NavbarBrand>
                 <NavbarToggler onClick={toggle} />
                 <Collapse isOpen={isOpen} navbar>
                     <Nav className="mr-auto" navbar>

@@ -43,7 +43,7 @@ class AgendaController {
    * @param {Response} ctx.response
    */
   async store ({ request, response }) {
-    const data = request.only(['doctor_cpf', 'paciente_cpf', 'horario','data']);
+    const data = request.only(['doctor_cpf', 'paciente_cpf', 'horario']);
 
     const paciente = await Agenda.create(data);
 
@@ -89,7 +89,7 @@ class AgendaController {
       const property = await Agenda.findOrFail(params.id)
 
       const data = request.only([
-        'doctor_cpf', 'paciente_cpf', 'horario','data'
+        'doctor_cpf', 'paciente_cpf', 'horario'
       ])
 
       property.merge(data)

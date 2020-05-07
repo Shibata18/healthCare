@@ -8,15 +8,15 @@ import SignUpAdmin from './pages/Admin/SignUpAdmin';
 import SignInAdmin from './pages/Admin/SignInAdmin';
 import Main from './pages/Admin/Main';
 import Agenda from './pages/Admin/Agenda';
+import Paciente from './pages/Admin/Paciente';
+import Doctors from './pages/Admin/Doctor';
 //Doctor
 import LoginDoctor from './pages/Medico/LoginDoctor';
 import RegisterDoctor from './pages/Medico/RegisterDoctor';
-import Doctors from './pages/Medico/Doctor';
 import DoctorPerfil from './pages/Medico/DoctorPerfil';
 //Paciente
 import LoginPaciente from './pages/Paciente/LoginPaciente';
 import RegisterPaciente from './pages/Paciente/RegisterPaciente';
-import Paciente from './pages/Paciente/Paciente';
 import PacientePerfil from './pages/Paciente/PacientePerfil';
 
 const PrivateRoute = ({ component: Component, ...rest }) => (

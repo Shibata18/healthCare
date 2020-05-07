@@ -22,10 +22,9 @@ function AddEditForm(props) {
     await api.post('/agenda', {
       doctor_cpf: form.doctor_cpf,
       paciente_cpf: form.paciente_cpf,
-      horario: form.horario,
-      data: form.data,
+      horario: form.data +' '+ form.horario,
     })
-      .then(response => response.data, setTimeout(function () { alert('Agendado Com sucesso'); window.location.reload() }, 1000))
+      .then(response => response.data, setTimeout(function () { alert('Agendado Com sucesso'); window.location.reload() }, 100))
       .then(item => {
         if (Array.isArray(item)) {
           props.addItemToState(item[0])
@@ -42,8 +41,7 @@ function AddEditForm(props) {
     await api.put(`/agenda/${form.id}`, {
       doctor_cpf: form.doctor_cpf,
       paciente_cpf: form.paciente_cpf,
-      horario: form.horario,
-      data: form.data,
+      horario: form.data +' '+ form.horario,
     })
       .then(response => response.data, setTimeout(function () { alert('Atualizado Com sucesso'); window.location.reload() }, 2000))
       .then(item => {

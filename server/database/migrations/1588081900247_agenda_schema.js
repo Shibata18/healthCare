@@ -19,7 +19,7 @@ class AgendaSchema extends Schema {
         .references('cpfPaciente')
         .inTable('pacientes')
         .onUpdate('CASCADE')
-      table.time('horario',{ useTz: true ,precision: 6 }).unique()
+      table.time('horario',{ useTz: true ,precision: 6 })
       table.date('data',{ useTz: true ,precision: 6 })
       table.timestamps()
     })

@@ -19,7 +19,7 @@ class DoctorController {
    * @param {View} ctx.view
    */
   async index ({ request, response, view }) {
-      const user = Doctor.all()
+      const user = Doctor.query().with('agendaDoctor').fetch()
 
       return user
   }

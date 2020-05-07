@@ -1,5 +1,6 @@
 'use strict'
-
+const Agenda = use('App/Models/Agenda');
+const Helpers = use('Helpers')
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
@@ -40,8 +41,28 @@ class FileController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async store ({ request }) {
-    
+  async store ({ params, request }) {
+    const agenda = await Agenda.findOrFail(params.id)
+  
+    const images = request.file('file', {
+      types: ['application','video','image','audio','text'],
+      size: '4mb',
+      //extnames:['pdf','jpg','png']//https://developer.mozilla.org/pt-BR/docs/Web/HTTP/Basico_sobre_HTTP/MIME_types/Complete_list_of_MIME_types
+    })
+  
+    await images.moveAll(Helpers.tmpPath('uploads'), file => ({
+      name: `${Date.now()}-${file.clientName}`
+    }))
+  
+    if (!images.movedAll()) {
+      return images.errors()
+    }
+  
+    await Promise.all(
+      images
+        .movedList()
+        .map(image => agenda.file().create({ path: image.fileName }))
+    )
   }
 
   /**
@@ -53,7 +74,8 @@ class FileController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async show ({ params, request, response, view }) {
+  async show ({ params, response }) {
+    return response.download(Helpers.tmpPath(`uploads/${params.path}`))
   }
 
   /**

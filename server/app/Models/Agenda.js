@@ -13,6 +13,9 @@ class Agenda extends Model {
    chat(){
        return this.hasMany("App/Models/Chat")
    }
+   file(){
+       return this.hasMany('App/Models/File')
+   }
 }
 
 module.exports = Agenda

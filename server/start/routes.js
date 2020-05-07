@@ -45,3 +45,5 @@ Route.post('agenda/:id/file', 'FileController.store')
   .middleware('auth:doctor,auth:paciente,auth:jwt')
 //Route.resource('chat','ChatController').apiOnly()
 //Route.resource('files','FileController')
+Route.get('file/:path', 'FileController.show')
+

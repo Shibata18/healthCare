@@ -18,8 +18,7 @@ class AgendaController {
    * @param {View} ctx.view
    */
   async index ({ request, response, view }) {
-    const agenda = Agenda.all();
-
+    const agenda = Agenda.query().with('file').fetch()
     return agenda;
   }
 

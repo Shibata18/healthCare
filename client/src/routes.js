@@ -14,10 +14,12 @@ import Doctors from './pages/Admin/Doctor';
 import LoginDoctor from './pages/Medico/LoginDoctor';
 import RegisterDoctor from './pages/Medico/RegisterDoctor';
 import DoctorPerfil from './pages/Medico/DoctorPerfil';
+import AgendaDoctor from "./pages/Medico/AgendaDoctor";
 //Paciente
 import LoginPaciente from './pages/Paciente/LoginPaciente';
 import RegisterPaciente from './pages/Paciente/RegisterPaciente';
 import PacientePerfil from './pages/Paciente/PacientePerfil';
+import AgendaPaciente from './pages/Paciente/AgendaPaciente';
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
@@ -47,13 +49,13 @@ const Routes = () => (
       <Route path="/registerDoctor" component={RegisterDoctor} />
       <PrivateRoute path="/doctors" component={Doctors} />
       <PrivateRoute path="/doctorPerfil" component={DoctorPerfil} />
-      <PrivateRoute path='/agendaDoctor' component={()=><h1>Agenda Médico</h1>} />
+      <PrivateRoute path='/agendaDoctor' component={AgendaDoctor} />
       {/* Paciente */}
       <Route path="/loginPaciente" component={LoginPaciente} />
       <Route path="/registerPaciente" component={RegisterPaciente} />
       <PrivateRoute path="/paciente" component={Paciente} />
       <PrivateRoute path="/pacientePerfil" component={PacientePerfil} />
-      <PrivateRoute path='/agendaPaciente' component={()=><h1>Agenda Paciente</h1>} />
+      <PrivateRoute path='/agendaPaciente' component={AgendaPaciente} />
       <Route path="*" component={() => <h1>Página não encontrada ou não existe</h1>} />
     </Switch>
   </BrowserRouter>

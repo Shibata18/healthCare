@@ -27,17 +27,17 @@ Route.resource('user','UserController').apiOnly().middleware('auth:jwt')
 //Doctor
 Route.post('/loginDoctor','LoginDoctorController.login');
 Route.post('doctors','DoctorController.store')
-Route.get('/agendaDoctor','DoctorController.agendaDoctor').middleware('auth:doctor,auth:jwt')
+Route.get('/agendaDoctor','AgendaController.agendaDoctor').middleware('auth:doctor,auth:jwt')
 Route.get('/perfilDoctor',"DoctorController.perfil").middleware('auth:doctor')
 Route.resource('doctors', 'DoctorController')
   .apiOnly().middleware('auth:doctor,auth:jwt')
 //Paciente
 Route.post('/loginPaciente','LoginPacienteController.login');
 Route.post("/paciente",'PacienteController.store')
-Route.get('/agendaPaciente','PacienteController.agendaPaciente').middleware('auth:paciente,auth:jwt')
 Route.resource('paciente', 'PacienteController')
   .apiOnly().middleware('auth:paciente,auth:jwt')
 Route.get('/perfilPaciente',"PacienteController.perfil").middleware('auth:paciente')
+Route.get('/agendaPaciente','AgendaController.agendaPaciente').middleware('auth:paciente,auth:jwt')
 //Agenda
 Route.resource('agenda', 'AgendaController')
     .apiOnly().middleware('auth:doctor,auth:paciente,auth:jwt')

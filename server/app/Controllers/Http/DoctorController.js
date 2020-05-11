@@ -1,6 +1,6 @@
 'use strict'
-    const Doctor = use("App/Models/Doctor")
-    const Agenda = use('App/Models/Agenda');
+const Doctor = use("App/Models/Doctor")
+const Agenda = use('App/Models/Agenda');
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
@@ -18,10 +18,10 @@ class DoctorController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async index ({ request, response, view }) {
-      const user = Doctor.query().with('agendaDoctor').fetch()
+  async index({ request, response, view }) {
+    const user = Doctor.query().with('agendaDoctor').fetch()
 
-      return user
+    return user
   }
   /**
    * Create/save a new doctor.
@@ -31,7 +31,7 @@ class DoctorController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async store ({ request, response }) {
+  async store({ request, response }) {
     const data = request.only(['cpfDoctor', 'nameDoctor', 'email', 'password', 'telefoneDoctor', 'conselho', 'registro', 'especialidade']);
 
     const user = await Doctor.create(data);
@@ -48,7 +48,7 @@ class DoctorController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async show ({ params, request, response, view }) {
+  async show({ params, request, response, view }) {
     const user = await Doctor.findOrFail(params.id)
 
     await user.load('agendaDoctor')
@@ -64,24 +64,24 @@ class DoctorController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async update ({ params, request, response }) {
-      const doctor = await Doctor.findOrFail(params.id)
-      const data = request.only([
-        'nameDoctor',
-        'email',
-        'password',
-        'telefoneDoctor',
-        'conselho',
-        'registro',
-        'especialidade',
-        'ativo_medico'
-      ])
+  async update({ params, request, response }) {
+    const doctor = await Doctor.findOrFail(params.id)
+    const data = request.only([
+      'nameDoctor',
+      'email',
+      'password',
+      'telefoneDoctor',
+      'conselho',
+      'registro',
+      'especialidade',
+      'ativo_medico'
+    ])
 
-      doctor.merge(data)
+    doctor.merge(data)
 
-      await doctor.save()
+    await doctor.save()
 
-      return doctor
+    return doctor
   }
 
   /**
@@ -92,7 +92,7 @@ class DoctorController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async destroy ({ params, request, response }) {
+  async destroy({ params, request, response }) {
     /*
       const user = await Doctor.findOrFail(params.id)
 
@@ -102,13 +102,14 @@ class DoctorController {
 
       await user.delete()*/
   }
-  async perfil({request}){
-    const user = await Doctor.findByOrFail("cpfDoctor",request.header("perfil"));
+  async perfil({ request }) {
+    const user = await Doctor.findByOrFail("cpfDoctor", request.header("perfil"));
     return user
-  } 
-  async agendaDoctor({request}){
-    const user = await Doctor.findByOrFail("cpfDoctor",request.header("agenda"))
-    await user.load('agendaDoctor');
+  }
+  async agendaDoctor({ request }) {
+    //const user = await Doctor.findByOrFail("cpfDoctor",request.body.cpfDoctor)
+    const user = await Doctor.query().where('cpfDoctor', request.body.cpfDoctor).with('agendaDoctor').fetch()
+    //await user.load('agendaDoctor');
     return user
   }
 }

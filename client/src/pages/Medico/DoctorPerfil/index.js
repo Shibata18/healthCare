@@ -10,6 +10,7 @@ export default function App(props) {
   useEffect(() => {
     async function loadDevs() {
       const response = await api.get('/perfilDoctor', { headers: { perfil: cpfMedico } })
+      localStorage.setItem('idDoctor',response.data.id);
       setItems(response.data)
     }
     loadDevs();

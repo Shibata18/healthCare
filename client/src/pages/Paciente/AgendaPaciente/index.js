@@ -10,8 +10,8 @@ function App(props) {
   const [items, setItems] = useState([])
   //const cpfMedico = localStorage.getItem('doctor_cpf');
   const getItems = useCallback(async() => {
-    const cpfMedico = localStorage.getItem('doctor_cpf');
-    await api.get('/agendaDoctor', { headers: { cpfDoctor: cpfMedico } })
+    const cpfPaciente = localStorage.getItem('paciente_cpf');
+    await api.get('/agendaPaciente', { headers: { cpfPaciente: cpfPaciente } })
       .then(response => response.data)
       .then(items => setItems(items))
       .catch(err => console.log(err))

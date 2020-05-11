@@ -44,7 +44,6 @@ class AgendaController {
    */
   async store ({ request, response }) {
     const data = request.only(['doctor_cpf', 'paciente_cpf', 'horario']);
-
     const paciente = await Agenda.create(data);
 
     return paciente;
@@ -108,6 +107,16 @@ class AgendaController {
    * @param {Response} ctx.response
    */
   async destroy ({ params, request, response }) {
+  }
+  async agendaDoctor({ request }) {
+    //const user = await Doctor.findByOrFail("cpfDoctor",request.body.cpfDoctor)
+    const user = await Agenda.query().where('doctor_cpf', request.header('cpfDoctor')).with('file').fetch()
+    //await user.load('agendaDoctor');
+    return user
+  }
+   async agendaPaciente({ request }) {
+    const user = await Agenda.query().where('paciente_cpf', request.header('cpfPaciente')).with('file').fetch()
+    return user
   }
 }
 

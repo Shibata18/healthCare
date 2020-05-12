@@ -42,7 +42,7 @@ function App(props) {
       <Container className="App">
         <Row>
           <Col>
-            <h1 style={{ margin: "20px 0" }}>Agenda {items.nameDoctor}</h1>
+            <h1 style={{ margin: "20px 0",color:"#876523" }}>Agenda</h1>
           </Col>
         </Row>
         <Row>

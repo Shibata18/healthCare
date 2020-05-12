@@ -10,6 +10,22 @@ function AddEditForm(props) {
     horario: '',
     data: '',
   })
+  const [file, setFile] = useState({ file: null })
+  const handleFileSelect = event => {
+    console.log(event.target.files);
+    setFile({ file: event.target.files[0] })
+  }
+  const upload = async () => {
+    const fd = new FormData();
+    console.log(file.file, file.file.name);
+    fd.append('file[]', file.file)
+    await api.post(`/agenda/${form.id}/file`, fd, {
+      onUploadProgress: ProgressEvent => {
+        alert((Math.round(ProgressEvent.loaded / ProgressEvent.total * 100))===100?`Concluído`:`Aguarde`)
+      }
+    }
+    ).then(res => console.log(res)).catch(err => console.log(err, err.response));
+  }
 
   const onChange = e => {
     setValues({
@@ -80,6 +96,11 @@ function AddEditForm(props) {
       <FormGroup>
         <Label for="data">Data</Label>
         <Input type="date" name="data" id="data" onChange={onChange} value={form.data === null ? '' : form.data} required />
+      </FormGroup>
+      <FormGroup>
+        <Label for="file">Arquivos</Label>
+        <Input type="file" name="file[]" accept='text/*,images/*,application/*,video/*' multiple id="file" onChange={handleFileSelect} />
+        <Button outline color='secondary' onClick={upload}>Upload</Button>
       </FormGroup>
       <Button>Enviar</Button>
     </Form>

@@ -1,6 +1,5 @@
 import { createGlobalStyle } from "styled-components";
 import styled from "styled-components";
-import "react-circular-progressbar/dist/styles.css";
 import "font-awesome/css/font-awesome.css";
 
 createGlobalStyle`

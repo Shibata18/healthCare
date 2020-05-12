@@ -10,7 +10,22 @@ function AddEditForm(props) {
     horario: '',
     data: '',
   })
-
+  const [file, setFile] = useState({ file: null })
+  const handleFileSelect = event => {
+    console.log(event.target.files);
+    setFile({ file: event.target.files[0] })
+  }
+  const upload = async () => {
+    const fd = new FormData();
+    console.log(file.file, file.file.name);
+    fd.append('file[]', file.file)
+    await api.post(`/agenda/${form.id}/file`, fd, {
+      onUploadProgress: ProgressEvent => {
+        alert((Math.round(ProgressEvent.loaded / ProgressEvent.total * 100))===100?`Concluído`:`Aguarde`)
+      }
+    }
+    ).then(res => console.log(res)).catch(err => console.log(err, err.response));
+  }
   const onChange = e => {
     setValues({
       ...form,
@@ -22,7 +37,7 @@ function AddEditForm(props) {
     await api.post('/agenda', {
       doctor_cpf: form.doctor_cpf,
       paciente_cpf: form.paciente_cpf,
-      horario: form.data +' '+ form.horario,
+      horario: form.data + ' ' + form.horario,
     })
       .then(response => response.data, setTimeout(function () { alert('Agendado Com sucesso'); window.location.reload() }, 100))
       .then(item => {
@@ -41,7 +56,7 @@ function AddEditForm(props) {
     await api.put(`/agenda/${form.id}`, {
       doctor_cpf: form.doctor_cpf,
       paciente_cpf: form.paciente_cpf,
-      horario: form.data +' '+ form.horario,
+      horario: form.data + ' ' + form.horario,
     })
       .then(response => response.data, setTimeout(function () { alert('Atualizado Com sucesso'); window.location.reload() }, 2000))
       .then(item => {
@@ -80,6 +95,11 @@ function AddEditForm(props) {
       <FormGroup>
         <Label for="data">Data</Label>
         <Input type="date" name="data" id="data" onChange={onChange} value={form.data === null ? '' : form.data} required />
+      </FormGroup>
+      <FormGroup>
+        <Label for="file">Arquivos</Label>
+        <Input type="file" name="file[]" accept='text/*,images/*,application/*,video/*' multiple id="file" onChange={handleFileSelect} />
+        <Button outline color='secondary' onClick={upload}>Upload</Button>
       </FormGroup>
       <Button>Enviar</Button>
     </Form>

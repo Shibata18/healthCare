@@ -49,7 +49,7 @@ class FileController {
       size: '4mb',
       //extnames:['pdf','jpg','png']//https://developer.mozilla.org/pt-BR/docs/Web/HTTP/Basico_sobre_HTTP/MIME_types/Complete_list_of_MIME_types
     })
-  
+                                //tmpPath
     await images.moveAll(Helpers.tmpPath('uploads'), file => ({
       name: `${Date.now()}-${file.clientName}`
     }))

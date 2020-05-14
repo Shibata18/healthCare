@@ -8,7 +8,8 @@ import {
 } from 'reactstrap';
 import { logout } from "../../../services/auth";
 import logo from '../../../assets/logo.svg'
-//import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+
 const Example = (props) => {
     const [isOpen, setIsOpen] = useState(false);
 
@@ -47,12 +48,12 @@ const Example = (props) => {
                     <UncontrolledDropdown>
                         <DropdownToggle nav caret>Options</DropdownToggle>
                         <DropdownMenu>
-                       {/*      <DropdownItem>
+                            <DropdownItem>
                                 <Link to='/doctorPerfil'>Perfil Médico</Link>
                             </DropdownItem>
                             <DropdownItem>
                                 <Link to='/pacientePerfil'>Perfil Paciente</Link>
-                            </DropdownItem> */}
+                            </DropdownItem>
                             <DropdownItem divider />
                             <DropdownItem>         {renderActions()}</DropdownItem>
                         </DropdownMenu>

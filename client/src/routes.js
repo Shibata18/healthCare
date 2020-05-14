@@ -3,7 +3,6 @@ import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import { isAuthenticated } from "./services/auth";
 import LandingPage from './pages/LandingPage';
 import ChatPage from './pages/Chat';
-import ChatVideoPage from './pages/Chat/video';
 //Admin
 import SignUpAdmin from './pages/Admin/SignUpAdmin';
 import SignInAdmin from './pages/Admin/SignInAdmin';
@@ -39,8 +38,8 @@ const Routes = () => (
   <BrowserRouter>
     <Switch>
       <Route exact path="/" component={LandingPage} />
+      {/* <PrivateRoute path="/chat" component={ChatPage} /> */}
       <PrivateRoute path="/chat" component={ChatPage} />
-      <Route path='/video' component={ChatVideoPage}/>
       {/* Admin */}
       <Route path="/signInAdmin" component={SignInAdmin} />
       <Route path="/signupAdmin" component={SignUpAdmin} />

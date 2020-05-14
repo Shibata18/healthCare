@@ -1,6 +1,8 @@
 import React from 'react'
 import { Table } from 'reactstrap';
 import ModalForm from './Modal'
+import DuoIcon from '@material-ui/icons/Duo';
+import { Link } from 'react-router-dom';
 
 function DataTable(props) {
   const items = props.items.map(item => {
@@ -14,6 +16,7 @@ function DataTable(props) {
         <td>{item.file.map(item => { return (<p key={item.id}><a rel="noopener noreferrer" href={item.url} target='_blank'>{item.path}</a></p>) })}</td>
         <td>{item.created_at}</td>
         <td>{item.updated_at}</td>
+        <td><Link to='/chat'><DuoIcon/></Link></td>
         <td>
           <div style={{ width: "10%" }}>
             <ModalForm buttonLabel="Editar" item={item} updateState={props.updateState} />
@@ -35,6 +38,7 @@ function DataTable(props) {
           <th>Arquivo</th>
           <th>Criado</th>
           <th>Atualizado</th>
+          <th>Vídeo</th>
           <th>Editar</th>
         </tr>
       </thead>

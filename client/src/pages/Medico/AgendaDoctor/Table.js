@@ -16,7 +16,7 @@ function DataTable(props) {
         <td>{item.file.map(item => { return (<p key={item.id}><a rel="noopener noreferrer" href={item.url} target='_blank'>{item.path}</a></p>) })}</td>
         <td>{item.created_at}</td>
         <td>{item.updated_at}</td>
-        <td><Link to='/chat'><DuoIcon/></Link></td>
+        <td><Link to='/chatDoctor'><DuoIcon/></Link></td>
         <td>
           <div style={{ width: "10%" }}>
             <ModalForm buttonLabel="Editar" item={item} updateState={props.updateState} />

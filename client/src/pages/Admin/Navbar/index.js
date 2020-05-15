@@ -1,67 +1,163 @@
-import React, { useState } from 'react';
-import {
-    Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, UncontrolledDropdown,
-    DropdownToggle,
-    DropdownMenu,
-    DropdownItem,
-    Button
-} from 'reactstrap';
+import React from 'react';
+import clsx from 'clsx';
+import { makeStyles } from '@material-ui/core/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import {Drawer,Button,AppBar} from '@material-ui/core';
+import Toolbar from '@material-ui/core/Toolbar';
+import List from '@material-ui/core/List';
+import Typography from '@material-ui/core/Typography';
+import Divider from '@material-ui/core/Divider';
+import IconButton from '@material-ui/core/IconButton';
+import Badge from '@material-ui/core/Badge';
+import MenuIcon from '@material-ui/icons/Menu';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import { mainListItems } from './listItems';
 import { logout } from "../../../services/auth";
-import logo from '../../../assets/logo.svg'
+import logo from '../../../assets/logo.png'
 import { Link } from 'react-router-dom';
 
-const Example = (props) => {
-    const [isOpen, setIsOpen] = useState(false);
+const drawerWidth = 240;
 
-    const toggle = () => setIsOpen(!isOpen);
-    const handleLogout = e => {
-        logout();
-        window.location.href='/';
-      };
-    function renderActions() {
-        return (
-            <Button color="#222" onClick={handleLogout}>
-              Sair <i className="fa fa-times" />
-            </Button>
-        );
-      }
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+  },
+  toolbar: {
+    paddingRight: 24, // keep right padding when drawer closed
+  },
+  toolbarIcon: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    padding: '0 8px',
+    ...theme.mixins.toolbar,
+  },
+  appBar: {
+    zIndex: theme.zIndex.drawer + 1,
+    transition: theme.transitions.create(['width', 'margin'], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+  },
+  appBarShift: {
+    marginLeft: drawerWidth,
+    width: `calc(100% - ${drawerWidth}px)`,
+    transition: theme.transitions.create(['width', 'margin'], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  },
+  menuButton: {
+    marginRight: 36,
+  },
+  menuButtonHidden: {
+    display: 'none',
+  },
+  title: {
+    flexGrow: 1,
+  },
+  drawerPaper: {
+    position: 'relative',
+    whiteSpace: 'nowrap',
+    width: drawerWidth,
+    transition: theme.transitions.create('width', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  },
+  drawerPaperClose: {
+    overflowX: 'hidden',
+    transition: theme.transitions.create('width', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+    width: theme.spacing(7),
+    [theme.breakpoints.up('sm')]: {
+      width: theme.spacing(9),
+    },
+  },
+  appBarSpacer: theme.mixins.toolbar,
+  content: {
+    flexGrow: 1,
+    height: '100vh',
+    overflow: 'auto',
+  },
+  container: {
+    paddingTop: theme.spacing(4),
+    paddingBottom: theme.spacing(4),
+  },
+  paper: {
+    padding: theme.spacing(2),
+    display: 'flex',
+    overflow: 'auto',
+    flexDirection: 'column',
+  },
+  fixedHeight: {
+    height: 240,
+  },
+}));
+
+export default function Dashboard() {
+  const classes = useStyles();
+  const [open, setOpen] = React.useState(true);
+  const handleDrawerOpen = () => {
+    setOpen(true);
+  };
+  const handleDrawerClose = () => {
+    setOpen(false);
+  };
+  const handleLogout = e => {
+    logout();
+    window.location.href='/';
+  };
+function renderActions() {
     return (
-        <div>
-            <Navbar light expand="md">
-                <NavbarBrand href="/main"><img alt='logo' src={logo} width='50%' height='80px' /></NavbarBrand>
-                <NavbarToggler onClick={toggle} />
-                <Collapse isOpen={isOpen} navbar>
-                    <Nav className="mr-auto" navbar>
-                        <NavItem>
-                            <NavLink href="/agenda">Agenda</NavLink>
-                        </NavItem>
-                        <NavItem>
-                            <NavLink href="/chat">Chat</NavLink>
-                        </NavItem>
-                        <NavItem>
-                            <NavLink href="/doctors">Médico</NavLink>
-                        </NavItem>
-                        <NavItem>
-                            <NavLink href="/paciente">Paciente</NavLink>
-                        </NavItem>
-                    </Nav>
-                    <UncontrolledDropdown>
-                        <DropdownToggle nav caret>Options</DropdownToggle>
-                        <DropdownMenu>
-                            <DropdownItem>
-                                <Link to='/doctorPerfil'>Perfil Médico</Link>
-                            </DropdownItem>
-                            <DropdownItem>
-                                <Link to='/pacientePerfil'>Perfil Paciente</Link>
-                            </DropdownItem>
-                            <DropdownItem divider />
-                            <DropdownItem>         {renderActions()}</DropdownItem>
-                        </DropdownMenu>
-                    </UncontrolledDropdown>
-                </Collapse>
-            </Navbar>
-        </div>
+        <Button color='light' onClick={handleLogout}>
+          Sair <ExitToAppIcon />
+        </Button>
     );
-}
+  }
 
-export default Example;
+  return (
+    <div className={classes.root}>
+      <CssBaseline />
+      <AppBar position="relative"  color='transparent' className={clsx(classes.appBar, open && classes.appBarShift)}>
+        <Toolbar className={classes.toolbar}>
+          <IconButton
+            edge="start"
+            color="inherit"
+            aria-label="open drawer"
+            onClick={handleDrawerOpen}
+            className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
+              <Link to='/main'><img alt='logo' src={logo} width='50px' height='80px' /></Link>
+          </Typography>
+          <IconButton color="inherit">
+            <Badge color="secondary">
+              {renderActions()}
+            </Badge>
+          </IconButton>
+        </Toolbar>
+      </AppBar>
+      <Drawer
+        variant="temporary"
+        classes={{
+          paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
+        }}
+        open={open}
+      >
+        <div className={classes.toolbarIcon}>
+          <IconButton onClick={handleDrawerClose}>
+            <ChevronLeftIcon />
+          </IconButton>
+        </div>
+        <Divider />
+        <List>{mainListItems}</List>
+      </Drawer>
+    </div>
+  );
+}

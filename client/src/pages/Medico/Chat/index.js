@@ -2,12 +2,15 @@ import React, { Component } from "react";
 //import socket from "./wesocket";
 import Navbar from '../Navbar'
 //import api from '../../services/api';
-import { Box,Grid } from '@material-ui/core';
-//Form, Col, Row, Button,
-import {  Container } from 'react-bootstrap';
-import App from './video/index';
-import config from './video/config';
+import { Box,Grid,Typography,Container } from '@material-ui/core';
+//import App from './video/index';
+//import config from './video/config';
 
+function Iframe(props) {
+  return (<div dangerouslySetInnerHTML={{ __html: props.iframe ? props.iframe : "" }} />);
+}
+//const iframe = `<iframe src="https://tokbox.com/embed/embed/ot-embed.js?embedId=759b1cc2-24e0-454f-80dd-6dc4f6725215&room=DEFAULT_ROOM&iframe=true" width="800" height="700" scrolling="auto" allow="microphone; camera" ></iframe>`;
+const iframe =  '<iframe  src="https://tokbox.com/embed/embed/ot-embed.js?embedId=838a2b8c-962a-427f-be71-3225bc0eec99&room=DEFAULT_ROOM&iframe=true"  width=800  height=640  scrolling="auto"  allow="microphone; camera"></iframe>';
 class ChatApp extends Component {
   /* constructor() {
     super();
@@ -56,15 +59,18 @@ class ChatApp extends Component {
             <Box color="text.primary" component="div" m={1} border={1} style={{ padding: 80 }}>
 {/*               <h1>....Loading....</h1>
               {this.renderChat()} */}
-              <Grid item xs={12}>
-                <App
+
+             {/*    <App
             apiKey={config.API_KEY}
             sessionId={config.SESSION_ID}
             token={config.TOKEN}
             loadingDelegate={<div>Loading...</div>}
             opentokClientUrl="https://static.opentok.com/v2/js/opentok.min.js"
-          />
-          </Grid>
+          /> */}
+            <Typography variant="h2" gutterBottom>Vídeo Chamada </Typography>
+              <Grid item xs={12}>
+                <Iframe iframe={iframe} />
+              </Grid>
             </Box>
           </div>
 

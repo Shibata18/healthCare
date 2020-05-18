@@ -1,49 +1,58 @@
 import React from 'react'
-import { Table  } from 'reactstrap';
+import { Table,TableContainer,Paper,TableHead,TableRow, TableCell, TableBody } from '@material-ui/core';
 import ModalForm from './Modal'
+import { makeStyles } from '@material-ui/core/styles';
 
+
+const useStyles = makeStyles({
+  table: {
+    minWidth: 650,
+  },
+});
 function DataTable(props){
-
+  const classes = useStyles();
     const items = props.items.map(item => {
       return (
-        <tr key={item.id}>
-          <th scope="row">{item.id}</th>
-          <td>{item.cpfPaciente}</td>
-          <td>{item.namePaciente}</td>
-          <td>{item.email}</td>
-          <td>{item.telefonePaciente}</td>
-          <td>{item.ativo_paciente?`Ativo`:`Inativo`}</td>
-          <td>{item.created_at}</td>
-          <td>{item.updated_at}</td>
-          <td>
-            <div style={{ width: "10%" }}>
+        <TableRow key={item.id}>
+          <TableCell scope="row">{item.id}</TableCell>
+          <TableCell align='center'>{item.cpfPaciente}</TableCell>
+          <TableCell align='center'>{item.namePaciente}</TableCell>
+          <TableCell align='center'>{item.email}</TableCell>
+          <TableCell align='center'>{item.telefonePaciente}</TableCell>
+          <TableCell align='center'>{item.ativo_paciente?`Ativo`:`Inativo`}</TableCell>
+          <TableCell align='center'>{item.created_at}</TableCell>
+          <TableCell align='center'>{item.updated_at}</TableCell>
+          <TableCell align='center'>
+            <div style={{ widTableCell: "10%" }}>
               <ModalForm buttonLabel="Editar" item={item} updateState={props.updateState}/>
               {/*<Button color="danger" onClick={() => deleteItem(item.id)}>Del</Button>*/ }
             </div>
-          </td>
-        </tr>
+          </TableCell>
+        </TableRow>
       )
     })
 
     return (
-      <Table responsive hover>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>CPF</th>
-            <th>Nome</th>
-            <th>Email</th>
-            <th>Telefone</th>
-            <th>Status</th>
-            <th>Criado</th>
-            <th>Atualizado</th>
-            <th>Editar</th>
-          </tr>
-        </thead>
-        <tbody>
+      <TableContainer component={Paper}>
+    <Table className={classes.table} aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            <TableCell align='center'>ID</TableCell>
+            <TableCell align='center'>CPF</TableCell>
+            <TableCell align='center'>Nome</TableCell>
+            <TableCell align='center'>Email</TableCell>
+            <TableCell align='center'>Telefone</TableCell>
+            <TableCell align='center'>Status</TableCell>
+            <TableCell align='center'>Criado</TableCell>
+            <TableCell align='center'>Atualizado</TableCell>
+            <TableCell align='center'>Editar</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
           {items}
-        </tbody>
+        </TableBody>
       </Table>
+      </TableContainer>
     )
 }
 

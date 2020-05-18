@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Button, Modal, ModalHeader, ModalBody } from 'reactstrap'
 import AddEditForm from './update'
-
+import EditIcon from '@material-ui/icons/Edit';
 function ModalForm(props) {
   const [modal, setModal] = useState(false)
 
@@ -16,11 +16,11 @@ function ModalForm(props) {
   let title = ''
 
   if(label === 'Editar'){
-    button = <Button
-              color="warning"
-              onClick={toggle}
-              style={{float: "left", marginRight:"10px"}}>{label}
-            </Button>
+    button = <EditIcon
+            color="action"
+            onClick={toggle}
+            style={{float: "left", marginRight:"10px"}}>{label}
+          </EditIcon>
     title = 'Editar'
   } else {
     button = <Button

@@ -41,7 +41,7 @@ const Example = (props) => {
                                 <CardContent>
                                     <Typography className={classes.title} color="textSecondary" gutterBottom>
                                         Profissionais    </Typography>
-                                    <Typography variant="h1" component="h2"> 6    </Typography>
+                                    <Typography variant="h1" component="h2"> 4    </Typography>
 
                                 </CardContent>
                             </Card>
@@ -54,7 +54,7 @@ const Example = (props) => {
                                 <CardContent>
                                     <Typography className={classes.title} color="textSecondary" gutterBottom>
                                         Pacientes        </Typography>
-                                    <Typography variant="h1" component="h2"> 6   </Typography>
+                                    <Typography variant="h1" component="h2"> 2   </Typography>
                                 </CardContent>
                             </Card>
 
@@ -82,7 +82,7 @@ const Example = (props) => {
                                         Dados Estáticos e ficticios
     </Typography>
                                     <Typography variant="h1" component="h2">
-                                        6
+                                        3
     </Typography>
 
                                 </CardContent>

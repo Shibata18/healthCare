@@ -5,6 +5,7 @@ import DataTable from './Table';
 import { CSVLink } from "react-csv";
 import Navbar from '../Navbar/index';
 import api from '../../../services/api';
+import GetAppIcon from '@material-ui/icons/GetApp';
 
 function App(props) {
 
@@ -42,12 +43,7 @@ function App(props) {
       <Container className="App">
         <Row>
           <Col>
-            <h1 style={{margin: "20px 0"}}>CRUD Médico</h1>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <DataTable items={items} updateState={updateState} deleteItemFromState={deleteItemFromState} />
+            <h1 style={{margin: "20px 0",color:"#617019"}}>Médicos</h1>
           </Col>
         </Row>
         <Row>
@@ -58,9 +54,14 @@ function App(props) {
               style={{float: "left", marginRight: "10px"}}
               className="btn btn-primary"
               data={items}>
-              Download CSV
+              <GetAppIcon/>
             </CSVLink>
             <ModalForm buttonLabel="Adicionar Médico" addItemToState={addItemToState}/>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <DataTable items={items} updateState={updateState} deleteItemFromState={deleteItemFromState} />
           </Col>
         </Row>
       </Container>

@@ -1,52 +1,62 @@
 import React from 'react'
-import { Table  } from 'reactstrap';
+import { Table,TableContainer,Paper,TableHead,TableRow, TableCell, TableBody } from '@material-ui/core';
 import ModalForm from './Modal'
 import DuoIcon from '@material-ui/icons/Duo';
+import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
+
+const useStyles = makeStyles({
+  table: {
+    minWidth: 650,
+  },
+});
 function DataTable(props){
+  const classes = useStyles();
     const items = props.items.map(item => {
       const date = new Date(item.horario)
       return (
-        <tr key={item.id}>
-          <th scope="row">{item.id}</th>
-          <td>{item.doctor_cpf}</td>
-          <td>{item.paciente_cpf}</td>
-          <td>{item.horario = date.toUTCString()}</td>
-          <td>{item.file.map(item=>{ return (<p key={item.id}><a rel="noopener noreferrer" href={item.url} target='_blank'>{item.path}</a></p>)})}</td>
-          <td>{item.created_at}</td>
-          <td>{item.updated_at}</td>
-          <td>
+        <TableRow key={item.id}>
+          {/* <TableHead scope="row">{item.id}</TableHead> */}
+          <TableCell>{item.doctor_cpf}</TableCell>
+          <TableCell>{item.paciente_cpf}</TableCell>
+          <TableCell>{item.horario = date.toUTCString()}</TableCell>
+          <TableCell>{item.file.map(item=>{ return (<p key={item.id}><a rel="noopener noreferrer" href={item.url} target='_blank'>{item.path}</a></p>)})}</TableCell>
+          <TableCell>{item.created_at}</TableCell>
+          <TableCell>{item.updated_at}</TableCell>
+          <TableCell>
               <Link to='/chat'><DuoIcon/></Link>
-          </td>
-          <td>
+          </TableCell>
+          <TableCell>
             <div style={{ width: "10%" }}>
               <ModalForm buttonLabel="Editar" item={item} updateState={props.updateState}/>
               {/* <Button color="danger" onClick={() => deleteItem(item.id)}>Del</Button> */}
             </div>
-          </td>
-        </tr>
+          </TableCell>
+        </TableRow>
       )
     })
 
     return (
-      <Table responsive hover>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>CPF Doctor</th>
-            <th>CPF Paciente</th>
-            <th>Horario</th>
-            <th>Arquivo</th>
-            <th>Criado</th>
-            <th>Atualizado</th>
-            <th>Vídeo</th>
-            <th>Editar</th>
-          </tr>
-        </thead>
-        <tbody>
+      <TableContainer component={Paper}>
+    <Table className={classes.table} aria-label="simple table">
+      <TableHead>
+          <TableRow>
+            {/* <TableCell align="center">ID</TableCell> */}
+            <TableCell align="center">CPF Doctor</TableCell>
+            <TableCell align="center">CPF Paciente</TableCell>
+            <TableCell align="center">Horario</TableCell>
+            <TableCell align="center">Arquivo</TableCell>
+            <TableCell align="center">Criado</TableCell>
+            <TableCell align="center">Atualizado</TableCell>
+            <TableCell align="center">Vídeo</TableCell>
+            <TableCell align="center">Editar</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
           {items}
-        </tbody>
+        </TableBody>
       </Table>
+      </TableContainer>
     )
 }
 

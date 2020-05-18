@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { Button, Modal, ModalHeader, ModalBody } from 'reactstrap'
 import AddEditForm from './update'
-
+import AddCircleIcon from '@material-ui/icons/AddCircle';
+import EditIcon from '@material-ui/icons/Edit';
 function ModalForm(props) {
   const [modal, setModal] = useState(false)
 
@@ -9,24 +10,24 @@ function ModalForm(props) {
     setModal(!modal)
   }
 
-  const closeBtn = <button className="close" onClick={toggle}>&times;</button>
+
   const label = props.buttonLabel
 
   let button = ''
   let title = ''
 
   if(label === 'Editar'){
-    button = <Button
-              color="warning"
+    button = <EditIcon
+              color="action"
               onClick={toggle}
               style={{float: "left", marginRight:"10px"}}>{label}
-            </Button>
+            </EditIcon>
     title = 'Editar Agenda'
   } else {
     button = <Button
               color="success"
               onClick={toggle}
-              style={{float: "left", marginRight:"10px"}}>{label}
+              style={{float: "left", marginRight:"10px"}}><AddCircleIcon/>
             </Button>
     title = 'Adicionar'
   }
@@ -36,7 +37,7 @@ function ModalForm(props) {
     <div>
       {button}
       <Modal isOpen={modal} toggle={toggle} className={props.className}>
-        <ModalHeader toggle={toggle} close={closeBtn}>{title}</ModalHeader>
+        <ModalHeader toggle={toggle} >{title}</ModalHeader>
         <ModalBody>
           <AddEditForm
             addItemToState={props.addItemToState}

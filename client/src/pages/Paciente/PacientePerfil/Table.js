@@ -1,5 +1,5 @@
 import React from 'react'
-import ModalForm from './Modal'
+//import ModalForm from './Modal'
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import {Container,Card,CardHeader,CardContent,Collapse,Typography }from '@material-ui/core';
@@ -67,19 +67,11 @@ export default function DataTable(props){
         <IconButton>
           <CardContent>
             <div style={{ width: "10%" }}>
-              <ModalForm buttonLabel="Editar" item={item} updateState={props.updateState}/>
+              {/* <ModalForm buttonLabel="Editar" item={item} updateState={props.updateState}/> */}
             </div>
           </CardContent>
         </IconButton>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
-          {/*<h4>ID:</h4>
-                <p >{item.id}</p>
-          <h4>CPF</h4>
-            <p>{item.cpfDoctor}</p>
-          <h4>Nome</h4>
-            <p>{item.nameDoctor}</p>
-          <h4>Email</h4>
-            <p>{item.email}</p>*/}
             <p>Telefone: {item.telefonePaciente}</p>
             <p>Criado: {item.created_at}</p>
           <p>Atualizado: {item.updated_at}</p>

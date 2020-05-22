@@ -19,19 +19,6 @@ function AddEditForm(props) {
       [e.target.name]: e.target.value
     })
   }
-  const submitFormAdd = async e => {
-    e.preventDefault()
-    await api.post('/paciente', {
-      cpfPaciente: form.cpfPaciente,
-      namePaciente: form.namePaciente,
-      email: form.email,
-      telefonePaciente: form.telefonePaciente,
-      password: form.password,
-    })
-      .then(response => response.data, setTimeout(function () { alert('Cadastrado Com sucesso'); window.location.reload() }, 1000))
-      .catch(err => console.log(err))
-  }
-
   const submitFormEdit = async e => {
     e.preventDefault()
     await api.put(`/paciente/${form.id}`, {
@@ -43,15 +30,6 @@ function AddEditForm(props) {
       ativo_paciente: form.ativo_paciente
     })
       .then(response => response.data, setTimeout(function () { alert('Atualizado Com sucesso'); window.location.reload() }, 2000))
-      .then(item => {
-        if (Array.isArray(item)) {
-          // console.log(item[0])
-          props.updateState(item[0])
-          props.toggle()
-        } else {
-          console.log('failure')
-        }
-      })
       .catch(err => console.log(err))
   }
 
@@ -63,7 +41,7 @@ function AddEditForm(props) {
   }, [props.item])
 
   return (
-    <Form onSubmit={props.item ? submitFormEdit : submitFormAdd}>
+    <Form onSubmit= {submitFormEdit}>
       <FormGroup>
         <Label for="cpfPaciente">CPF</Label>
         <Input type="text" name="cpfPaciente" id="cpfPaciente" onChange={onChange} value={form.cpfPaciente === null ? '' : form.cpfPaciente} required minLength='11' maxLength='11' />

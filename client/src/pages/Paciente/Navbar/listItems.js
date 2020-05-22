@@ -3,7 +3,6 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import DashboardIcon from '@material-ui/icons/Dashboard';
-import ForumRoundedIcon from '@material-ui/icons/ForumRounded';
 import InfoRoundedIcon from '@material-ui/icons/InfoRounded';
 import HelpOutlineRoundedIcon from '@material-ui/icons/HelpOutlineRounded';
 import AssignmentIcon from '@material-ui/icons/Assignment';
@@ -22,12 +21,6 @@ export const mainListItems = (
       <AssignmentIcon />
       </ListItemIcon>
       <Link to='/agendaPaciente'><ListItemText primary="Agenda" /></Link>
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-      <ForumRoundedIcon />
-      </ListItemIcon>
-      <Link to='/chatPaciente'><ListItemText primary="Consultas" /></Link>
     </ListItem>
     <ListItem button>
       <ListItemIcon>

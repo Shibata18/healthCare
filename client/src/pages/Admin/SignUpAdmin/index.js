@@ -25,7 +25,7 @@ class SignUp extends Component {
         this.props.history.push("/signupAdmin");
       } catch (err) {
         console.log(err);
-        this.setState({ error: "Ocorreu um erro ao registrar sua conta." });
+        this.setState({ error: "Ocorreu um erro ao registrar sua conta. Tente Novamente" });
       }
     }
   };

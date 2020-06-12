@@ -28,7 +28,7 @@ class SignIn extends Component {
         console.log(err);
         this.setState({
           error:
-            "Houve um problema com o login, verifique suas credenciais."
+            "Houve um problema com o login, verifique o CPF e a senha Novamente."
         });
       }
     }

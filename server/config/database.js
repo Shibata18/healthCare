@@ -18,7 +18,7 @@ module.exports = {
   |
   */
   connection: Env.get('DB_CONNECTION', 'pg'),
-
+  connection: Env.get('MONGODB_CONNECTION','mongodb'),
   /*
   |--------------------------------------------------------------------------
   | Sqlite
@@ -43,7 +43,6 @@ module.exports = {
   |--------------------------------------------------------------------------
   | MySQL
   |--------------------------------------------------------------------------
-  |
   | Here we define connection settings for MySQL database.
   |
   | npm i --save mysql
@@ -69,15 +68,18 @@ module.exports = {
   |
   */
  mongodb: {
-  connectionString: Env.get('MONGO_CONNECTION_STRING', null),
+   client:'mongodb',
+  connectionString: Env.get('MONGO_CONNECTION_STRING', DATABASE_URL.href),
   connection: {
-    host: Env.get('MONGO_HOST', 'localhost'),
-    port: Env.get('MONGO_PORT', 27017),
-    user: Env.get('MONGO_USER', 'admin'),
-    pass: Env.get('MONGO_PASSWORD', ''),
-    database: Env.get('MONGO_DATABASE', 'adonis'),
+    host: Env.get('MONGO_HOST', DATABASE_URL.host),
+    port: Env.get('MONGO_PORT', DATABASE_URL.port),
+    user: Env.get('MONGO_USER', DATABASE_URL.username),
+    pass: Env.get('MONGO_PASSWORD', DATABASE_URL.password),
+    database: Env.get('MONGO_DATABASE', DATABASE_URL.pathname.substr(1)),
     options: {
       // All options can be found at http://mongoosejs.com/docs/connections.html
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
     },
     debug: false
   }

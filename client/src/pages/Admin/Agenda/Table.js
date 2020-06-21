@@ -24,7 +24,7 @@ function DataTable(props){
           <TableCell>{item.created_at}</TableCell>
           <TableCell>{item.updated_at}</TableCell>
           <TableCell>
-              <Link to='/chat'><DuoIcon/></Link>
+              <Link to='/teste'><DuoIcon/></Link>
           </TableCell>
           <TableCell>
             <div style={{ width: "10%" }}>

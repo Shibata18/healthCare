@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import { isAuthenticated } from "./services/auth";
 import LandingPage from './pages/LandingPage';
 import ChatPage from './pages/Chat';
+import TestePage from './pages/Teste';
 //Admin
 import SignUpAdmin from './pages/Admin/SignUpAdmin';
 import SignInAdmin from './pages/Admin/SignInAdmin';
@@ -15,13 +16,13 @@ import LoginDoctor from './pages/Medico/LoginDoctor';
 import RegisterDoctor from './pages/Medico/RegisterDoctor';
 import DoctorPerfil from './pages/Medico/DoctorPerfil';
 import AgendaDoctor from "./pages/Medico/AgendaDoctor";
-import ChatDoctor from './pages/Medico/Chat';
+import ChatDoctor from './pages/Medico/Teste';
 //Paciente
 import LoginPaciente from './pages/Paciente/LoginPaciente';
 import RegisterPaciente from './pages/Paciente/RegisterPaciente';
 import PacientePerfil from './pages/Paciente/PacientePerfil';
 import AgendaPaciente from './pages/Paciente/AgendaPaciente';
-import ChatPaciente from './pages/Paciente/Chat';
+import ChatPaciente from './pages/Paciente/Teste';
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
@@ -40,6 +41,7 @@ const Routes = () => (
   <BrowserRouter>
     <Switch>
       <Route exact path="/" component={LandingPage} />
+      <PrivateRoute  path="/teste" component={TestePage} />
       <PrivateRoute path="/chat" component={ChatPage} />
       {/* Admin */}
       <Route path="/signInAdmin" component={SignInAdmin} />

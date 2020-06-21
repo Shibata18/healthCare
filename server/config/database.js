@@ -18,7 +18,7 @@ module.exports = {
   |
   */
   connection: Env.get('DB_CONNECTION', 'pg'),
-  connection: Env.get('MONGODB_CONNECTION','mongodb'),
+ // connection: Env.get('MONGODB_CONNECTION','mongodb'),
   /*
   |--------------------------------------------------------------------------
   | Sqlite
@@ -66,7 +66,7 @@ module.exports = {
   |
   | Here we define connection settings for MongoDB database.
   |
-  */
+ 
  mongodb: {
    client:'mongodb',
   connectionString: Env.get('MONGO_CONNECTION_STRING', DATABASE_URL.href),
@@ -83,7 +83,7 @@ module.exports = {
     },
     debug: false
   }
-},
+},*/
 
   /*
   |--------------------------------------------------------------------------

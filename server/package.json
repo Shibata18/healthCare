@@ -29,6 +29,7 @@
     "@adonisjs/ignitor": "^2.0.8",
     "@adonisjs/lucid": "^6.1.3",
     "@adonisjs/websocket": "^1.0.12",
+    "opentok": "^2.10.0",
     "pg": "^8.0.3",
     "url-parse": "^1.4.7"
   },

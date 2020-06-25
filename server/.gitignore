@@ -9,5 +9,5 @@ tmp
 
 # The development sqlite file
 database/*.sqlite
-
+#
 config.json

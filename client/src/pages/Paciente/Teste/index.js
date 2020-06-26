@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import AccCore from 'opentok-accelerator-core';
 import 'opentok-solutions-css';
 
-import config from '../../../../config.json';
+import config from '../../../config.json';
 import './App.css';
 import Navbar from '../Navbar'
 

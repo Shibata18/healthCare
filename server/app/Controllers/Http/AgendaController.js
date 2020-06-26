@@ -1,7 +1,5 @@
 'use strict'
 const Agenda = use('App/Models/Agenda');
-const OpenTok = require('opentok');
-import config from '../../../conifg.json';
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
@@ -46,8 +44,8 @@ class AgendaController {
    */
   async store ({ request, response }) {
     const data = request.only(['doctor_cpf', 'paciente_cpf', 'horario']);
+    
     const paciente = await Agenda.create(data);
-
     return paciente;
   }
 

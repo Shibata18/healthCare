@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import{InputBase} from '@material-ui/core'
 import api from "../../../services/api";
 function AddEditForm(props) {
   const [form, setValues] = useState({
@@ -7,7 +8,6 @@ function AddEditForm(props) {
     doctor_cpf: '',
     paciente_cpf: '',
     horario: '',
-    data: '',
   })
   const [file, setFile] = useState({ file: null })
   const handleFileSelect = event => {
@@ -36,7 +36,7 @@ function AddEditForm(props) {
     await api.post('/agenda', {
       doctor_cpf: form.doctor_cpf,
       paciente_cpf: form.paciente_cpf,
-      horario: form.data + ' ' + form.horario,
+      horario: form.horario,
     })
       .then(response => response.data, setTimeout(function () { alert('Agendado Com sucesso'); window.location.reload() }, 100))
       .then(item => {
@@ -87,15 +87,17 @@ function AddEditForm(props) {
         <Label for="paciente_cpf">CPF Paciente</Label>
         <Input type="text" name="paciente_cpf" id="paciente_cpf" onChange={onChange} value={form.paciente_cpf === null ? '' : form.paciente_cpf} required minLength='11' maxLength='11' />
       </FormGroup>
-      <FormGroup>
+    {/*   <FormGroup>
         <Label for="horario">Horario</Label>
         <Input type="time" name="horario" id="horario" onChange={onChange} value={form.horario === null ? '' : form.horario} required />
       </FormGroup>
       <FormGroup>
         <Label for="data">Data</Label>
         <Input type="date" name="data" id="data" onChange={onChange} value={form.data === null ? '' : form.data} required />
-      </FormGroup>
-      <FormGroup>
+    </FormGroup>*/} <InputBase
+    type='datetime-local'
+    name="horario" id="horario" onChange={onChange} value={form.horario === null ? '' : form.horario} required />
+      <FormGroup> 
         <Label for="file">Arquivos</Label>
         <Input type="file" name="file[]" accept='text/*,images/*,application/*,video/*' multiple id="file" onChange={handleFileSelect} />
         <Button outline color='secondary' onClick={upload}>Upload</Button>

@@ -14,12 +14,13 @@ function DataTable(props){
   const classes = useStyles();
     const items = props.items.map(item => {
       const date = new Date(item.horario)
+      
       return (
         <TableRow key={item.id}>
           {/* <TableHead scope="row">{item.id}</TableHead> */}
           <TableCell>{item.doctor_cpf}</TableCell>
           <TableCell>{item.paciente_cpf}</TableCell>
-          <TableCell>{item.horario = date.toUTCString()}</TableCell>
+          <TableCell>{date.toString()}</TableCell>
           <TableCell>{item.file.map(item=>{ return (<p key={item.id}><a rel="noopener noreferrer" href={item.url} target='_blank'>{item.path}</a></p>)})}</TableCell>
           <TableCell>{item.created_at}</TableCell>
           <TableCell>{item.updated_at}</TableCell>

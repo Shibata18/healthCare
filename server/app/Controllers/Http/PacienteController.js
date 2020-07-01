@@ -18,7 +18,7 @@ class PacienteController {
    * @param {View} ctx.view
    */
   async index ({ request, response, view }) {
-    const paciente = Paciente.all();
+    const paciente = Paciente.query().with('agendaPaciente').fetch();
 
     return paciente;
   }

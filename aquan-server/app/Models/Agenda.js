@@ -10,6 +10,9 @@ class Agenda extends Model {
    paciente() {
        return this.belongsTo('App/Models/Paciente','cpfPaciente','paciente_cpf')
    }
+   prontuario(){
+       return this.hasOne('App/Models/Prontuario')
+   }
 }
 
 module.exports = Agenda

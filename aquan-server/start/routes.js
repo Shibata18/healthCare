@@ -43,3 +43,6 @@ Route.get('/agendaDoctor','AgendaController.agendaDoctor').middleware('auth:doct
 
 // Agenda
 Route.resource('agenda', 'AgendaController').apiOnly().middleware('auth:doctor,auth:paciente,auth:jwt');
+Route.post('/agenda/:id/prontuario','ProntuarioController.store').middleware('auth:doctor,auth:paciente,auth:jwt');
+Route.put('/agenda/:id/prontuario','ProntuarioController.update').middleware('auth:doctor,auth:paciente,auth:jwt');
+Route.get('/prontuario','ProntuarioController.index').middleware('auth:doctor,auth:paciente,auth:jwt');

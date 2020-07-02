@@ -48,6 +48,7 @@ class AgendaController {
    */
   async show ({ params }) {
     const agenda = await Agenda.findOrFail(params.id);
+    await agenda.load('prontuario')
     return agenda
   }
   /**
@@ -83,11 +84,11 @@ class AgendaController {
   async destroy ({ params, request, response }) {
   }
   async agendaDoctor({ request }) {
-    const user = await Agenda.query().where('doctor_cpf', request.header('cpfDoctor')).fetch()//with('prontuario')
+    const user = await Agenda.query().where('doctor_cpf', request.header('cpfDoctor')).with('prontuario').fetch()
     return user
   }
    async agendaPaciente({ request }) {
-    const user = await Agenda.query().where('paciente_cpf', request.header('cpfPaciente')).fetch()//.with('file').fetch()
+    const user = await Agenda.query().where('paciente_cpf', request.header('cpfPaciente')).with('prontuario').fetch()
     return user
   }
 }

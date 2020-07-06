@@ -26,15 +26,15 @@ const useStyles = makeStyles((theme) => ({
 function Paciente() {
     const classes = useStyles();
     const [pacientes, setPacientes] = useState([]);
-   // const [agendaPaciente,setAgendaPaciente] = useState([]);
+    const [agendaPaciente,setAgendaPaciente] = useState([]);
     const cpfPaciente = localStorage.getItem('paciente_cpf');
-  /*   useEffect(()=>{
-        async function getFiles(){
+     useEffect(()=>{
+        async function getProntuario(){
             const response = await api.get('/agendaPaciente',{headers:{cpfPaciente:cpfPaciente}})
             setAgendaPaciente(response.data);
         }
-        getFiles();
-    }) */
+        getProntuario();
+    }) 
     useEffect(() => {
         async function getData() {
             const response = await api.get('/perfilPaciente', { headers: { perfil: cpfPaciente } })
@@ -42,7 +42,18 @@ function Paciente() {
         }
         getData();
     })
-    
+    function mostrarProntuario(){
+        return (
+            agendaPaciente.map((value,index)=>{
+                return (
+                    <>
+                    <p>Consulta:{value.id}</p>
+                    <p>Prontuario: {value.prontuario.prontuario}</p>
+                    </>
+                )
+            })
+        )
+    }
     return (
         <>
             <Navbar />
@@ -64,10 +75,11 @@ function Paciente() {
                             <p>STATUS: {pacientes.ativo_paciente?`ATIVO`:`INATIVO`}</p>
                         </Typography>
                     </CardContent>
-                    <CardContent>
-                        <Typography variant="h6" component="h3">
-                        </Typography>
-                    </CardContent>
+                </Card>
+                <Card className={classes.root}>
+                <CardContent>
+                     {mostrarProntuario()}
+                </CardContent>
                 </Card>
             </Container>
         </>

@@ -45,7 +45,6 @@ function AddEditForm(props) {
           .then(response => response.data, setTimeout(function () {alert('Atualizado Com sucesso');window.location.reload() }, 2000))
           .then(item => {
             if(Array.isArray(item)) {
-              // console.log(item[0])
               props.updateState(item[0])
               props.toggle()
             } else {

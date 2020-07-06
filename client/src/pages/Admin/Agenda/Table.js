@@ -18,7 +18,6 @@ function DataTable(props){
       const horario = date.getTime();
       return (
         <TableRow key={item.id}>
-          {/* <TableHead scope="row">{item.id}</TableHead> */}
           <TableCell>{item.doctor_cpf}</TableCell>
           <TableCell>{item.paciente_cpf}</TableCell>
           <TableCell>{date.toString()}</TableCell>
@@ -42,7 +41,6 @@ function DataTable(props){
     <Table className={classes.table} aria-label="simple table">
       <TableHead>
           <TableRow>
-            {/* <TableCell align="center">ID</TableCell> */}
             <TableCell align="center">CPF Doctor</TableCell>
             <TableCell align="center">CPF Paciente</TableCell>
             <TableCell align="center">Horario</TableCell>

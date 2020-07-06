@@ -14,7 +14,7 @@ function DataTable(props) {
     const date = new Date(item.horario)
     const dataAtual = new Date();
     const horario = date.getTime();
-    
+    localStorage.setItem('idAgenda',item.id)
     return (
       <TableRow key={item.id}>
         {/* <th scope="row">{item.id}</th> */}
@@ -40,7 +40,6 @@ function DataTable(props) {
     <Table className={classes.table} aria-label="simple table">
       <TableHead>
         <TableRow>
-          {/* <th>ID</th> */}
           <TableCell align="center">Médico</TableCell>
           <TableCell align="center">Paciente</TableCell>
           <TableCell align="center">Horário</TableCell>

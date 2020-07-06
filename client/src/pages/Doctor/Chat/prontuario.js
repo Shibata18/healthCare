@@ -5,10 +5,11 @@ import { Button, InputLabel } from '@material-ui/core';
 
 function Prontuario() {
     const [textoProntuario, setTextoProntuario] = useState('');
+    const idAgenda = localStorage.getItem('idAgenda');
     async function prontuarioSubmit(e) {
         e.preventDefault();
         try {
-            const response = await api.post(`/agenda/1/prontuario`,{prontuario:textoProntuario,agenda_id:1});
+            const response = await api.post(`/agenda/${idAgenda}/prontuario`,{prontuario:textoProntuario});
             console.log(response.status);
             return alert("Enviado com sucesso");
         } catch (error) {
@@ -21,7 +22,7 @@ function Prontuario() {
             <InputLabel variant='standard'>Prontuário</InputLabel>
             <TextareaAutosize
                 rowsMax={30}
-                rowsMin={25}
+                rowsMin={8}
                 placeholder="Escreva aqui o feedback para o paciente"
                 value={textoProntuario}
                 onChange={e => setTextoProntuario(e.target.value)}

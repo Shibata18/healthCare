@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Grid, Container, Card, CardContent, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
 import Navbar from './Navbar';
+import api from '../../services/api';
+
 const useStyles = makeStyles((theme) => ({
 
     appBarSpacer: theme.mixins.toolbar,
@@ -28,9 +30,57 @@ const useStyles = makeStyles((theme) => ({
 
 const Example = (props) => {
     const classes = useStyles();
+    const [numeroDoctors, setNumeroDoctors] = useState('');
+    const [numeroDoctorsTotal, setNumeroDoctorsTotal] = useState('');
+    const [numeroPacientes, setNumeroPacientes] = useState('');
+    const [numeroPacientesTotal, setNumeroPacientesTotal] = useState('');
+    useEffect(() => {
+        async function getDoctorActive() {
+            try {
+                const response = await api.get("/numeroDoctor")
+                setNumeroDoctors(response.data)
+            } catch (error) {
+                alert('Erro ao carregar os dados')
+            }
+        }
+        getDoctorActive();
+    }, [])
+    useEffect(() => {
+        async function getTotalDoctor() {
+            try {
+                const response = await api.get("/numeroDoctorTotal")
+                setNumeroDoctorsTotal(response.data)
+            } catch (error) {
+                alert('Erro ao carregar os dados')
+            }
+        }
+        getTotalDoctor();
+    }, [])
+    useEffect(() => {
+        async function getPacienteActive() {
+            try {
+                const response = await api.get("/numeroPaciente")
+                setNumeroPacientes(response.data)
+            } catch (error) {
+                alert('Erro ao carregar os dados')
+            }
+        }
+        getPacienteActive();
+    }, [])
+    useEffect(() => {
+        async function getTotalPaciente() {
+            try {
+                const response = await api.get("/numeroPacienteTotal")
+                setNumeroPacientesTotal(response.data)
+            } catch (error) {
+                alert('Erro ao carregar os dados')
+            }
+        }
+        getTotalPaciente();
+    }, [])
     return (
         <>
-            <Navbar/>
+            <Navbar />
             <main className={classes.content}>
                 <div className={classes.appBarSpacer} />
                 <Container maxWidth="lg" className={classes.container}>
@@ -40,8 +90,8 @@ const Example = (props) => {
                             <Card className={classes.root} variant="outlined">
                                 <CardContent>
                                     <Typography className={classes.title} color="textSecondary" gutterBottom>
-                                        Profissionais    </Typography>
-                                    <Typography variant="h1" component="h2"> 4    </Typography>
+                                        Profissionais  Ativos  </Typography>
+                                    <Typography variant="h1" component="h2"> {numeroDoctors}    </Typography>
 
                                 </CardContent>
                             </Card>
@@ -53,8 +103,8 @@ const Example = (props) => {
                             <Card className={classes.root} variant="outlined">
                                 <CardContent>
                                     <Typography className={classes.title} color="textSecondary" gutterBottom>
-                                        Pacientes        </Typography>
-                                    <Typography variant="h1" component="h2"> 2   </Typography>
+                                        Total de Profissionais        </Typography>
+                                    <Typography variant="h1" component="h2"> {numeroDoctorsTotal}</Typography>
                                 </CardContent>
                             </Card>
 
@@ -65,9 +115,9 @@ const Example = (props) => {
                             <Card className={classes.root} variant="outlined">
                                 <CardContent>
                                     <Typography className={classes.title} color="textSecondary" gutterBottom>
-                                        Atendimentos    </Typography>
+                                        Pacientes Ativos    </Typography>
                                     <Typography variant="h1" component="h2">
-                                        6    </Typography>
+                                        {numeroPacientes}    </Typography>
 
                                 </CardContent>
                             </Card>
@@ -79,10 +129,10 @@ const Example = (props) => {
                             <Card className={classes.root} variant="outlined">
                                 <CardContent>
                                     <Typography className={classes.title} color="textSecondary" gutterBottom>
-                                        Dados Estáticos e ficticios
+                                       Total de Pacientes
     </Typography>
                                     <Typography variant="h1" component="h2">
-                                        3
+                                        {numeroPacientesTotal}
     </Typography>
 
                                 </CardContent>

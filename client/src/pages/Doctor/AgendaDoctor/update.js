@@ -38,7 +38,7 @@ function AddEditForm(props) {
     await api.put(`/agenda/${form.id}`, {
       doctor_cpf: form.doctor_cpf,
       paciente_cpf: form.paciente_cpf,
-      horario: form.data + ' ' + form.horario,
+      horario: form.horario,
     })
       .then(response => response.data, setTimeout(function () { alert('Atualizado Com sucesso'); window.location.reload() }, 2000))
       .then(item => {

@@ -113,6 +113,14 @@ class DoctorController {
     const token = await adminAuth.attempt(cpfDoctor, password);
     return token
   }
+  async contadorAtivo(){
+    const contador = await Doctor.query().where('ativo_medico',true).getCount();
+    return contador;
+  }
+  async contador(){
+    const contador = await Doctor.getCount();
+    return contador;
+  }
 }
 
 module.exports = DoctorController

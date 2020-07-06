@@ -31,6 +31,9 @@ Route.post('/paciente','PacienteController.store'); // Cadastro do Paciente
 Route.resource('paciente','PacienteController');
 Route.get('/perfilPaciente','PacienteController.perfil'); // Mostra apenas dados de um paciente especifico
 Route.get('/agendaPaciente','AgendaController.agendaPaciente').middleware('auth:paciente,auth:jwt')
+Route.get('/numeroPaciente','PacienteController.contadorAtivo').middleware('auth:jwt');//Contador de Pacientes ativos
+Route.get('/numeroPacienteTotal','PacienteController.contadorTotal').middleware('auth:jwt');//Contador de Pacientes 
+
 
 
 //Doctors
@@ -39,10 +42,12 @@ Route.post('/doctor','DoctorController.store'); // Cadastro do Doutor
 Route.resource('doctor','DoctorController');
 Route.get('/perfilDoctor','DoctorController.perfil'); // Mostra apenas dados de um Doutor específico
 Route.get('/agendaDoctor','AgendaController.agendaDoctor').middleware('auth:doctor,auth:jwt')
+Route.get('/numeroDoctor','DoctorController.contadorAtivo').middleware('auth:jwt');//Contador de Profissionais ativos
+Route.get('/numeroDoctorTotal','DoctorController.contador').middleware('auth:jwt');//Contador de Profissionais 
 
 
 // Agenda
 Route.resource('agenda', 'AgendaController').apiOnly().middleware('auth:doctor,auth:paciente,auth:jwt');
-Route.post('/agenda/:id/prontuario','ProntuarioController.store').middleware('auth:doctor,auth:paciente,auth:jwt');
-Route.put('/agenda/:id/prontuario','ProntuarioController.update').middleware('auth:doctor,auth:paciente,auth:jwt');
-Route.get('/prontuario','ProntuarioController.index').middleware('auth:doctor,auth:paciente,auth:jwt');
+Route.post('/agenda/:id/prontuario','ProntuarioController.store').middleware('auth:doctor,auth:jwt');
+Route.put('/agenda/:id/prontuario','ProntuarioController.update').middleware('auth:doctor,auth:jwt');
+Route.get('/prontuario','ProntuarioController.index').middleware('auth:jwt');

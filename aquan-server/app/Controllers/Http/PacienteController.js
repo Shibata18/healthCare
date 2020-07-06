@@ -75,6 +75,14 @@ class PacienteController {
     const token = await adminAuth.attempt(cpfPaciente, password);
     return token
   }
+  async contadorTotal(){
+    const contador = await Paciente.getCount();
+    return contador;
+  }
+  async contadorAtivo(){
+    const contador = await Paciente.query().where('ativo_paciente',true).getCount();
+    return contador;
+  }
 }
 
 module.exports = PacienteController

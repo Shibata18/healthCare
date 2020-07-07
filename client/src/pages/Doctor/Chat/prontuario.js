@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 import api from '../../../services/api';
-import { Button, InputLabel } from '@material-ui/core';
+import { Button, Container } from '@material-ui/core';
 
 function Prontuario() {
     const [textoProntuario, setTextoProntuario] = useState('');
@@ -9,7 +8,7 @@ function Prontuario() {
     async function prontuarioSubmit(e) {
         e.preventDefault();
         try {
-            const response = await api.post(`/agenda/${idAgenda}/prontuario`,{prontuario:textoProntuario});
+            const response = await api.post(`/agenda/${idAgenda}/prontuario`, { prontuario: textoProntuario });
             console.log(response.status);
             return alert("Enviado com sucesso");
         } catch (error) {
@@ -18,17 +17,18 @@ function Prontuario() {
         }
     }
     return (
-        <form onSubmit={prontuarioSubmit}>
-            <InputLabel variant='standard'>Prontuário</InputLabel>
-            <TextareaAutosize
-                rowsMax={30}
-                rowsMin={8}
-                placeholder="Escreva aqui o feedback para o paciente"
-                value={textoProntuario}
-                onChange={e => setTextoProntuario(e.target.value)}
-            />
-            <Button variant="contained" type='submit'>Enviar</Button>
-        </form>
+        <Container>
+            <form onSubmit={prontuarioSubmit}>
+                <textarea
+                    cols='90'
+                    rows='5'
+                    value={textoProntuario}
+                    placeholder="Prontuario: Escreva aqui o feedback para o paciente"
+                    onChange={e => setTextoProntuario(e.target.value)}
+                />
+                <Button variant="contained" size='medium' type='submit'>Enviar</Button>
+            </form>
+        </Container>
     )
 }
 

@@ -54,7 +54,7 @@ const otCoreOptions = {
     callProperties: null, // Using default
   },
   textChat: {
-    name: 'Teste',// eslint-disable-line no-bitwise
+    name: localStorage.getItem('nomePaciente'),// eslint-disable-line no-bitwise
     waitingMessage: 'Mensagens serão enviadas quando o outro usuário entrar na chamada',
     container: '#chat',
   },

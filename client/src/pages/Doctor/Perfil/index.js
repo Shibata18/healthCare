@@ -35,6 +35,7 @@ function Doctor() {
       }
       loadDevs();
     });
+    localStorage.setItem('nameDoctor',doctor.nameDoctor)
     return (
         <>
             <Navbar />

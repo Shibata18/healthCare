@@ -73,7 +73,7 @@ function AddEditForm(props) {
         <p><label htmlFor='horario'>Data e Hora: </label></p>
         <InputBase
           type='datetime-local'
-          name="horario" id="horario" onChange={onChange} value={form.horario === null ? '' : form.horario} required />
+          name="horario" id="horario" onChange={onChange} value={form.horario} required />
       </p>
       <Button type='submit'>Enviar</Button>
     </form>

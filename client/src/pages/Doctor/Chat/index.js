@@ -54,7 +54,7 @@ const otCoreOptions = {
     callProperties: null, // Using default
   },
   textChat: {
-    name: 'Teste',// eslint-disable-line no-bitwise
+    name: localStorage.getItem('nameDoctor'),// eslint-disable-line no-bitwise
     waitingMessage: 'Mensagens serão enviadas quando o outro usuário entrar na chamada',
     container: '#chat',
   },
@@ -204,15 +204,15 @@ class App extends Component {
             <div id="screenPublisherContainer" className={screenPublisherClass} />
             <div id="cameraSubscriberContainer" className={cameraSubscriberClass} />
             <div id="screenSubscriberContainer" className={screenSubscriberClass} />
-            <Prontuario/>
+            <div id="chat" className="App-chat-container" />
           </div>
-          <div id="controls" className={controlClass}>
-            <div className={localAudioClass} onClick={this.toggleLocalAudio} />
-            <div className={localVideoClass} onClick={this.toggleLocalVideo} />
-            <div className={localCallClass} onClick={this.endCall} />
-          </div>
-          <div id="chat" className="App-chat-container" />
         </div>
+        <div id="controls" className={controlClass}>
+          <div className={localAudioClass} onClick={this.toggleLocalAudio} />
+          <div className={localVideoClass} onClick={this.toggleLocalVideo} />
+          <div className={localCallClass} onClick={this.endCall} />
+        </div>
+          <Prontuario />
       </div>
     );
   }

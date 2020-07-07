@@ -26,15 +26,15 @@ const useStyles = makeStyles((theme) => ({
 function Paciente() {
     const classes = useStyles();
     const [pacientes, setPacientes] = useState([]);
-    const [agendaPaciente,setAgendaPaciente] = useState([]);
+    const [agendaPaciente, setAgendaPaciente] = useState([]);
     const cpfPaciente = localStorage.getItem('paciente_cpf');
-     useEffect(()=>{
-        async function getProntuario(){
-            const response = await api.get('/agendaPaciente',{headers:{cpfPaciente:cpfPaciente}})
+    useEffect(() => {
+        async function getProntuario() {
+            const response = await api.get('/agendaPaciente', { headers: { cpfPaciente: cpfPaciente } })
             setAgendaPaciente(response.data);
         }
         getProntuario();
-    }) 
+    })
     useEffect(() => {
         async function getData() {
             const response = await api.get('/perfilPaciente', { headers: { perfil: cpfPaciente } })
@@ -42,18 +42,25 @@ function Paciente() {
         }
         getData();
     })
-    function mostrarProntuario(){
-        return (
-            agendaPaciente.map((value,index)=>{
-                return (
-                    <>
-                    <p>Consulta:{value.id}</p>
-                    <p>Prontuario: {value.prontuario.prontuario}</p>
-                    </>
-                )
-            })
-        )
+    function mostrarProntuario() {
+       try{
+            return (
+                agendaPaciente.map((value, index) => {
+                    return (
+                        <>
+                            <p>Consulta:{value.id}</p>
+                            <p>Prontuario: {value.prontuario.prontuario}</p>
+                        </>
+                    )
+                })
+                
+            )
+               
+        }catch (err){
+            
+        }
     }
+    localStorage.setItem('nomePaciente',pacientes.namePaciente);
     return (
         <>
             <Navbar />
@@ -72,14 +79,14 @@ function Paciente() {
                             <p>TELEFONE: {pacientes.telefonePaciente}</p>
                         </Typography>
                         <Typography variant="h6" component="h3">
-                            <p>STATUS: {pacientes.ativo_paciente?`ATIVO`:`INATIVO`}</p>
+                            <p>STATUS: {pacientes.ativo_paciente ? `ATIVO` : `INATIVO`}</p>
                         </Typography>
                     </CardContent>
                 </Card>
                 <Card className={classes.root}>
-                <CardContent>
-                     {mostrarProntuario()}
-                </CardContent>
+                    <CardContent>
+                        {mostrarProntuario()}
+                    </CardContent>
                 </Card>
             </Container>
         </>

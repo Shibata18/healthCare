@@ -18,7 +18,7 @@ class AgendaController {
    * @param {View} ctx.view
    */
   async index ({ request, response, view }) {
-    const agenda = Agenda.query().with('prontuario').fetch()
+    const agenda = Agenda.all()
     return agenda;
   }
 

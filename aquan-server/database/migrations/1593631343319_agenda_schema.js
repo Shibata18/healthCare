@@ -20,6 +20,7 @@ class AgendaSchema extends Schema {
         .inTable('pacientes')
         .onUpdate('CASCADE')
       table.datetime('horario', { useTz: true, precision: 6 }).unique()
+      //table.boolean('agenda_ativo').defaultTo(true)
       table.timestamps()
     })
   }

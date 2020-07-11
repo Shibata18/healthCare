@@ -32,7 +32,6 @@ function AddEditForm(props) {
       })
       .catch(err => console.log(err))
   }
-
   const submitFormEdit = async e => {
     e.preventDefault()
     await api.put(`/agenda/${form.id}`, {
@@ -71,10 +70,10 @@ function AddEditForm(props) {
       <input type="text" name="paciente_cpf" id="paciente_cpf" onChange={onChange} value={form.paciente_cpf === null ? '' : form.paciente_cpf} required minLength='11' maxLength='11' />
       <p style={{ marginTop: 15, marginBottom: 20 }}>
         <p><label htmlFor='horario'>Data e Hora: </label></p>
-        <InputBase
+        <p><InputBase
           type='datetime-local'
           name="horario" id="horario" onChange={onChange} value={form.horario} required />
-      </p>
+        </p></p>
       <Button type='submit'>Enviar</Button>
     </form>
   )

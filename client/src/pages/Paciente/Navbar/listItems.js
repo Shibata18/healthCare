@@ -3,6 +3,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import DashboardIcon from '@material-ui/icons/Dashboard';
+import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
 import InfoRoundedIcon from '@material-ui/icons/InfoRounded';
 import HelpOutlineRoundedIcon from '@material-ui/icons/HelpOutlineRounded';
 import AssignmentIcon from '@material-ui/icons/Assignment';
@@ -23,6 +24,13 @@ export const mainListItems = (
           <AssignmentIcon />
         </ListItemIcon>
         <ListItemText primary="Agenda" /></Button>
+    </ListItem>
+    <ListItem button>
+      <Button href='/listaProfissionais'>
+        <ListItemIcon>
+          <PeopleAltIcon />
+        </ListItemIcon>
+        <ListItemText primary="Profissionais" /></Button>
     </ListItem>
     <ListItem button>
       <Button href='#'>

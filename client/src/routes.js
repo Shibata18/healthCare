@@ -14,6 +14,7 @@ import RegisterPaciente from './pages/Paciente/Register';
 import PerfilPaciente from './pages/Paciente/Perfil';
 import AgendaPaciente from './pages/Paciente/Agenda';
 import ChatPaciente from './pages/Paciente/Chat';
+import ListaProfissionais from './pages/Paciente/ListarProfisionais';
 //Doctor
 import DoctorLogin from './pages/Doctor/Login';
 import DoctorRegister from './pages/Doctor/Register';
@@ -50,6 +51,7 @@ const Routes = () => (
       <PrivateRoute path='/pacientePerfil' component={PerfilPaciente}/>
       <PrivateRoute path='/agendaPaciente' component={AgendaPaciente}/>
       <PrivateRoute path='/chatPaciente' component={ChatPaciente}/>
+      <PrivateRoute path='/listaProfissionais' component={ListaProfissionais}/>
       {/* Doctor */}
       <Route path='/loginDoctor' component={DoctorLogin}/>
       <Route path='/registerDoctor' component={DoctorRegister} />

@@ -28,8 +28,8 @@ Route.resource('user','UserController').apiOnly().middleware('auth:jwt') // Meto
 //Pacientes
 Route.post('/loginPaciente','PacienteController.login'); // Login como Paciente
 Route.post('/paciente','PacienteController.store'); // Cadastro do Paciente
-Route.resource('paciente','PacienteController');
-Route.get('/perfilPaciente','PacienteController.perfil'); // Mostra apenas dados de um paciente especifico
+Route.resource('paciente','PacienteController').middleware('auth:paciente,auth:jwt')
+Route.get('/perfilPaciente','PacienteController.perfil').middleware('auth:paciente,auth:jwt'); // Mostra apenas dados de um paciente especifico
 Route.get('/agendaPaciente','AgendaController.agendaPaciente').middleware('auth:paciente,auth:jwt')
 Route.get('/numeroPaciente','PacienteController.contadorAtivo').middleware('auth:jwt');//Contador de Pacientes ativos
 Route.get('/numeroPacienteTotal','PacienteController.contadorTotal').middleware('auth:jwt');//Contador de Pacientes 
@@ -39,8 +39,8 @@ Route.get('/numeroPacienteTotal','PacienteController.contadorTotal').middleware(
 //Doctors
 Route.post('/loginDoctor','DoctorController.login'); //Login como Doutor
 Route.post('/doctor','DoctorController.store'); // Cadastro do Doutor
-Route.resource('doctor','DoctorController');
-Route.get('/perfilDoctor','DoctorController.perfil'); // Mostra apenas dados de um Doutor específico
+Route.resource('doctor','DoctorController').middleware('auth:doctor,auth:jwt,auth:paciente')
+Route.get('/perfilDoctor','DoctorController.perfil').middleware('auth:doctor,auth:jwt'); // Mostra apenas dados de um Doutor específico
 Route.get('/agendaDoctor','AgendaController.agendaDoctor').middleware('auth:doctor,auth:jwt')
 Route.get('/numeroDoctor','DoctorController.contadorAtivo').middleware('auth:jwt');//Contador de Profissionais ativos
 Route.get('/numeroDoctorTotal','DoctorController.contador').middleware('auth:jwt');//Contador de Profissionais 

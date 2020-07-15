@@ -2,10 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Container } from '@material-ui/core'
 import ModalForm from './Modal';
 import DataTable from './Table';
-import { CSVLink } from "react-csv";
 import Navbar from '../Navbar';
 import api from '../../../services/api'
-import GetAppIcon from '@material-ui/icons/GetApp';
 
 function App(props) {
     const [items, setItems] = useState([])
@@ -41,14 +39,6 @@ function App(props) {
 
             <Container>
                 <h1 style={{ margin: 20 }}>Agenda</h1>
-                <CSVLink
-                    filename={"db_agenda.csv"}
-                    color="primary"
-                    style={{ float: "left", marginRight: "10px" }}
-                    className="btn btn-primary"
-                    data={items}>
-                    <GetAppIcon />
-                </CSVLink>
                 <ModalForm addItemToState={addItemToState} />
                 <DataTable items={items} updateState={updateState} deleteItemFromState={deleteItemFromState} />
             </Container>

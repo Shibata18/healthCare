@@ -10,24 +10,8 @@ import config from '../../../config.json';
 import './App.css';
 import Navbar from '../Navbar'
 
-//import OpenTok from "opentok";
-
 let otCore;
-/* 
-let opentok = new OpenTok(config.apiKey, config.apiKey_secret);
-let sessionId;
-let token
-opentok.createSession({mediaMode:"relayed"}, function(error, session) {
-  if (error) {
-    console.log("Error creating session:", error)
-  } else {
-    sessionId = session.sessionId;
-    console.log("Session ID: " + sessionId);
-    // Generate a token.
-    token = opentok.generateToken(sessionId);
-    console.log(token);
-  }
-}); */
+
 
 const otCoreOptions = {
   credentials: {

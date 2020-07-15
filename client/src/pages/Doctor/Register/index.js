@@ -86,7 +86,7 @@ export default function SignInDoctor() {
                     Cadastro Médico
         </Typography>
                 <form className={classes.form} noValidate onSubmit={handleSubmit}>
-                    <InputLabel htmlFor='cpfDoctor'>CPF:</InputLabel>
+                    <InputLabel htmlFor='cpfDoctor'>CPF: *</InputLabel>
                     <input
                         type="text"
                         placeholder='CPF' minLength='11' maxLength='11' required
@@ -136,7 +136,7 @@ export default function SignInDoctor() {
                     <InputLabel htmlFor="telefonePaciente">Telefone</InputLabel>
                     <input
                         type="text"
-                        placeholder="(00) 12345-1234" pattern="\([0-9]{2}\) [0-9]{4,6}-[0-9]{3,4}$" required
+                        placeholder="(00) 12345-1234" pattern="\([0-9]{2}\) [0-9]{4,6}-[0-9]{3,4}$" 
                         value={telefoneDoctor}
                         onChange={e => settelefoneDoctor(e.target.value)}
                     />

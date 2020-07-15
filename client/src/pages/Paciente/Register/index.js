@@ -132,7 +132,7 @@ export default function SignIn() {
                     <InputLabel htmlFor="telefonePaciente">Telefone</InputLabel>
                     <input
                         type="text"
-                        placeholder="(00) 12345-1234" pattern="\([0-9]{2}\) [0-9]{4,6}-[0-9]{3,4}$" required
+                        placeholder="(00) 12345-1234" pattern="\([0-9]{2}\) [0-9]{4,6}-[0-9]{3,4}$" 
                         value={telefonePaciente}
                         onChange={e => setTelefonePaciente(e.target.value)}
                     />

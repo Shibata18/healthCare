@@ -84,7 +84,7 @@ function AddEditForm(props) {
           </FormGroup>
           <FormGroup>
               <Label for="telefoneDoctor">Telefone</Label>
-              <Input type="text" name="telefoneDoctor" id="telefoneDoctor" onChange={onChange} value={form.telefoneDoctor === null ? '' : form.telefoneDoctor} placeholder="(11)-12345-6789" pattern="\([0-9]{2}\) [0-9]{4,6}-[0-9]{3,4}$" required />
+              <Input type="text" name="telefoneDoctor" id="telefoneDoctor" onChange={onChange} value={form.telefoneDoctor === null ? '' : form.telefoneDoctor} placeholder="(11)-12345-6789" pattern="\([0-9]{2}\) [0-9]{4,6}-[0-9]{3,4}$" />
           </FormGroup>
           <FormGroup>
               <Label for="password">password</Label>
@@ -105,6 +105,7 @@ function AddEditForm(props) {
           <FormGroup>
             <Label for="ativo">Status</Label>
               <Input type="select"  name='ativo' id='ativo'>
+                    <option>Selecione a opção</option>
                     <option  value={form.ativo_medico = true}  onChange={onChange}>Ativo</option>
                     <option value={form.ativo_medico = false} onChange={onChange}>Inativar</option>
               </Input>

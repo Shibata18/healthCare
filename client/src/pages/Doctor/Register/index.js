@@ -89,7 +89,7 @@ export default function SignInDoctor() {
                     <InputLabel htmlFor='cpfDoctor'>CPF: *</InputLabel>
                     <input
                         type="text"
-                        placeholder='CPF' minLength='11' maxLength='11' required
+                        placeholder='CPF*' minLength='11' maxLength='11' required
                         value={cpfDoctor}
                         onChange={e => setcpfDoctor(e.target.value)}
                     />

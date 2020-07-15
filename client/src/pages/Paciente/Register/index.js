@@ -66,7 +66,7 @@ export default function SignIn() {
                 login(response.data.token);
                 history.push('/loginPaciente')
             } catch (error) {
-                console.log(error.response);
+                console.error(error.response);
                 alert("Houve um problema com o cadastro, verifique o CPF , o email e a senha Novamente.")
             }
         }

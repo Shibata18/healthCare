@@ -64,6 +64,7 @@ export default function SignIn() {
                 history.push('/loginAdmin')
             } catch (error) {
                 console.log(error);
+                console.log(error.response);
                 alert("Houve um problema com o cadastro, verifique o CPF , o email e a senha Novamente.")
             }
         }
@@ -81,7 +82,7 @@ export default function SignIn() {
                 <form className={classes.form} noValidate onSubmit={handleSubmit}>
                         <input
                             type="text"
-                            placeholder='CPF' minLength='11' maxLength='11' required
+                            placeholder='CPF*' minLength='11' maxLength='11' required
                             value={cpfUser}
                             onChange={e => setCpfUser(e.target.value)}
                         />

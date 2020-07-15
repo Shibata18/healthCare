@@ -65,6 +65,7 @@ export default function SignInPaciente() {
                 history.push('/pacientePerfil')
             } catch (error) {
                 console.log(error);
+                console.error(error.response);
                 alert("Houve um problema com o login, verifique o CPF e a senha Novamente.")
             }
         }
@@ -82,7 +83,7 @@ export default function SignInPaciente() {
                 <form className={classes.form} noValidate onSubmit={handleSubmit}>
                     <input
                         type="text"
-                        placeholder='CPF' minLength='11' maxLength='11' required
+                        placeholder='CPF*' minLength='11' maxLength='11' required
                         value={cpfPaciente}
                         onChange={e => setcpfPaciente(e.target.value)}
                     />

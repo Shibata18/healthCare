@@ -9,10 +9,13 @@ function App(props) {
     const [items, setItems] = useState([])
 
     const getItems = async ()=>{
-      await api.get('/paciente')
-            .then(response => response.data)
-            .then(items => setItems(items))
-            .catch(err => console.log(err))
+      try {
+        const response =  await api.get('/paciente');
+        setItems(response.data);
+      } catch (error) {
+        console.log(error.response); 
+        console.log(error); 
+      }
     }
     const addItemToState = (item) => {
           setItems([...items, item])

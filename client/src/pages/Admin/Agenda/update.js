@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { InputBase, Button } from '@material-ui/core'
+import { Button } from '@material-ui/core'
 import api from "../../../services/api";
 
 function AddEditForm(props) {
@@ -27,7 +27,8 @@ function AddEditForm(props) {
       
     } catch (error) {
       alert('Paciente ou Médico inexistente, hora errada')
-      console.log(error);
+      console.log(error.response);
+      console.error(error);
     }
 
 
@@ -44,6 +45,7 @@ function AddEditForm(props) {
       setTimeout(function () { alert('Atualizado Com sucesso'); window.location.reload() }, 2000)
     } catch (error) {
      console.log(error); 
+     console.log(error.response); 
     }
   }
 
@@ -65,7 +67,7 @@ function AddEditForm(props) {
       <input type="text" name="paciente_cpf" id="paciente_cpf" onChange={onChange} value={form.paciente_cpf === null ? '' : form.paciente_cpf} required minLength='11' maxLength='11' />
       <p style={{ marginTop: 15, marginBottom: 20 }}>
         <label htmlFor='horario'>Data e Hora: </label></p>
-      <InputBase
+      <input
         type='datetime-local'
         name="horario" id="horario" onChange={onChange} value={form.horario} required />
       <div>

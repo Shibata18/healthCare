@@ -21,37 +21,38 @@ function AddEditForm(props) {
   }
   const submitFormAdd = async e => {
       e.preventDefault()
-      await api.post('/paciente',{
-        cpfPaciente: form.cpfPaciente,
-        namePaciente: form.namePaciente,
-        email: form.email,
-        telefonePaciente: form.telefonePaciente,
-        password: form.password,
-      })
-        .then(response => response.data, setTimeout(function () { alert('Cadastrado Com sucesso');window.location.reload() }, 1000))
-          .catch(err => console.log(err))
+      try {
+        const response =  await api.post('/paciente',{
+          cpfPaciente: form.cpfPaciente,
+          namePaciente: form.namePaciente,
+          email: form.email,
+          telefonePaciente: form.telefonePaciente,
+          password: form.password,
+        })
+        if(response) setTimeout(function () { alert('Cadastrado Com sucesso');window.location.reload() }, 1000)
+      } catch (error) {
+        console.log(error);
+        console.log(error.response);
+      }  
   }
 
   const submitFormEdit = async e => {
       e.preventDefault()
-      await api.put(`/paciente/${form.id}`,{
-        cpfPaciente: form.cpfPaciente,
-        namePaciente: form.namePaciente,
-        email: form.email,
-        telefonePaciente: form.telefonePaciente,
-        password: form.password,
-        ativo_paciente: form.ativo_paciente
-      })
-          .then(response => response.data, setTimeout(function () {alert('Atualizado Com sucesso');window.location.reload() }, 2000))
-          .then(item => {
-            if(Array.isArray(item)) {
-              props.updateState(item[0])
-              props.toggle()
-            } else {
-              console.log('failure')
-            }
-          })
-          .catch(err => console.log(err))
+      try {
+        const response =  await api.put(`/paciente/${form.id}`,{
+          cpfPaciente: form.cpfPaciente,
+          namePaciente: form.namePaciente,
+          email: form.email,
+          telefonePaciente: form.telefonePaciente,
+          password: form.password,
+          ativo_paciente: form.ativo_paciente
+        });
+        if(response)setTimeout(function () {alert('Atualizado Com sucesso');window.location.reload() }, 2000)
+      } catch (error) {
+        console.log(error);
+        console.error(error.response);
+      }
+     
   }
 
   useEffect(() => {
@@ -76,11 +77,11 @@ function AddEditForm(props) {
             <Input type="email" name="email" id="email" onChange={onChange} value={form.email === null ? '' : form.email} />
         </FormGroup>
         <FormGroup>
-            <Label for="telefonePaciente">Telefoner</Label>
+            <Label for="telefonePaciente">Telefone</Label>
             <Input type="text" name="telefonePaciente" id="telefonePaciente" onChange={onChange} value={form.telefonePaciente === null ? '' : form.telefonePaciente} placeholder="(11) 12345-1234" />
         </FormGroup>
         <FormGroup>
-            <Label for="password">password</Label>
+            <Label for="password">Senha</Label>
             <Input type="password" name="password" id="password" onChange={onChange} value={form.password === null ? '' : form.password} />
         </FormGroup>
         <FormGroup>

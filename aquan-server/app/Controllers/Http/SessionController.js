@@ -26,29 +26,39 @@ class SessionController {
     const agenda = await Agenda.findOrFail(params.id)
     if (agenda) {
       const opentok = new Opentok(config.apiKey, config.apiKey_secret);
-      const teste = opentok.createSession({ mediaMode: 'relayed' }, async (err, session) => {
+      opentok.createSession({ mediaMode: 'relayed' }, async (err, session) => {
         if (err) {
           console.log("Error creating session:", err)
         } else {
           let tokenOptions = {}
           tokenOptions.role = 'publisher'
           let token = opentok.generateToken(session.sessionId)
-          console.log("Token: " + token);
+         // console.log("Token: " + token);
           try {
             let sessionid = session.sessionId
             await Database.table('sessions').insert({ session: sessionid, token: token,agenda_id:agenda.id })
-            console.log("Session ID: " + sessionid);
+           // console.log("Session ID: " + sessionid);
           } catch (error) {
             console.log("Error creating session:", error)
           }
 
         }
       })
-      return response.status(200).json(teste)
     }else {
       return response.status(404).json({mensagem:"Agenda não encontrada"})
     }
   }
+  async getSessao({response,params}){
+    const agenda = await Agenda.findOrFail(params.id);
+    try{
+      const database = await Database.table('sessions').select('*').where({agenda_id:agenda.id})
+      return database
+    }catch(err){
+      console.log(err);
+    }
+    
+  }
+
   async teste({ request, response }) {
     const opentok = new Opentok(config.apiKey, config.apiKey_secret);
     const teste = opentok.createSession({ mediaMode: 'relayed' }, async (err, session) => {
@@ -71,8 +81,6 @@ class SessionController {
     })
     return response.status(200).json(teste)
   }
-
-
 }
 
 module.exports = SessionController

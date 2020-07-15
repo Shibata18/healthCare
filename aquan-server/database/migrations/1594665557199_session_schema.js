@@ -12,7 +12,7 @@ class SessionSchema extends Schema {
       .references('id')
       .inTable('agenda')
       .onUpdate('CASCADE')
-      .onDelete('CASCADE')
+      .onDelete('CASCADE').unique()
       table.string('session')
       table.text('token','longtext')
       //table.timestamps()

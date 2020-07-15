@@ -52,3 +52,4 @@ Route.post('/agenda/:id/prontuario','ProntuarioController.store').middleware('au
 Route.put('/agenda/:id/prontuario','ProntuarioController.update').middleware('auth:doctor,auth:jwt');
 Route.get('/prontuario','ProntuarioController.index').middleware('auth:jwt');
 Route.post('/agenda/:id/session','SessionController.store').middleware('auth:jwt')// Criando sessão e tokens
+Route.get('/agenda/:id/session','SessionController.getSessao').middleware('auth:jwt,auth:doctor,auth:paciente')// Criando sessão e tokens

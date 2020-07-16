@@ -64,9 +64,12 @@ export default function SignInDoctor() {
                 login(response.data.token);
                 history.push('/doctorPerfil')
             } catch (error) {
-                console.log(error);
-                console.error(error.response);
-                alert("Houve um problema com o login, verifique o CPF e a senha Novamente." )
+                console.error(error.response.data);
+                if(error.response.data[0].field=== "cpfDoctor"){
+                    alert('CPF inválido')
+                }else if(error.response.data[0].field==="password"){
+                    alert("Senha inválida")
+                }
             }
         }
     }

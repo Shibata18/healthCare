@@ -55,18 +55,16 @@ export default function SignIn() {
     async function handleSubmit(e) {
         e.preventDefault();
         const data = { cpfUser,  password }
-        if (!data) {
-            alert('Preencha os dados para continuar')
-        } else {
             try {
                 const response = await api.post('/sessions', data);
                 login(response.data.token);
                 history.push('/main')
             } catch (error) {
-                console.log(error.response);
-                alert("Houve um problema com o login, verifique o CPF e a senha Novamente." )
+                if(error.response.data[0].field === 'cpfUser'){
+                    alert('CPF não encontrado')
+                }else if(error.response.data[0].field === 'password')alert('Senha inválida')
+                console.log(error.response.data[0]);
             }
-        }
     }
     return (
         <Container component="main" maxWidth="xs">

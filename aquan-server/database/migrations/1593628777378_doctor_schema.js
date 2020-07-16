@@ -13,6 +13,7 @@ class DoctorSchema extends Schema {
       table.string('password', 60).notNullable()
       table.string('telefoneDoctor', 20).notNullable()
       table.string('conselho', 100).notNullable()
+      table.string('uf', 2).notNullable()
       table.string('registro', 254).notNullable()
       table.string('especialidade', 250).notNullable()
       table.boolean('ativo_medico').defaultTo(true)

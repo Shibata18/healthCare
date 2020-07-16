@@ -32,7 +32,7 @@ class DoctorController {
    * @param {Response} ctx.response
    */
   async store({ request, response }) {
-    const data = request.only(['cpfDoctor', 'nameDoctor', 'email', 'password', 'telefoneDoctor', 'conselho', 'registro', 'especialidade']);
+    const data = request.only(['cpfDoctor', 'nameDoctor', 'email', 'password', 'telefoneDoctor', 'conselho', 'registro', 'especialidade','uf']);
 
     const user = await Doctor.create(data);
 

@@ -66,8 +66,20 @@ export default function SignIn() {
                 login(response.data.token);
                 history.push('/loginPaciente')
             } catch (error) {
-                console.error(error.response);
-                alert("Houve um problema com o cadastro, verifique o CPF , o email e a senha Novamente.")
+                const mensagemErro = error.response.data.error.message;
+                if (mensagemErro === 'insert into "pacientes" ("cpfPaciente", "created_at", "email", "namePaciente", "password", "telefonePaciente", "updated_at") values ($1, $2, $3, $4, $5, $6, $7) returning "id" - null value in column "cpfPaciente" violates not-null constraint') {
+                    alert("CPF não pode estar em branco")
+                } else if (mensagemErro === 'insert into "pacientes" ("cpfPaciente", "created_at", "email", "namePaciente", "password", "telefonePaciente", "updated_at") values ($1, $2, $3, $4, $5, $6, $7) returning "id" - null value in column "namePaciente" violates not-null constraint') {
+                    alert('Nome não pode estar em Branco')
+                } else if (mensagemErro === 'insert into "pacientes" ("cpfPaciente", "created_at", "email", "namePaciente", "password", "telefonePaciente", "updated_at") values ($1, $2, $3, $4, $5, $6, $7) returning "id" - null value in column "email" violates not-null constraint') {
+                    alert('Email não pode estar em Branco')
+                } else if (mensagemErro === 'insert into "pacientes" ("cpfPaciente", "created_at", "email", "namePaciente", "password", "telefonePaciente", "updated_at") values ($1, $2, $3, $4, $5, $6, $7) returning "id" - null value in column "password" violates not-null constraint') {
+                    alert("Senha não pode estar em Branco")
+                } else if (mensagemErro === 'insert into "pacientes" ("cpfPaciente", "created_at", "email", "namePaciente", "password", "telefonePaciente", "updated_at") values ($1, $2, $3, $4, $5, $6, $7) returning "id" - null value in column "telefonePaciente" violates not-null constraint') {
+                    alert('Telefone não pode estar em Branco')
+                } else if (mensagemErro === 'insert into "pacientes" ("cpfPaciente", "created_at", "email", "namePaciente", "password", "telefonePaciente", "updated_at") values ($1, $2, $3, $4, $5, $6, $7) returning "id" - duplicate key value violates unique constraint "pacientes_cpfpaciente_unique"') {
+                    alert('CPF já cadastrado')
+                }
             }
         }
     }
@@ -82,14 +94,14 @@ export default function SignIn() {
                     Cadastro
         </Typography>
                 <form className={classes.form} noValidate onSubmit={handleSubmit}>
-                <input
-                            type="text"
-                            placeholder='CPF' minLength='11' maxLength='11' required
-                            value={cpfPaciente}
+                    <input
+                        type="text"
+                        placeholder='CPF' minLength='11' maxLength='11' required
+                        value={cpfPaciente}
                         onChange={e => setcpfPaciente(e.target.value)}
-                        />
-                 
-                     <TextField
+                    />
+
+                    <TextField
                         variant="outlined"
                         margin="normal"
                         required
@@ -115,7 +127,7 @@ export default function SignIn() {
                         autoComplete="email"
                         autoFocus
                     />
-                   
+
                     <TextField
                         variant="outlined"
                         margin="normal"
@@ -132,7 +144,7 @@ export default function SignIn() {
                     <InputLabel htmlFor="telefonePaciente">Telefone</InputLabel>
                     <input
                         type="text"
-                        placeholder="(00) 12345-1234" pattern="\([0-9]{2}\) [0-9]{4,6}-[0-9]{3,4}$" 
+                        placeholder="(00) 12345-1234"
                         value={telefonePaciente}
                         onChange={e => setTelefonePaciente(e.target.value)}
                     />

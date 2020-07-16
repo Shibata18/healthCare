@@ -63,9 +63,10 @@ export default function SignIn() {
                 login(response.data.token);
                 history.push('/loginAdmin')
             } catch (error) {
-                console.log(error);
-                console.log(error.response);
-                alert("Houve um problema com o cadastro, verifique o CPF , o email e a senha Novamente.")
+                if(error.response.data.error.message === 'insert into "users" ("cpfUser", "created_at", "email", "password", "updated_at") values ($1, $2, $3, $4, $5) returning "id" - null value in column "cpfUser" violates not-null constraint'){alert('CPF não pode estar em branco')}
+                else if(error.response.data.error.message ==='insert into "users" ("cpfUser", "created_at", "email", "password", "updated_at") values ($1, $2, $3, $4, $5) returning "id" - duplicate key value violates unique constraint "users_cpfuser_unique"'){alert('CPF já cadastrado')}
+                else if(error.response.data.error.message ==='insert into "users" ("cpfUser", "created_at", "email", "password", "updated_at") values ($1, $2, $3, $4, $5) returning "id" - null value in column "email" violates not-null constraint'){alert('Email não pode estar em branco')}
+                else if(error.response.data.error.message === 'insert into "users" ("cpfUser", "created_at", "email", "password", "updated_at") values ($1, $2, $3, $4, $5) returning "id" - null value in column "password" violates not-null constraint'){alert('Senha não pode estar em branco')}
             }
         }
     }

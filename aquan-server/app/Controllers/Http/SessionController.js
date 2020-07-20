@@ -52,7 +52,7 @@ class SessionController {
     const agenda = await Agenda.findOrFail(params.id);
     try{
       const database = await Database.table('sessions').select('*').where({agenda_id:agenda.id})
-      return database
+      return response.json({session:database[agenda.id-1].session,token:database[agenda.id-1].token})
     }catch(err){
       console.log(err);
     }

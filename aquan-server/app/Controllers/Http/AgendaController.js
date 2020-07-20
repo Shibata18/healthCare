@@ -1,5 +1,9 @@
 'use strict'
+
+const { on } = require('@adonisjs/framework/src/Route/Manager');
+
 const Agenda = use('App/Models/Agenda');
+const Database = use("Database");
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
@@ -18,7 +22,10 @@ class AgendaController {
    * @param {View} ctx.view
    */
   async index ({ request, response, view }) {
-    const agenda = Agenda.all()
+    const agenda = await Database.select('agenda.horario','agenda.id','agenda.paciente_cpf','agenda.doctor_cpf','pacientes.namePaciente','doctors.nameDoctor')
+      .from('agenda')
+      .innerJoin('pacientes','agenda.paciente_cpf','pacientes.cpfPaciente')
+      .innerJoin('doctors','agenda.doctor_cpf','doctors.cpfDoctor')
     return agenda;
   }
 
@@ -84,12 +91,24 @@ class AgendaController {
   async destroy ({ params, request, response }) {
   }
   async agendaDoctor({ request }) {
-    const user = await Agenda.query().where('doctor_cpf', request.header('cpfDoctor')).with('prontuario').fetch()
+   // const user = await Agenda.query().where('doctor_cpf', request.header('cpfDoctor')).with('prontuario').fetch()
+   const user = await  Database.select('agenda.horario','agenda.id','pacientes.namePaciente','agenda.paciente_cpf','agenda.doctor_cpf','doctors.nameDoctor','pacientes.cpfPaciente')//,'prontuarios.prontuario')
+   .from('agenda')
+   .where('doctor_cpf',request.header('cpfDoctor'))
+   .innerJoin('pacientes','agenda.paciente_cpf','pacientes.cpfPaciente')
+   .innerJoin('doctors','agenda.doctor_cpf','doctors.cpfDoctor')
+//   .innerJoin('prontuarios','agenda.id','prontuarios.agenda_id')
     return user
   }
    async agendaPaciente({ request }) {
-    const user = await Agenda.query().where('paciente_cpf', request.header('cpfPaciente')).with('prontuario').fetch()
-    return user
+    //const user = await Agenda.query().where('paciente_cpf', request.header('cpfPaciente')).with('prontuario').fetch()
+    const user = await  Database.select('agenda.horario','agenda.id','pacientes.namePaciente','doctors.nameDoctor')//,'prontuarios.prontuario')
+    .from('agenda')
+    .where('paciente_cpf',request.header('cpfPaciente'))
+    .innerJoin('pacientes','agenda.paciente_cpf','pacientes.cpfPaciente')
+    .innerJoin('doctors','agenda.doctor_cpf','doctors.cpfDoctor')
+   // .innerJoin('prontuarios','agenda.id','prontuarios.agenda_id')
+     return user
   }
 }
 

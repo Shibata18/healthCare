@@ -14,7 +14,6 @@ function DataTable(props){
     const items = props.items.map(item => {
       return (
         <TableRow key={item.id}>
-          <TableCell scope="row">{item.id}</TableCell>
           <TableCell align='center'>{item.cpfPaciente}</TableCell>
           <TableCell align='center'>{item.namePaciente}</TableCell>
           <TableCell align='center'>{item.email}</TableCell>
@@ -37,7 +36,6 @@ function DataTable(props){
     <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell align='center'>ID</TableCell>
             <TableCell align='center'>CPF</TableCell>
             <TableCell align='center'>Nome</TableCell>
             <TableCell align='center'>Email</TableCell>

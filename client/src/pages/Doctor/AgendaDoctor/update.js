@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { InputBase, Button } from '@material-ui/core'
+import { Button } from '@material-ui/core'
 import api from "../../../services/api";
+
 function AddEditForm(props) {
   const [form, setValues] = useState({
     id: 0,
@@ -16,41 +17,51 @@ function AddEditForm(props) {
   }
   const submitFormAdd = async e => {
     e.preventDefault()
-    await api.post('/agenda', {
-      doctor_cpf: form.doctor_cpf,
-      paciente_cpf: form.paciente_cpf,
-      horario: form.horario,
-    })
-      .then(response => response.data, setTimeout(function () { alert('Agendado Com sucesso'); window.location.reload() }, 100))
-      .then(item => {
-        if (Array.isArray(item)) {
-          props.addItemToState(item[0])
-          props.toggle()
-        } else {
-          console.log('failure')
-        }
+    try {
+      const response = await api.post('/agenda', {
+        doctor_cpf: form.doctor_cpf,
+        paciente_cpf: form.paciente_cpf,
+        horario: form.horario,
       })
-      .catch(err => console.log(err))
-  }
+      if (response) setTimeout(function () { alert('Agendado Com sucesso'); window.location.reload() }, 100)
 
+    } catch (error) {
+      let mensagemErro = error.response.data.error.message;
+      console.log(error.response.data);
+      console.log(error.response.data.error.message);
+      if (mensagemErro === 'insert into "agenda" ("created_at", "doctor_cpf", "horario", "paciente_cpf", "updated_at") values ($1, $2, $3, $4, $5) returning "id" - insert or update on table "agenda" violates foreign key constraint "agenda_doctor_cpf_foreign"') {
+        alert('CPF do médico não encontrado')
+      } else if (mensagemErro === 'insert into "agenda" ("created_at", "doctor_cpf", "horario", "paciente_cpf", "updated_at") values ($1, $2, $3, $4, $5) returning "id" - insert or update on table "agenda" violates foreign key constraint "agenda_paciente_cpf_foreign"') {
+        alert('CPF do Paciente não encontrado')
+      } else if (mensagemErro === 'insert into "agenda" ("created_at", "doctor_cpf", "horario", "paciente_cpf", "updated_at") values ($1, $2, $3, $4, $5) returning "id" - duplicate key value violates unique constraint "agenda_horario_unique"') {
+        alert("Horário indisponível")
+      }
+    }
+
+
+  }
   const submitFormEdit = async e => {
     e.preventDefault()
-    await api.put(`/agenda/${form.id}`, {
-      doctor_cpf: form.doctor_cpf,
-      paciente_cpf: form.paciente_cpf,
-      horario: form.horario,
-    })
-      .then(response => response.data, setTimeout(function () { alert('Atualizado Com sucesso'); window.location.reload() }, 2000))
-      .then(item => {
-        if (Array.isArray(item)) {
-          // console.log(item[0])
-          props.updateState(item[0])
-          props.toggle()
-        } else {
-          console.log('failure')
-        }
+    try {
+      await api.put(`/agenda/${form.id}`, {
+        doctor_cpf: form.doctor_cpf,
+        paciente_cpf: form.paciente_cpf,
+        horario: form.horario,
       })
-      .catch(err => console.log(err))
+      await api.post(`/agenda/${form.id}/session`);
+      setTimeout(function () { alert('Atualizado Com sucesso'); window.location.reload() }, 2000)
+    } catch (error) {
+      let mensagemErro = error.response.data.error.message;
+      console.log(error.response.data);
+      console.log(error.response.data.error.message);
+      if (mensagemErro === 'insert into "agenda" ("created_at", "doctor_cpf", "horario", "paciente_cpf", "updated_at") values ($1, $2, $3, $4, $5) returning "id" - insert or update on table "agenda" violates foreign key constraint "agenda_doctor_cpf_foreign"') {
+        alert('CPF do médico não encontrado')
+      } else if (mensagemErro === 'insert into "agenda" ("created_at", "doctor_cpf", "horario", "paciente_cpf", "updated_at") values ($1, $2, $3, $4, $5) returning "id" - insert or update on table "agenda" violates foreign key constraint "agenda_paciente_cpf_foreign"') {
+        alert('CPF do Paciente não encontrado')
+      } else if (mensagemErro === 'insert into "agenda" ("created_at", "doctor_cpf", "horario", "paciente_cpf", "updated_at") values ($1, $2, $3, $4, $5) returning "id" - duplicate key value violates unique constraint "agenda_horario_unique"') {
+        alert("Horário indisponível")
+      }
+    }
   }
 
   useEffect(() => {
@@ -70,12 +81,13 @@ function AddEditForm(props) {
       <label htmlFor="paciente_cpf">CPF Paciente</label>
       <input type="text" name="paciente_cpf" id="paciente_cpf" onChange={onChange} value={form.paciente_cpf === null ? '' : form.paciente_cpf} required minLength='11' maxLength='11' />
       <p style={{ marginTop: 15, marginBottom: 20 }}>
-        <p><label htmlFor='horario'>Data e Hora: </label></p>
-        <InputBase
-          type='datetime-local'
-          name="horario" id="horario" onChange={onChange} value={form.horario === null ? '' : form.horario} required />
-      </p>
-      <Button type='submit'>Enviar</Button>
+        <label htmlFor='horario'>Data e Hora: </label></p>
+      <input
+        type='datetime-local'
+        name="horario" id="horario" onChange={onChange} value={form.horario} required />
+      <div>
+        <Button type='submit'>Enviar</Button>
+      </div>
     </form>
   )
 }

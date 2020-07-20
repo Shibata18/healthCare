@@ -26,41 +26,46 @@ const useStyles = makeStyles((theme) => ({
 function Paciente() {
     const classes = useStyles();
     const [pacientes, setPacientes] = useState([]);
-    const [agendaPaciente, setAgendaPaciente] = useState([]);
+    // const [agendaPaciente, setAgendaPaciente] = useState([]);
     const cpfPaciente = localStorage.getItem('paciente_cpf');
-    useEffect(() => {
+
+    /* useEffect(() => {
         async function getProntuario() {
             const response = await api.get('/agendaPaciente', { headers: { cpfPaciente: cpfPaciente } })
             setAgendaPaciente(response.data);
         }
         getProntuario();
     })
+ */
     useEffect(() => {
         async function getData() {
-            const response = await api.get('/perfilPaciente', { headers: { perfil: cpfPaciente } })
-            setPacientes(response.data)
+            try {
+                const response = await api.get('/perfilPaciente', { headers: { perfil: cpfPaciente } })
+                setPacientes(response.data)
+            } catch (error) {
+                console.log(error.response.data);
+            }
         }
         getData();
     })
-    function mostrarProntuario() {
-       try{
-            return (
-                agendaPaciente.map((value, index) => {
-                    return (
-                        <>
-                            <p>Consulta:{value.id}</p>
-                            <p>Prontuario: {value.prontuario.prontuario}</p>
-                        </>
-                    )
-                })
-                
-            )
+    /*    function mostrarProntuario() {
+          try{
+               return (
+                   agendaPaciente.map((value, index) => {
+                       return (
+                           <>
+                               <p>Consulta:{value.id}</p>
+                               <p>Prontuario: {value.prontuario}</p>
+                           </>
+                       )
+                   })
+                   
+               )
+           }catch (err){
                
-        }catch (err){
-            
-        }
-    }
-    localStorage.setItem('nomePaciente',pacientes.namePaciente);
+           }
+       } */
+    localStorage.setItem('nomePaciente', pacientes.namePaciente);
     return (
         <>
             <Navbar />
@@ -83,11 +88,12 @@ function Paciente() {
                         </Typography>
                     </CardContent>
                 </Card>
-                <Card className={classes.root}>
+                {/*    <Card className={classes.root}>
                     <CardContent>
+                        PRONTUÁRIO:
                         {mostrarProntuario()}
                     </CardContent>
-                </Card>
+                </Card> */}
             </Container>
         </>
     )

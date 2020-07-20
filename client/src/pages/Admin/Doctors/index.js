@@ -4,6 +4,8 @@ import ModalForm from './Modal';
 import DataTable from './Table';
 import Navbar from '../Navbar/index';
 import api from '../../../services/api';
+import { CSVLink } from "react-csv";
+import GetAppIcon from '@material-ui/icons/GetApp';
 
 
 function App(props) {
@@ -49,6 +51,14 @@ function App(props) {
         </Row>
         <Row>
           <Col>
+          <CSVLink
+              filename={"db_medico.csv"}
+              color="primary"
+              style={{float: "left", marginRight: "10px"}}
+              className="btn btn-primary"
+              data={items}>
+              <GetAppIcon/>
+            </CSVLink>
             <ModalForm buttonLabel="Adicionar Médico" addItemToState={addItemToState}/>
           </Col>
         </Row>

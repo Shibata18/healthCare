@@ -3,16 +3,21 @@ import { Container } from '@material-ui/core'
 import ModalForm from './Modal';
 import DataTable from './Table';
 import Navbar from '../Navbar';
+import { CSVLink } from "react-csv";
+import GetAppIcon from '@material-ui/icons/GetApp';
 import api from '../../../services/api'
 
 function App(props) {
     const [items, setItems] = useState([])
 
     const getItems = async () => {
-        await api.get('/agenda')
-            .then(response => response.data)
-            .then(items => setItems(items))
-            .catch(err => console.log(err))
+        try {
+            const response = await api.get('/agenda');
+            setItems(response.data)
+        } catch (error) {
+         console.log(error);
+         alert("Erro em carregar os dados")   
+        }
     }
     const addItemToState = (item) => {
         setItems([...items, item])
@@ -24,10 +29,6 @@ function App(props) {
         setItems(newArray)
     }
 
-    const deleteItemFromState = (id) => {
-        const updatedItems = items.filter(item => item.id !== id)
-        setItems(updatedItems)
-    }
 
     useEffect(() => {
         getItems()
@@ -39,8 +40,17 @@ function App(props) {
 
             <Container>
                 <h1 style={{ margin: 20 }}>Agenda</h1>
+
+                <CSVLink
+                    filename={"db_agenda.csv"}
+                    color="primary"
+                    style={{ float: "left", marginRight: "10px" }}
+                    className="btn btn-primary"
+                    data={items}>
+                    <GetAppIcon />
+                </CSVLink>
                 <ModalForm addItemToState={addItemToState} />
-                <DataTable items={items} updateState={updateState} deleteItemFromState={deleteItemFromState} />
+                <DataTable items={items} updateState={updateState}  />
             </Container>
         </>
     )

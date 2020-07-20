@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import api from '../../../services/api';
 import { Button, Container } from '@material-ui/core';
-
+import './App.css'
 function Prontuario() {
     const [textoProntuario, setTextoProntuario] = useState('');
     const idAgenda = localStorage.getItem('idAgenda');
@@ -20,13 +20,13 @@ function Prontuario() {
         <Container>
             <form onSubmit={prontuarioSubmit}>
                 <textarea
-                    cols='90'
+                    cols='100%'
                     rows='5'
                     value={textoProntuario}
                     placeholder="Prontuario: Escreva aqui o feedback para o paciente"
                     onChange={e => setTextoProntuario(e.target.value)}
                 />
-                <Button variant="contained" size='medium' type='submit'>Enviar</Button>
+                <Button variant="contained" color='primary' fullWidth type='submit'>Enviar</Button>
             </form>
         </Container>
     )

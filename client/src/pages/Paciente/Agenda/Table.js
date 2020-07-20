@@ -17,11 +17,9 @@ function DataTable(props) {
     return (
       <TableRow key={item.id}>
         {/* <th scope="row">{item.id}</th> */}
-        <TableCell align='justify'>{item.doctor_cpf}</TableCell>
-        <TableCell align='justify'>{item.paciente_cpf}</TableCell>
+        <TableCell align='justify'>{item.namePaciente}</TableCell>
+        <TableCell align='justify'>{item.nameDoctor}</TableCell>
         <TableCell align='justify'>{date.toString()}</TableCell>
-        <TableCell align='justify'>{item.created_at}</TableCell>
-        <TableCell align='justify'>{item.updated_at}</TableCell>
         <TableCell align='justify'>{horario>dataAtual?<Button href='/chatPaciente' color='primary'><DuoIcon/></Button>:<Button disabled color='inherit'><DuoIcon/></Button>}</TableCell>
         <TableCell align='justify'>
           {/* <div style={{ width: "10%" }}>
@@ -41,11 +39,9 @@ function DataTable(props) {
       <TableHead>
         <TableRow>
           {/* <th>ID</th> */}
-          <TableCell align='justify'>CPF Médico</TableCell>
-          <TableCell align='justify'>CPF Paciente</TableCell>
+          <TableCell align='justify'>Nome do Paciente</TableCell>
+          <TableCell align='justify'>Nome do Médico</TableCell>
           <TableCell align='justify'>Horario</TableCell>
-          <TableCell align='justify'>Criado</TableCell>
-          <TableCell align='justify'>Atualizado</TableCell>
           <TableCell align='justify'>Vídeo</TableCell>
         </TableRow>
       </TableHead>

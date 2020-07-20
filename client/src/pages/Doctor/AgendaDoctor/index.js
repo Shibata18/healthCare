@@ -1,6 +1,6 @@
 import React, { useState, useEffect,useCallback } from 'react';
 import { Container, Row, Col } from 'reactstrap'
-//import ModalForm from './Modal';
+import ModalForm from './Modal';
 import DataTable from './Table';
 import Navbar from '../Navbar/index';
 import api from '../../../services/api'
@@ -15,9 +15,9 @@ function App(props) {
       .then(items => setItems(items))
       .catch(err => console.log(err))
   },[])
-   /* const addItemToState = (item) => {
+    const addItemToState = (item) => {
     setItems([...items, item])
-  }  */
+  } 
 
    const updateState = (item) => {
     const itemIndex = items.findIndex(data => data.id === item.id)
@@ -46,12 +46,12 @@ function App(props) {
         </Row>
         <Row>
           <Col>
-            <DataTable items={items}  updateState={updateState} deleteItemFromState={deleteItemFromState} />
+            <ModalForm buttonLabel="Adicionar Agenda" addItemToState={addItemToState} /> 
           </Col>
         </Row>
         <Row>
           <Col>
-            {/* <ModalForm buttonLabel="Adicionar Agenda" addItemToState={addItemToState} />  */}
+            <DataTable items={items}  updateState={updateState} deleteItemFromState={deleteItemFromState} />
           </Col>
         </Row>
       </Container>

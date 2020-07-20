@@ -12,11 +12,10 @@ let pendingPromise = response()
 console.log(pendingPromise) // Promise { <pending> }
 
 pendingPromise.then(function(result) {
-  result.map(sessio=>credential.sessionId= sessio.session)
-  result.map(session=>{return credential.token =session.token})
+  console.log(result);
+ 
 })
 credential.apiKey =config.apiKey;
-console.log(credential);
 export default {
     credential
 }

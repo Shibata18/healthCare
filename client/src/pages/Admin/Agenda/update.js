@@ -26,9 +26,16 @@ function AddEditForm(props) {
       if (response) setTimeout(function () { alert('Agendado Com sucesso'); window.location.reload() }, 100)
       
     } catch (error) {
-      alert('Paciente ou Médico inexistente, hora errada')
-      console.log(error.response);
-      console.error(error);
+      let mensagemErro = error.response.data.error.message;
+      console.log(error.response.data);
+      console.log(error.response.data.error.message);
+      if(mensagemErro ==='insert into "agenda" ("created_at", "doctor_cpf", "horario", "paciente_cpf", "updated_at") values ($1, $2, $3, $4, $5) returning "id" - insert or update on table "agenda" violates foreign key constraint "agenda_doctor_cpf_foreign"'){
+        alert('CPF do médico não encontrado')
+      }else if(mensagemErro ==='insert into "agenda" ("created_at", "doctor_cpf", "horario", "paciente_cpf", "updated_at") values ($1, $2, $3, $4, $5) returning "id" - insert or update on table "agenda" violates foreign key constraint "agenda_paciente_cpf_foreign"'){
+        alert('CPF do Paciente não encontrado')
+      }else if(mensagemErro ==='insert into "agenda" ("created_at", "doctor_cpf", "horario", "paciente_cpf", "updated_at") values ($1, $2, $3, $4, $5) returning "id" - duplicate key value violates unique constraint "agenda_horario_unique"'){
+        alert("Horário indisponível")
+      }
     }
 
 

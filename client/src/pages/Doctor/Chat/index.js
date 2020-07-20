@@ -16,7 +16,7 @@ let otCore;
 const otCoreOptions = {
   credentials: {
     apiKey: config.apiKey,
-    sessionId: config.sessao,
+    sessionId: config.sessionId,
     token: config.token,
   },
   // A container can either be a query selector or an HTML Element
@@ -80,7 +80,7 @@ const containerClasses = (state) => {
   const activeCameraSubscribersOdd = activeCameraSubscribers % 2;
   const screenshareActive = viewingSharedScreen || sharingScreen;
   return {
-    controlClass: classNames('App-control-container', { hidden: !active }),
+    controlClass: classNames('App-control-container', { hidden: active }),
     localAudioClass: classNames('ots-video-control circle audio', { hidden: !active, muted: !localAudioEnabled }),
     localVideoClass: classNames('ots-video-control circle video', { hidden: !active, muted: !localVideoEnabled }),
     localCallClass: classNames('ots-video-control circle end-call', { hidden: !active }),
@@ -196,7 +196,7 @@ class App extends Component {
           <div className={localVideoClass} onClick={this.toggleLocalVideo} />
           <div className={localCallClass} onClick={this.endCall} />
         </div>
-          <Prontuario />
+        <Prontuario />
       </div>
     );
   }

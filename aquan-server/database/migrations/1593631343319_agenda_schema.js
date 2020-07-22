@@ -10,17 +10,17 @@ class AgendaSchema extends Schema {
       table
         .string('doctor_cpf')
         .unsigned()
-        .references('cpfDoctor')
-        .inTable('doctors')
+        .references('cpfUser')
+        .inTable('users')
         .onUpdate('CASCADE')
       table
         .string('paciente_cpf')
         .unsigned()
-        .references('cpfPaciente')
-        .inTable('pacientes')
+        .references('cpfUser')
+        .inTable('users')
         .onUpdate('CASCADE')
       table.datetime('horario', { useTz: true, precision: 6 }).unique()
-      //table.boolean('agenda_ativo').defaultTo(true)
+      table.boolean('agenda_ativo').defaultTo(true)
       table.timestamps()
     })
   }

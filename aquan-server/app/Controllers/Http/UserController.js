@@ -3,7 +3,7 @@
 const User = use("App/Models/User")
 class UserController {
   async store({ request }) {
-    const data = request.only(['cpfUser',  'email', 'password']);
+    const data = request.only(['cpfUser', 'nome' ,'email', 'password']);
 
     const user = await User.create(data);
 
@@ -14,16 +14,39 @@ class UserController {
 
     return user
   };
+   /**
+   * Display a single doctor.
+   * GET doctors/:id
+   *
+   * @param {object} ctx
+   * @param {Request} ctx.request
+   * @param {Response} ctx.response
+   * @param {View} ctx.view
+   */
   async show({ params }) {
     const user = await User.findOrFail(params.id)
+
+    await user.load('agenda')
+
     return user
-  };
-  async update({ request, response ,params}) {
-    const user = await User.findOrFail(params.id)
+  }
+
+  async update({ request}) {
+    const user = await User.findByOrFail("cpfUser", request.header("cpfUser"));
+
 
     const data = request.only([
       'email',
       'password',
+      'name',
+      'telefone',
+      'conselho',
+      'ufConselho',
+      'registro',
+      'especialidade',
+      'ativo',
+      'ehMedico',
+      'ehPaciente',
     ])
 
     user.merge(data)
@@ -45,6 +68,14 @@ class UserController {
       const {cpfUser,password} = request.all();
       const token = await auth.attempt(cpfUser,password);
       return token;
+  }
+  async contadorPaciente(){
+    const contador = await  User.query().where('ativo',true).getCount()
+    return contador;
+  }
+  async contadorMedico(){
+    const contador = await User.query().where('ehMedico',true).getCount()
+    return contador
   }
 }
 

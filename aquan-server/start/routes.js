@@ -16,6 +16,23 @@
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
 
+//Login
+Route.post('/sessions','UserController.login')//Logar no sistema
+
+Route.get('/user','UserController.index').middleware('auth:jwt')//Mostra todos os usuários cadastrados
+Route.get('/user/:id','UserController.show').middleware('auth:jwt')//Mostra um  usuários especifico
+Route.post('/user','UserController.store')//Cadastrar usuários
+Route.put('/user','UserController.update').middleware("auth:jwt")// Editar o usuário
+Route.get('/totalPaciente','UserController.contadorPaciente').middleware('auth:jwt')//Conta a quantidade de usuários cadastrados
+Route.get('/totalMedicos','UserController.contadorMedico').middleware('auth:jwt')//Conta a quantidade de médicos cadastrados
+Route.post('/agenda','AgendaController.store').middleware("auth:jwt")//Cadastrando agenda
+Route.put('/agenda','AgendaController.update').middleware("auth:jwt")//Editando a agenda
+Route.get('/agenda','AgendaController.index').middleware('auth:jwt')//Ver toda a agenda
+Route.get('/agendaDoctor','AgendaController.agendaDoctor').middleware('auth:jwt')//Ver a agenda do médico
+Route.get('/agendaPaciente','AgendaController.agendaPaciente').middleware('auth:jwt')//Ver a agenda do médico
+
+
+/*
 //Admin
 Route.post('/sessions','UserController.login');//Login como administrador
 Route.post('/user','UserController.store'); //Cadastro do Administrador
@@ -49,3 +66,5 @@ Route.put('/agenda/:id/prontuario','ProntuarioController.update').middleware('au
 Route.get('/prontuario','ProntuarioController.index').middleware('auth:jwt');
 Route.post('/agenda/:id/session','SessionController.store').middleware('auth:jwt')// Criando sessão e tokens
 Route.get('/agenda/:id/session','SessionController.getSessao').middleware('auth:jwt,auth:doctor,auth:paciente')// Criando sessão e tokens
+
+*/

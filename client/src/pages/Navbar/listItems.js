@@ -3,7 +3,8 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import DashboardIcon from '@material-ui/icons/Dashboard';
-import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
+import PeopleIcon from '@material-ui/icons/People';
+import LocalHospitalRoundedIcon from '@material-ui/icons/LocalHospitalRounded';
 import InfoRoundedIcon from '@material-ui/icons/InfoRounded';
 import HelpOutlineRoundedIcon from '@material-ui/icons/HelpOutlineRounded';
 import AssignmentIcon from '@material-ui/icons/Assignment';
@@ -12,25 +13,32 @@ import { Button } from '@material-ui/core';
 export const mainListItems = (
   <div>
     <ListItem button>
-      <Button href='/pacientePerfil'>
+      <Button href='/main'>
         <ListItemIcon>
           <DashboardIcon />
         </ListItemIcon>
-        <ListItemText primary="Perfil" /></Button>
+        <ListItemText primary="Dashboard" /></Button>
     </ListItem>
     <ListItem button>
-      <Button href='/agendaPaciente'>
+      <Button href='/pacientes'>
         <ListItemIcon>
-          <AssignmentIcon />
+          <PeopleIcon />
         </ListItemIcon>
-        <ListItemText primary="Agenda" /></Button>
+        <ListItemText primary="Pacientes" /></Button>
     </ListItem>
     <ListItem button>
       <Button href='/listaProfissionais'>
         <ListItemIcon>
-          <PeopleAltIcon />
+          <LocalHospitalRoundedIcon />
         </ListItemIcon>
         <ListItemText primary="Profissionais" /></Button>
+    </ListItem>
+    <ListItem button>
+      <Button href='/agenda'>
+        <ListItemIcon>
+          <AssignmentIcon />
+        </ListItemIcon>
+        <ListItemText primary="Agenda" /></Button>
     </ListItem>
     <ListItem button>
       <Button href='#'>

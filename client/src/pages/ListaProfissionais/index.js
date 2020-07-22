@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Container, Grid } from '@material-ui/core'
 import DataCard from './card';
 import Navbar from '../Navbar/index';
-import api from '../../../services/api';
+import api from '../../services/api';
 
 function App(props) {
 
@@ -10,7 +10,7 @@ function App(props) {
 
   const getItems = async () => {
     try {
-      const response = await api.get('/doctor');
+      const response = await api.get('/user');
       setItems(response.data)
     } catch (error) {
       console.log(error);

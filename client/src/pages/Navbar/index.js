@@ -2,7 +2,7 @@ import React from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import {Drawer,Button,AppBar} from '@material-ui/core';
+import { Drawer,  AppBar,  Button } from '@material-ui/core';
 import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
@@ -13,8 +13,8 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { mainListItems } from './listItems';
-import { logout } from "../../../services/auth";
-import logo from '../../../assets/logo.png'
+import { logout } from "../../services/auth";
+import logo from '../../assets/logo.png'
 
 const drawerWidth = 240;
 
@@ -108,12 +108,20 @@ export default function Dashboard() {
   };
   const handleLogout = e => {
     logout();
-    window.location.href='/';
+    window.location.href = '/';
   };
+  /* function renderActions() {
+      return (
+          <Button color='primary' onClick={handleLogout}>
+            Sair <ExitToAppIcon />
+          </Button>
+      );
+    } */
+
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <AppBar position="relative"  color='transparent' className={clsx(classes.appBar, open && classes.appBarShift)}>
+      <AppBar position="relative" color='transparent' className={clsx(classes.appBar, open && classes.appBarShift)}>
         <Toolbar className={classes.toolbar}>
           <IconButton
             edge="start"
@@ -125,13 +133,15 @@ export default function Dashboard() {
             <MenuIcon />
           </IconButton>
           <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-              <Button href='/pacientePerfil'><img alt='logo' src={logo} width='50px' height='80px' /></Button>
+            <a href='/main'><img alt='logo' src={logo} width='50px' height='80px' /></a>
           </Typography>
+
             <Badge color="secondary">
-            <Button color='primary' onClick={handleLogout}>
+              <Button color='primary' onClick={handleLogout}>
                 Sair <ExitToAppIcon />
               </Button>
             </Badge>
+         
         </Toolbar>
       </AppBar>
       <Drawer

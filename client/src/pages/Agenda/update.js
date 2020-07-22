@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from '@material-ui/core'
-import api from "../../../services/api";
+import api from "../../services/api";
 
 function AddEditForm(props) {
   const [form, setValues] = useState({

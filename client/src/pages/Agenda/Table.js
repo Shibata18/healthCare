@@ -12,6 +12,7 @@ function DataTable(props) {
   const classes = useStyles();
   const items = props.items.map(item => {
     const date = new Date(item.horario)
+    console.log(item);
   /*   const dataAtual = new Date();
     const horario = date.getTime(); */
     return (

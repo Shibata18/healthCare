@@ -5,7 +5,7 @@ import DataTable from './Table';
 import Navbar from '../Navbar';
 import { CSVLink } from "react-csv";
 import GetAppIcon from '@material-ui/icons/GetApp';
-import api from '../../../services/api'
+import api from '../../services/api'
 
 function App(props) {
     const [items, setItems] = useState([])

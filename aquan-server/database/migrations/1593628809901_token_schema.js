@@ -8,8 +8,6 @@ class TokensSchema extends Schema {
     this.create('tokens', (table) => {
       table.increments()
       table.integer('user_id').unsigned().references('id').inTable('users')
-      table.integer('doctor_id').unsigned().references('id').inTable('doctors')
-      table.integer('paciente_id').unsigned().references('id').inTable('pacientes')
       table.string('token', 255).notNullable().unique().index()
       table.string('type', 80).notNullable()
       table.boolean('is_revoked').defaultTo(false)

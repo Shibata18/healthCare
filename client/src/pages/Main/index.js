@@ -1,9 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { Grid, Container, Card, CardContent, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
-import Navbar from './Navbar';
+import Navbar from '../Navbar';
 import api from '../../services/api';
+import { Skeleton } from '@material-ui/lab';
+import { LineChart, Line } from 'recharts';
+const data = [{name: 'Page A', uv: 400, pv: 2400, amt: 2400},{name: 'Page A', uv: 100, pv: 1400, amt: 1400},{name: 'Page A', uv: 300, pv: 2400, amt: 2400},{name: 'Page A', uv: 200, pv: 2400, amt: 2400},{name: 'Page A', uv: 400, pv: 2400, amt: 2400},{name: 'Page A', uv: 100, pv: 1400, amt: 1400},{name: 'Page A', uv: 300, pv: 2400, amt: 2400},{name: 'Page A', uv: 200, pv: 2400, amt: 2400},{name: 'Page A', uv: 400, pv: 2400, amt: 2400},{name: 'Page A', uv: 100, pv: 1400, amt: 1400},{name: 'Page A', uv: 300, pv: 2400, amt: 2400},{name: 'Page A', uv: 200, pv: 2400, amt: 2400}];
 
+const renderLineChart = (
+    <LineChart width={300} height={200} data={data}>
+      <Line type="monotone" dataKey="uv" stroke="#8884d8" />
+    </LineChart>
+  );
+  
 const useStyles = makeStyles((theme) => ({
 
     appBarSpacer: theme.mixins.toolbar,
@@ -28,16 +37,14 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const Example = (props) => {
+const Main = (props) => {
     const classes = useStyles();
     const [numeroDoctors, setNumeroDoctors] = useState('');
-    const [numeroDoctorsTotal, setNumeroDoctorsTotal] = useState('');
-    const [numeroPacientes, setNumeroPacientes] = useState('');
-    const [numeroPacientesTotal, setNumeroPacientesTotal] = useState('');
+    const [totalPacientes, setTotalPacientes] = useState('');
     useEffect(() => {
         async function getDoctorActive() {
             try {
-                const response = await api.get("/numeroDoctor")
+                const response = await api.get("/totalMedicos")
                 setNumeroDoctors(response.data)
             } catch (error) {
                 alert('Erro ao carregar os dados')
@@ -46,38 +53,17 @@ const Example = (props) => {
         getDoctorActive();
     }, [])
     useEffect(() => {
-        async function getTotalDoctor() {
+        async function getTotalPacientes() {
             try {
-                const response = await api.get("/numeroDoctorTotal")
-                setNumeroDoctorsTotal(response.data)
+                const response = await api.get("/totalPaciente")
+                setTotalPacientes(response.data)
             } catch (error) {
                 alert('Erro ao carregar os dados')
             }
         }
-        getTotalDoctor();
+        getTotalPacientes();
     }, [])
-    useEffect(() => {
-        async function getPacienteActive() {
-            try {
-                const response = await api.get("/numeroPaciente")
-                setNumeroPacientes(response.data)
-            } catch (error) {
-                alert('Erro ao carregar os dados')
-            }
-        }
-        getPacienteActive();
-    }, [])
-    useEffect(() => {
-        async function getTotalPaciente() {
-            try {
-                const response = await api.get("/numeroPacienteTotal")
-                setNumeroPacientesTotal(response.data)
-            } catch (error) {
-                alert('Erro ao carregar os dados')
-            }
-        }
-        getTotalPaciente();
-    }, [])
+    
     return (
         <>
             <Navbar />
@@ -90,8 +76,19 @@ const Example = (props) => {
                             <Card className={classes.root} variant="outlined">
                                 <CardContent>
                                     <Typography className={classes.title} color="textSecondary" gutterBottom>
-                                        Profissionais  Ativos  </Typography>
-                                    <Typography variant="h1" component="h2"> {numeroDoctors}    </Typography>
+                                        Profissionais       </Typography>
+                                    <Typography variant="h1" component="h2"> {numeroDoctors}</Typography>
+                                </CardContent>
+                            </Card>
+
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+
+                            <Card className={classes.root} variant="outlined">
+                                <CardContent>
+                                    <Typography className={classes.title} color="textSecondary" gutterBottom>
+                                       Pacientes  </Typography>
+                                    <Typography variant="h1" component="h2"> {totalPacientes}    </Typography>
 
                                 </CardContent>
                             </Card>
@@ -103,8 +100,8 @@ const Example = (props) => {
                             <Card className={classes.root} variant="outlined">
                                 <CardContent>
                                     <Typography className={classes.title} color="textSecondary" gutterBottom>
-                                        Total de Profissionais        </Typography>
-                                    <Typography variant="h1" component="h2"> {numeroDoctorsTotal}</Typography>
+                                       Atendimentos        </Typography>
+                                    <Typography variant="h1" component="h2"> {renderLineChart}</Typography>
                                 </CardContent>
                             </Card>
 
@@ -112,32 +109,10 @@ const Example = (props) => {
                         </Grid>
                         <Grid item xs={12} sm={6}>
 
-                            <Card className={classes.root} variant="outlined">
-                                <CardContent>
+                      
                                     <Typography className={classes.title} color="textSecondary" gutterBottom>
-                                        Pacientes Ativos    </Typography>
-                                    <Typography variant="h1" component="h2">
-                                        {numeroPacientes}    </Typography>
-
-                                </CardContent>
-                            </Card>
-
-
-                        </Grid>
-                        <Grid item xs={12} sm={6}>
-
-                            <Card className={classes.root} variant="outlined">
-                                <CardContent>
-                                    <Typography className={classes.title} color="textSecondary" gutterBottom>
-                                       Total de Pacientes
-    </Typography>
-                                    <Typography variant="h1" component="h2">
-                                        {numeroPacientesTotal}
-    </Typography>
-
-                                </CardContent>
-                            </Card>
-
+                                    <Skeleton variant="circle" width={150} height={150} /></Typography>
+                      
 
                         </Grid>
                     </Grid>
@@ -147,4 +122,4 @@ const Example = (props) => {
     );
 };
 
-export default Example;
+export default Main;

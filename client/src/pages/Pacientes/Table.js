@@ -12,13 +12,14 @@ const useStyles = makeStyles({
 function DataTable(props){
   const classes = useStyles();
     const items = props.items.map(item => {
+      if(item.ehPaciente){
       return (
         <TableRow key={item.id}>
-          <TableCell align='center'>{item.cpfPaciente}</TableCell>
-          <TableCell align='center'>{item.namePaciente}</TableCell>
+          <TableCell align='center'>{item.cpfUser}</TableCell>
+          <TableCell align='center'>{item.nome}</TableCell>
           <TableCell align='center'>{item.email}</TableCell>
-          <TableCell align='center'>{item.telefonePaciente}</TableCell>
-          <TableCell align='center'>{item.ativo_paciente?`Ativo`:`Inativo`}</TableCell>
+          <TableCell align='center'>{item.telefone}</TableCell>
+          <TableCell align='center'>{item.ativo?`Ativo`:`Inativo`}</TableCell>
           <TableCell align='center'>{item.created_at}</TableCell>
           <TableCell align='center'>{item.updated_at}</TableCell>
           <TableCell align='center'>
@@ -28,7 +29,9 @@ function DataTable(props){
             </div>
           </TableCell>
         </TableRow>
-      )
+      )}else{
+        return(<TableRow key={item.id}></TableRow>)
+      }
     })
 
     return (

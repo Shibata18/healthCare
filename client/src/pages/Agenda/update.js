@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button } from '@material-ui/core'
+import { Button ,Select,MenuItem} from '@material-ui/core'
 import api from "../../services/api";
 
 function AddEditForm(props) {
@@ -8,6 +8,7 @@ function AddEditForm(props) {
     doctor_cpf: '',
     paciente_cpf: '',
     horario: '',
+    agenda_ativo:'',
   })
   const onChange = e => {
     setValues({
@@ -47,8 +48,9 @@ function AddEditForm(props) {
         doctor_cpf: form.doctor_cpf,
         paciente_cpf: form.paciente_cpf,
         horario: form.horario,
+        agenda_ativo:form.agenda_ativo,
       })
-      await api.post(`/agenda/${form.id}/session`);
+      //await api.post(`/agenda/${form.id}/session`);
       setTimeout(function () { alert('Atualizado Com sucesso'); window.location.reload() }, 2000)
     } catch (error) {
      console.log(error); 
@@ -58,8 +60,8 @@ function AddEditForm(props) {
 
   useEffect(() => {
     if (props.item) {
-      const { id, doctor_cpf, paciente_cpf, horario, data } = props.item
-      setValues({ id, doctor_cpf, paciente_cpf, horario, data })
+      const { id, doctor_cpf, paciente_cpf, horario,agenda_ativo} = props.item
+      setValues({ id, doctor_cpf, paciente_cpf, horario,agenda_ativo })
     }
   }, [props.item])
 
@@ -69,7 +71,6 @@ function AddEditForm(props) {
       <label htmlFor="doctor_cpf">CPF Médico</label>
       <input type="text" name="doctor_cpf" id="doctor_cpf" onChange={onChange} value={form.doctor_cpf === null ? '' : form.doctor_cpf} required minLength='11' maxLength='11' />
 
-
       <label htmlFor="paciente_cpf">CPF Paciente</label>
       <input type="text" name="paciente_cpf" id="paciente_cpf" onChange={onChange} value={form.paciente_cpf === null ? '' : form.paciente_cpf} required minLength='11' maxLength='11' />
       <p style={{ marginTop: 15, marginBottom: 20 }}>
@@ -77,6 +78,12 @@ function AddEditForm(props) {
       <input
         type='datetime-local'
         name="horario" id="horario" onChange={onChange} value={form.horario} required />
+      <div style={{ marginTop: 15, marginBottom: 20 }}>
+      <label htmlFor='status'>Status</label>
+      <Select  name='ativo' id='ativo' fullWidth value={form.agenda_ativo} onChange={onChange}>
+          <MenuItem value={true}>Ativo</MenuItem>
+          <MenuItem value={false} >Inativar</MenuItem>
+        </Select></div>
       <div>
         <Button type='submit'>Enviar</Button>
       </div>

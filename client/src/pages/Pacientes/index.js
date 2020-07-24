@@ -30,7 +30,6 @@ function App(props) {
   useEffect(() => {
     getItems()
   }, []);
-
   return (
     <>
       <Navbar />

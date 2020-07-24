@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import api from '../../../services/api';
+import api from '../../services/api';
 import { Button, Container } from '@material-ui/core';
 import './App.css'
 function Prontuario() {

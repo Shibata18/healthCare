@@ -49,6 +49,8 @@ export default function SignIn() {
     const [cpfUser, setCpfUser] = useState('');
     const [password, setPassword] = useState('');
     const history = useHistory();
+    localStorage.setItem('cpfUser',cpfUser);
+
     async function handleSubmit(e) {
         e.preventDefault();
         const data = { cpfUser,  password }
@@ -60,7 +62,6 @@ export default function SignIn() {
                 if(error.response.data[0].field === 'cpfUser'){
                     alert('CPF não encontrado')
                 }else if(error.response.data[0].field === 'password')alert('Senha inválida')
-                console.log(error.response.data[0]);
             }
     }
     return (

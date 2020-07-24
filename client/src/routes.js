@@ -7,10 +7,9 @@ import CadastrarPage from './pages/Cadastro';
 import ListaProfissionais from './pages/ListaProfissionais';
 import ListaPacientes from './pages/Pacientes';
 import Agenda from './pages/Agenda'
-//Doctor
-import DoctorPerfil from './pages/Doctor/Perfil';
-import AgendaDoctor from './pages/Doctor/AgendaDoctor';
-import ChatDoctor from './pages/Doctor/Chat';
+import Chat from './pages/Chat';
+import Perfil from './pages/Perfil';
+import DetalhePerfil from './pages/DetalhePerfil';
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
@@ -33,11 +32,10 @@ const Routes = () => (
       <PrivateRoute path='/main' component={MainPage}/>
       <PrivateRoute path='/listaProfissionais' component={ListaProfissionais}/>
       <PrivateRoute path='/pacientes' component={ListaPacientes}/>
-      <PrivateRoute path='/agenda' component={Agenda}/>
-  
-      <PrivateRoute path='/doctorPerfil' component={DoctorPerfil}/>
-      <PrivateRoute path='/agendaDoctor' component={AgendaDoctor}/>
-      <PrivateRoute path='/chatDoctor' component={ChatDoctor}/>
+      <PrivateRoute path='/agenda' component={Agenda}/> 
+      <PrivateRoute path='/perfil' component={Perfil}/>
+      <PrivateRoute path='/chat' component={Chat}/>
+      <PrivateRoute path='/detalhePerfil/:id' component={DetalhePerfil}/>
       <Route path="*" component={() => <h1>Página não encontrada ou não existe</h1>} />
     </Switch>
   </BrowserRouter>

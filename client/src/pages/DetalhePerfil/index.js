@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import api from '../../../services/api';
+import api from '../../services/api';
 import Navbar from '../Navbar';
 import { Container, Card, Avatar, CardHeader, CardContent, Typography } from '@material-ui/core';
 import { red } from '@material-ui/core/colors';
@@ -23,47 +23,46 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: red[500],
     },
 }));
-function Doctor() {
+function Paciente() {
     const classes = useStyles();
-    const [doctor, setdoctor] = useState([]);
-    const cpfMedico = localStorage.getItem('doctor_cpf');
+    const [medico, setmedico] = useState([]);
+    const idDetalhe = localStorage.getItem('idDetalhe');
     useEffect(() => {
-      async function loadDevs() {
-        const response = await api.get('/perfilDoctor', { headers: { perfil: cpfMedico } })
-        localStorage.setItem('idDoctor',response.data.id);
-        setdoctor(response.data)
-      }
-      loadDevs();
-    });
-    localStorage.setItem('nameDoctor',doctor.nameDoctor)
+        async function getData() {
+            try {
+                const response = await api.get(`/user/${idDetalhe}`)
+                setmedico(response.data)
+            } catch (error) {
+                console.log(error.response.data);
+            }
+        }
+        getData();
+    })
     return (
         <>
             <Navbar />
             <Container>
                 <Card className={classes.root}>
                     <CardHeader
-                        avatar={<Avatar aria-label={doctor.nameDoctor} className={classes.avatar} />}
-                        title={doctor.nameDoctor}
-                        subheader={doctor.email}
+                        avatar={<Avatar aria-label={medico.nome} className={classes.avatar} />}
+                        title={medico.nome}
+                        subheader={medico.email}
                     />
                     <CardContent>
                         <Typography variant="h6" component="h3">
-                            <p>CPF: {doctor.cpfDoctor}</p>
+                            <p>Especialidade: {medico.especialidade}</p>
                         </Typography>
                         <Typography variant="h6" component="h3">
-                            <p>TELEFONE: {doctor.telefoneDoctor}</p>
+                            <p>TELEFONE: {medico.telefone}</p>
                         </Typography>
                         <Typography variant="h6" component="h3">
-                            <p>CONSELHO: {doctor.conselho}</p>
+                            <p>Conselho: {medico.conselho} - {medico.ufConselho}</p>
                         </Typography>
                         <Typography variant="h6" component="h3">
-                            <p>REGISTRO: {doctor.registro}</p>
-                        </Typography>  
-                        <Typography variant="h6" component="h3">
-                            <p>ESPECIALIDADE: {doctor.especialidade}</p>
+                            <p>STATUS: {medico.ativo ? `ATIVO` : `INATIVO`}</p>
                         </Typography>
                         <Typography variant="h6" component="h3">
-                            <p>STATUS: {doctor.ativo_medico?`ATIVO`:`INATIVO`}</p>
+                            <p>MEMBRO DESDE: {medico.created_at}</p>
                         </Typography>
                     </CardContent>
                 </Card>
@@ -72,4 +71,4 @@ function Doctor() {
     )
 }
 
-export default Doctor;
+export default Paciente

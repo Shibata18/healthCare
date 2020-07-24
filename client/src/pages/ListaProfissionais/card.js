@@ -20,6 +20,7 @@ function DataTable(props) {
   const classes = useStyles();
   const items = props.items.map(item => {
     if(item.ehMedico){
+      localStorage.setItem('idDetalhe',item.id)
     return (
       <Grid container spacing={3} key={item.id}>
         <Grid item xs={3} >
@@ -40,7 +41,7 @@ function DataTable(props) {
             </CardContent>
             <CardActions>
               <Button size="small"><BookmarkBorderRoundedIcon  color='disabled' /></Button>
-              <Button size="small" href='#'><AccountCircleRoundedIcon  color='primary' /></Button>
+              <Button size="small" href={`/detalhePerfil/${item.id}`}><AccountCircleRoundedIcon  color='primary' /></Button>
               <Button size="small"><ThumbUpIcon  color='disabled' /></Button>
             </CardActions>
           </Card>

@@ -6,18 +6,21 @@ import classNames from 'classnames';
 import AccCore from 'opentok-accelerator-core';
 import 'opentok-solutions-css';
 
-import config from '../../../config.json';
+import config from '../../config.json';
 import './App.css';
 import Navbar from '../Navbar'
+//import Prontuario from './prontuario';
+import Opentok from 'opentok'
 
+let opentok = new Opentok(config.apiKey,config.apiKey_secret);
+let token = opentok.generateToken(config.sessionId);
 let otCore;
-
 
 const otCoreOptions = {
   credentials: {
     apiKey: config.apiKey,
     sessionId: config.sessionId,
-    token: config.token,
+    token: token,
   },
   // A container can either be a query selector or an HTML Element
   streamContainers(pubSub, type, data, stream) {
@@ -38,7 +41,7 @@ const otCoreOptions = {
     callProperties: null, // Using default
   },
   textChat: {
-    name: localStorage.getItem('nomePaciente'),// eslint-disable-line no-bitwise
+    name: localStorage.getItem('nome'),// eslint-disable-line no-bitwise
     waitingMessage: 'Mensagens serão enviadas quando o outro usuário entrar na chamada',
     container: '#chat',
   },
@@ -188,13 +191,13 @@ class App extends Component {
             <div id="screenPublisherContainer" className={screenPublisherClass} />
             <div id="cameraSubscriberContainer" className={cameraSubscriberClass} />
             <div id="screenSubscriberContainer" className={screenSubscriberClass} />
+            <div id="chat" className="App-chat-container" />
           </div>
-          <div id="controls" className={controlClass}>
-            <div className={localAudioClass} onClick={this.toggleLocalAudio} />
-            <div className={localVideoClass} onClick={this.toggleLocalVideo} />
-            <div className={localCallClass} onClick={this.endCall} />
-          </div>
-          <div id="chat" className="App-chat-container" />
+        </div>
+        <div id="controls" className={controlClass}>
+          <div className={localAudioClass} onClick={this.toggleLocalAudio} />
+          <div className={localVideoClass} onClick={this.toggleLocalVideo} />
+          <div className={localCallClass} onClick={this.endCall} />
         </div>
       </div>
     );

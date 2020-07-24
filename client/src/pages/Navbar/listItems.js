@@ -8,10 +8,18 @@ import LocalHospitalRoundedIcon from '@material-ui/icons/LocalHospitalRounded';
 import InfoRoundedIcon from '@material-ui/icons/InfoRounded';
 import HelpOutlineRoundedIcon from '@material-ui/icons/HelpOutlineRounded';
 import AssignmentIcon from '@material-ui/icons/Assignment';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { Button } from '@material-ui/core';
 
 export const mainListItems = (
   <div>
+    <ListItem button>
+      <Button href='/perfil'>
+        <ListItemIcon>
+          <AccountCircleIcon />
+        </ListItemIcon>
+        <ListItemText primary="Meu Perfil" /></Button>
+    </ListItem>
     <ListItem button>
       <Button href='/main'>
         <ListItemIcon>

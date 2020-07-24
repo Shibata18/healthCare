@@ -18,7 +18,7 @@ class UserSchema extends Schema {
       table.string('especialidade', 250)
       table.boolean('ativo').defaultTo(true)
       table.boolean('ehMedico').defaultTo(false)
-      table.boolean('ehPaciente').defaultTo(false)
+      table.boolean('ehPaciente').defaultTo(true)
       table.timestamps()
     })
   }

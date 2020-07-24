@@ -16,9 +16,6 @@ class Agenda extends Model {
    prontuario(){
        return this.hasOne('App/Models/Prontuario')
    }
-   session(){
-       return this.hasOne('App/Models/Session');
-   }
 }
 
 module.exports = Agenda

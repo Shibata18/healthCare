@@ -47,8 +47,7 @@ class AgendaController {
    * @param {Response} ctx.response
    */
   async update({ params, request}) {
-    //const atualizarAgenda = await Agenda.findOrFail(params.id)
-    const atualizarAgenda = await Agenda.findByOrFail("doctor_cpf",request.body.doctor_cpf)
+    const atualizarAgenda = await Agenda.findOrFail(params.id)
     
     const data = request.only([
       'doctor_cpf', 'paciente_cpf', 'horario','agenda_ativo'
@@ -76,13 +75,12 @@ class AgendaController {
     return user;
   }
   async agendaPaciente({ request }) {
-    //const user = await Agenda.query().where('paciente_cpf', request.header('cpfPaciente')).with('prontuario').fetch()
-    /* const user = await Database.select('agenda.horario', 'agenda.id', 'pacientes.namePaciente', 'doctors.nameDoctor')//,'prontuarios.prontuario')
+    
+    /*  const user = await Database.select('agenda.horario', 'agenda.agenda_ativo','agenda.id', 'users.nome')//,'prontuarios.prontuario')
       .from('agenda')
       .where('paciente_cpf', request.header('cpfPaciente'))
-      .innerJoin('pacientes', 'agenda.paciente_cpf', 'pacientes.cpfPaciente')
-      .innerJoin('doctors', 'agenda.doctor_cpf', 'doctors.cpfDoctor') */
-    // .innerJoin('prontuarios','agenda.id','prontuarios.agenda_id')
+      .innerJoin('users', 'agenda.paciente_cpf', 'users.cpfUser')
+    //.innerJoin('prontuarios','agenda.id','prontuarios.agenda_id') */
     const user = await Agenda.query().where('paciente_cpf',request.header('cpfPaciente')).with('prontuario').fetch()
     return user
   }

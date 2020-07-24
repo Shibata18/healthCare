@@ -1,6 +1,7 @@
 'use strict'
 //Para criar um controller adonis make:controller User --type http
-const User = use("App/Models/User")
+const User = use("App/Models/User");
+
 class UserController {
   async store({ request }) {
     const data = request.only(['cpfUser', 'nome' ,'email', 'password']);
@@ -26,8 +27,6 @@ class UserController {
   async show({ params }) {
     const user = await User.findOrFail(params.id)
 
-    await user.load('agenda')
-
     return user
   }
 
@@ -38,7 +37,7 @@ class UserController {
     const data = request.only([
       'email',
       'password',
-      'name',
+      'nome',
       'telefone',
       'conselho',
       'ufConselho',
@@ -76,6 +75,11 @@ class UserController {
   async contadorMedico(){
     const contador = await User.query().where('ehMedico',true).getCount()
     return contador
+  }
+  async perfil({request}){
+    const user = await User.findByOrFail('cpfUser',request.header('cpfUser'))
+    //.from('users').select('*').where('cpfUser',request.header('cpfUser'))
+    return user
   }
 }
 

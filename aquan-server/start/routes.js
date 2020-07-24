@@ -26,45 +26,8 @@ Route.put('/user','UserController.update').middleware("auth:jwt")// Editar o usu
 Route.get('/totalPaciente','UserController.contadorPaciente').middleware('auth:jwt')//Conta a quantidade de usuários cadastrados
 Route.get('/totalMedicos','UserController.contadorMedico').middleware('auth:jwt')//Conta a quantidade de médicos cadastrados
 Route.post('/agenda','AgendaController.store').middleware("auth:jwt")//Cadastrando agenda
-Route.put('/agenda','AgendaController.update').middleware("auth:jwt")//Editando a agenda
+Route.put('/agenda/:id','AgendaController.update').middleware("auth:jwt")//Editando a agenda
 Route.get('/agenda','AgendaController.index').middleware('auth:jwt')//Ver toda a agenda
 Route.get('/agendaDoctor','AgendaController.agendaDoctor').middleware('auth:jwt')//Ver a agenda do médico
 Route.get('/agendaPaciente','AgendaController.agendaPaciente').middleware('auth:jwt')//Ver a agenda do médico
-
-
-/*
-//Admin
-Route.post('/sessions','UserController.login');//Login como administrador
-Route.post('/user','UserController.store'); //Cadastro do Administrador
-Route.resource('user','UserController').apiOnly().middleware('auth:jwt') // Metodo GET,UPDATE, GET/:id, apenas se tiver autenticado
-
-//Pacientes
-Route.post('/loginPaciente','PacienteController.login'); // Login como Paciente
-Route.post('/paciente','PacienteController.store'); // Cadastro do Paciente
-Route.resource('paciente','PacienteController').middleware('auth:paciente,auth:jwt')
-Route.get('/perfilPaciente','PacienteController.perfil').middleware('auth:paciente,auth:jwt'); // Mostra apenas dados de um paciente especifico
-Route.get('/agendaPaciente','AgendaController.agendaPaciente').middleware('auth:paciente,auth:jwt')
-Route.get('/numeroPaciente','PacienteController.contadorAtivo').middleware('auth:jwt');//Contador de Pacientes ativos
-Route.get('/numeroPacienteTotal','PacienteController.contadorTotal').middleware('auth:jwt');//Contador de Pacientes 
-
-
-
-//Doctors
-Route.post('/loginDoctor','DoctorController.login'); //Login como Doutor
-Route.post('/doctor','DoctorController.store'); // Cadastro do Doutor
-Route.resource('doctor','DoctorController').middleware('auth:doctor,auth:jwt,auth:paciente')
-Route.get('/perfilDoctor','DoctorController.perfil').middleware('auth:doctor,auth:jwt'); // Mostra apenas dados de um Doutor específico
-Route.get('/agendaDoctor','AgendaController.agendaDoctor').middleware('auth:doctor,auth:jwt')
-Route.get('/numeroDoctor','DoctorController.contadorAtivo').middleware('auth:jwt');//Contador de Profissionais ativos
-Route.get('/numeroDoctorTotal','DoctorController.contador').middleware('auth:jwt');//Contador de Profissionais 
-
-
-// Agenda
-Route.resource('agenda', 'AgendaController').apiOnly().middleware('auth:doctor,auth:paciente,auth:jwt');
-Route.post('/agenda/:id/prontuario','ProntuarioController.store').middleware('auth:doctor,auth:jwt');
-Route.put('/agenda/:id/prontuario','ProntuarioController.update').middleware('auth:doctor,auth:jwt');
-Route.get('/prontuario','ProntuarioController.index').middleware('auth:jwt');
-Route.post('/agenda/:id/session','SessionController.store').middleware('auth:jwt')// Criando sessão e tokens
-Route.get('/agenda/:id/session','SessionController.getSessao').middleware('auth:jwt,auth:doctor,auth:paciente')// Criando sessão e tokens
-
-*/
+Route.get('/perfil','UserController.perfil').middleware('auth:jwt')//Mostra o perfil do usuário

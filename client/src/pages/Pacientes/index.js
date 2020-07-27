@@ -6,7 +6,7 @@ import Navbar from '../Navbar/index';
 import api from '../../services/api'
 
 function App(props) {
-  const [items, setItems] = useState([])
+  const [items, setItems] = useState([]);
 
   const getItems = async () => {
     try {

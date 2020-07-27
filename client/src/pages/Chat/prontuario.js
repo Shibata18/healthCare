@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import api from '../../services/api';
-import { Button, Container } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 import './App.css'
 function Prontuario() {
     const [textoProntuario, setTextoProntuario] = useState('');
@@ -12,12 +12,11 @@ function Prontuario() {
             console.log(response.status);
             return alert("Enviado com sucesso");
         } catch (error) {
-            console.log(error);
+            console.log(error.response);
             alert('Houve um erro ao enviar')
         }
     }
     return (
-        <Container>
             <form onSubmit={prontuarioSubmit}>
                 <textarea
                     cols='100%'
@@ -28,7 +27,6 @@ function Prontuario() {
                 />
                 <Button variant="contained" color='primary' fullWidth type='submit'>Enviar</Button>
             </form>
-        </Container>
     )
 }
 

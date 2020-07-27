@@ -9,16 +9,19 @@ import api from '../../services/api'
 
 function App(props) {
     const [items, setItems] = useState([])
-
-    const getItems = async () => {
-        try {
-            const response = await api.get('/agenda');
-            setItems(response.data)
-        } catch (error) {
-         console.log(error);
-         alert("Erro em carregar os dados")   
+    useEffect(() => {
+        const cpf = localStorage.getItem('cpfUser')
+        const getItems = async () => {
+            try {
+                const response = await api.get('/agenda', { headers: { cpfPaciente: cpf, cpfDoctor: cpf } });
+                setItems(response.data)
+            } catch (error) {
+                console.log(error);
+                alert("Erro em carregar os dados")
+            }
         }
-    }
+        getItems()
+    }, []);
     const addItemToState = (item) => {
         setItems([...items, item])
     }
@@ -28,11 +31,6 @@ function App(props) {
         const newArray = [...items.slice(0, itemIndex), item, ...items.slice(itemIndex + 1)]
         setItems(newArray)
     }
-
-
-    useEffect(() => {
-        getItems()
-    }, []);
 
     return (
         <>
@@ -50,42 +48,10 @@ function App(props) {
                     <GetAppIcon />
                 </CSVLink>
                 <ModalForm addItemToState={addItemToState} />
-                <DataTable items={items} updateState={updateState}  />
+                <DataTable items={items} updateState={updateState} />
             </Container>
         </>
     )
 }
 
 export default App;
-/* import React, { useState, useEffect } from 'react';
-import api from '../../../services/api';
-import NavBar from '../Navbar';
-import AgendaTable from './table';
-import AddAgenda from './addAgenda';
-import { Container } from '@material-ui/core';
-function Agenda() {
-    const [agenda, setagenda] = useState([]);
-    useEffect(() => {
-        async function getData() {
-            const response = await api.get('/agenda');
-            setagenda(response.data)
-            console.log(response.data);
-        }
-        getData();
-    }, [])
-    const addAgenda = consulta => {
-        consulta.id = agenda.length + 1;
-        setagenda([...agenda, consulta])
-    }
-    return (
-        <>
-            <NavBar />
-            <Container style={{ marginTop: 10 }}>
-                <AddAgenda addAgenda={addAgenda} />
-                <AgendaTable agenda={agenda} />
-            </Container>
-        </>
-    )
-}
-
-export default Agenda; */

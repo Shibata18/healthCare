@@ -56,12 +56,10 @@ export default function SignIn() {
     async function handleSubmit(e) {
         e.preventDefault();
         const data = { cpfUser, email, password ,nome}
-        if (!data) {
-            alert('Preencha os dados para continuar')
-        } else {
             try {
                 const response = await api.post('/user', data);
                 login(response.data.token);
+                alert('Cadastro Realizado com sucesso')
                 history.push('/')
             } catch (error) {
                 let mensagemErro = error.response.data.error.message;
@@ -73,7 +71,7 @@ export default function SignIn() {
                 else if(mensagemErro ==='insert into "users" ("cpfUser", "created_at", "email", "nome", "password", "updated_at") values ($1, $2, $3, $4, $5, $6) returning "id" - duplicate key value violates unique constraint "users_email_unique"'){alert('Email já Cadastrado')}
 
             }
-        }
+        
     }
     return (
         <Container component="main" maxWidth="xs">

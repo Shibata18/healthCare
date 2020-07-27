@@ -15,6 +15,7 @@ function DataTable(props) {
     const date = new Date(item.horario)
        const dataAtual = new Date();
       const horario = date.getTime(); 
+      localStorage.setItem('idAgenda',item.id)
     return (
       <TableRow key={item.id}>
         <TableCell>{item.doctor_cpf}</TableCell>
@@ -25,7 +26,6 @@ function DataTable(props) {
         <TableCell>
           <div style={{ width: "10%" }}>
             <ModalForm buttonLabel="Editar" item={item} updateState={props.updateState} />
-            {/* <Button color="danger" onClick={() => deleteItem(item.id)}>Del</Button> */}
           </div>
         </TableCell>
       </TableRow>

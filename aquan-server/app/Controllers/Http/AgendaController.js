@@ -1,7 +1,7 @@
 'use strict'
 
 const Agenda = use('App/Models/Agenda');
-const Database = use("Database");
+//const Database = use("Database");
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
@@ -20,8 +20,12 @@ class AgendaController {
    * @param {View} ctx.view
    */
   async index({ request, response, view }) {
-    const agenda = await Agenda.all()
-    return agenda;
+    const user = await Agenda
+         .query().where(function(){this
+      .where('paciente_cpf',request.header('cpfPaciente'))
+      .orWhere('doctor_cpf',request.header('cpfDoctor'))
+    }).with('prontuario').fetch() 
+    return user
   }
 
   /**
@@ -50,7 +54,7 @@ class AgendaController {
     const atualizarAgenda = await Agenda.findOrFail(params.id)
     
     const data = request.only([
-      'doctor_cpf', 'paciente_cpf', 'horario','agenda_ativo'
+      'doctor_cpf', 'paciente_cpf', 'horario',
     ])
 
     atualizarAgenda.merge(data)
@@ -70,21 +74,6 @@ class AgendaController {
    */
   async destroy({ params, request, response }) {
   }
-  async agendaDoctor({ request }) {
-    const user = await Agenda.query().where('doctor_cpf',request.header('cpfDoctor')).with('prontuario').fetch()
-    return user;
-  }
-  async agendaPaciente({ request }) {
-    
-    /*  const user = await Database.select('agenda.horario', 'agenda.agenda_ativo','agenda.id', 'users.nome')//,'prontuarios.prontuario')
-      .from('agenda')
-      .where('paciente_cpf', request.header('cpfPaciente'))
-      .innerJoin('users', 'agenda.paciente_cpf', 'users.cpfUser')
-    //.innerJoin('prontuarios','agenda.id','prontuarios.agenda_id') */
-    const user = await Agenda.query().where('paciente_cpf',request.header('cpfPaciente')).with('prontuario').fetch()
-    return user
-  }
-
 }
 
 module.exports = AgendaController

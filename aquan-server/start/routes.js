@@ -28,6 +28,5 @@ Route.get('/totalMedicos','UserController.contadorMedico').middleware('auth:jwt'
 Route.post('/agenda','AgendaController.store').middleware("auth:jwt")//Cadastrando agenda
 Route.put('/agenda/:id','AgendaController.update').middleware("auth:jwt")//Editando a agenda
 Route.get('/agenda','AgendaController.index').middleware('auth:jwt')//Ver toda a agenda
-Route.get('/agendaDoctor','AgendaController.agendaDoctor').middleware('auth:jwt')//Ver a agenda do médico
-Route.get('/agendaPaciente','AgendaController.agendaPaciente').middleware('auth:jwt')//Ver a agenda do médico
 Route.get('/perfil','UserController.perfil').middleware('auth:jwt')//Mostra o perfil do usuário
+Route.post('/agenda/:id/prontuario','ProntuarioController.store').middleware('auth:jwt')//Criando prontuário

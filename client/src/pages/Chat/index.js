@@ -22,6 +22,7 @@ const iframe1 = `
 `;
 const agendaId = localStorage.getItem('idAgenda')
 const newIframe = iframe1.replace('DEFAULT_ROOM', `sala${agendaId}`);
+const ehMedico = localStorage.getItem('ehMedico');
 class ChatApp extends Component {
 
     render() {
@@ -30,7 +31,9 @@ class ChatApp extends Component {
                 <Navbar />
                 <Container>
                     <Iframe iframe={newIframe} />
+                    {ehMedico === 'true'?
                     <Prontuario />
+                    :<div></div>}
                 </Container>
             </>
         );

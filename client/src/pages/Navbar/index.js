@@ -110,13 +110,7 @@ export default function Dashboard() {
     logout();
     window.location.href = '/';
   };
-  /* function renderActions() {
-      return (
-          <Button color='primary' onClick={handleLogout}>
-            Sair <ExitToAppIcon />
-          </Button>
-      );
-    } */
+  const ehMedico = localStorage.getItem('ehMedico');
 
   return (
     <div className={classes.root}>
@@ -133,7 +127,9 @@ export default function Dashboard() {
             <MenuIcon />
           </IconButton>
           <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
+            {ehMedico === 'true'?
             <a href='/main'><img alt='logo' src={logo} width='50px' height='80px' /></a>
+            :<a href='/perfil'><img alt='logo' src={logo} width='50px' height='80px' /></a>}
           </Typography>
 
             <Badge color="secondary">

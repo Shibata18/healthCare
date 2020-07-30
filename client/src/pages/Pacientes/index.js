@@ -7,7 +7,7 @@ import api from '../../services/api'
 
 function App(props) {
   const [items, setItems] = useState([]);
-
+  const ehMedico = localStorage.getItem('ehMedico');
   const getItems = async () => {
     try {
       const response = await api.get('/user');
@@ -40,12 +40,12 @@ function App(props) {
             <h1 style={{ margin: "20px 0", color: "#768549" }}>Pacientes</h1>
           </Col>
         </Row>
-
+    { ehMedico === 'true'?
         <Row>
           <Col>
             <ModalForm buttonLabel="Adicionar Paciente" addItemToState={addItemToState} />
           </Col>
-        </Row>
+        </Row>:<div></div>}
         <Row>
           <Col>
             <DataTable items={items} updateState={updateState} />

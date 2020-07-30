@@ -27,17 +27,8 @@ const useStyles = makeStyles((theme) => ({
 function Paciente() {
     const classes = useStyles();
     const [pacientes, setPacientes] = useState([]);
-    // const [agendaPaciente, setAgendaPaciente] = useState([]);
     const cpfUser = localStorage.getItem('cpfUser');
-       
-    /* useEffect(() => {
-        async function getProntuario() {
-            const response = await api.get('/agendaPaciente', { headers: { cpfPaciente: cpfPaciente } })
-            setAgendaPaciente(response.data);
-        }
-        getProntuario();
-    })
- */
+    
     useEffect(() => {
         async function getData() {
             try {
@@ -49,23 +40,14 @@ function Paciente() {
         }
         getData();
     })
-    /*    function mostrarProntuario() {
-          try{
-               return (
-                   agendaPaciente.map((value, index) => {
-                       return (
-                           <>
-                               <p>Consulta:{value.id}</p>
-                               <p>Prontuario: {value.prontuario}</p>
-                           </>
-                       )
-                   })
-                   
-               )
-           }catch (err){
-               
-           }
-       } */
+    const updateState = (item) => {
+        const itemIndex = pacientes.findIndex(data => data.id === item.id)
+        console.log(itemIndex);
+        const newArray = [...pacientes.slice(0, itemIndex), item, ...pacientes.slice(itemIndex + 1)]
+        console.log(newArray);
+        setPacientes(newArray)
+    }
+ 
     function showEditar() {
         document.getElementById('editar').style.display = 'block';
     }
@@ -83,6 +65,7 @@ function Paciente() {
             }
     }
     localStorage.setItem('nome', pacientes.nome);
+    localStorage.setItem('ehMedico', pacientes.ehMedico);
     return (
         <>
             <Navbar />
@@ -113,15 +96,9 @@ function Paciente() {
                         </Typography>
                     </CardContent>
                 </Card>
-                {/*    <Card className={classes.root}>
-                    <CardContent>
-                        PRONTUÁRIO:
-                        {mostrarProntuario()}
-                    </CardContent>
-                </Card> */}
                 <Button onClick={showEditar} color='primary' variant="contained" >Editar Perfil</Button>
                 <div id='editar' style={{ display: 'none' }}>
-                    <Update/>
+                    <Update updateState={updateState} />
                 </div> 
                 </div>
                 <div id='usuarioProfissional' style={{ display: 'none' }}>
@@ -152,12 +129,6 @@ function Paciente() {
                         </Typography>
                     </CardContent>
                 </Card>
-                {/*    <Card className={classes.root}>
-                    <CardContent>
-                        PRONTUÁRIO:
-                        {mostrarProntuario()}
-                    </CardContent>
-                </Card> */}
                 <Button onClick={showEditarProf} color='primary' variant="contained" >Editar Perfil</Button>
                 <div id='editarProf' style={{ display: 'none' }}>
                     <Editar/>

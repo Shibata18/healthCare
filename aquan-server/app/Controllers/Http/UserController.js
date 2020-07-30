@@ -45,7 +45,6 @@ class UserController {
       'especialidade',
       'ativo',
       'ehMedico',
-      'ehPaciente',
     ])
 
     user.merge(data)
@@ -69,7 +68,7 @@ class UserController {
       return token;
   }
   async contadorPaciente(){
-    const contador = await  User.query().where('ativo',true).getCount()
+    const contador = await  User.query().where('ehPaciente',true).getCount()
     return contador;
   }
   async contadorMedico(){

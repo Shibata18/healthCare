@@ -57,7 +57,7 @@ export default function SignIn() {
             try {
                 const response = await api.post('/sessions', data);
                 login(response.data.token);
-                history.push('/main')
+                history.push('/perfil')
             } catch (error) {
                 if(error.response.data[0].field === 'cpfUser'){
                     alert('CPF não encontrado')

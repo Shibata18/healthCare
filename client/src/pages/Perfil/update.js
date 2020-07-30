@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button, Select, MenuItem } from '@material-ui/core';
 import api from "../../services/api";
 
-function AddEditForm(props) {
+function EditProfile() {
   const [form, setValues] = useState({
     nome: '',
     email: '',
@@ -65,4 +65,4 @@ function AddEditForm(props) {
   )
 }
 
-export default AddEditForm
+export default EditProfile

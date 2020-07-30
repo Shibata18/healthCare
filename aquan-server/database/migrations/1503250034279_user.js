@@ -16,7 +16,7 @@ class UserSchema extends Schema {
       table.string('ufConselho', 2)
       table.string('registro', 254)
       table.string('especialidade', 250)
-      table.boolean('ativo').defaultTo(true)
+      table.boolean('ativo').defaultTo(true)//No futuro para mudar false
       table.boolean('ehMedico').defaultTo(false)
       table.boolean('ehPaciente').defaultTo(true)
       table.timestamps()

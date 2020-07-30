@@ -54,7 +54,6 @@ function AddEditForm(props) {
       console.log(error.response);
     }
   }
-
   useEffect(() => {
     if (props.item) {
       const { id, doctor_cpf, paciente_cpf, horario } = props.item

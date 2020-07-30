@@ -9,6 +9,7 @@ import api from '../../services/api'
 
 function App(props) {
     const [items, setItems] = useState([])
+    const ehMedico = localStorage.getItem('ehMedico');
     useEffect(() => {
         const cpf = localStorage.getItem('cpfUser')
         const getItems = async () => {
@@ -38,9 +39,10 @@ function App(props) {
 
             <Container>
                 <h1 style={{ margin: 20 }}>Agenda</h1>
-
+                {ehMedico === 'true'?
+                <>
                 <CSVLink
-                    filename={"db_agenda.csv"}
+                    filename={`db_agenda_${items.doctor_cpf}.csv`}
                     color="primary"
                     style={{ float: "left", marginRight: "10px" }}
                     className="btn btn-primary"
@@ -48,7 +50,7 @@ function App(props) {
                     <GetAppIcon />
                 </CSVLink>
                 <ModalForm addItemToState={addItemToState} />
-                <DataTable items={items} updateState={updateState} />
+                <DataTable items={items} updateState={updateState} /> </>:  <DataTable items={items}/>  }
             </Container>
         </>
     )

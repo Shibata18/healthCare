@@ -11,6 +11,7 @@ import AssignmentIcon from '@material-ui/icons/Assignment';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { Button } from '@material-ui/core';
 
+const ehMedico = localStorage.getItem('ehMedico');
 export const mainListItems = (
   <div>
     <ListItem button>
@@ -20,20 +21,21 @@ export const mainListItems = (
         </ListItemIcon>
         <ListItemText primary="Meu Perfil" /></Button>
     </ListItem>
-    <ListItem button>
-      <Button href='/main'>
-        <ListItemIcon>
-          <DashboardIcon />
-        </ListItemIcon>
-        <ListItemText primary="Dashboard" /></Button>
-    </ListItem>
-    <ListItem button>
-      <Button href='/pacientes'>
-        <ListItemIcon>
-          <PeopleIcon />
-        </ListItemIcon>
-        <ListItemText primary="Pacientes" /></Button>
-    </ListItem>
+    {ehMedico === 'true' ?
+      <><ListItem button>
+        <Button href='/main'>
+          <ListItemIcon>
+            <DashboardIcon />
+          </ListItemIcon>
+          <ListItemText primary="Dashboard" /></Button>
+      </ListItem>
+        <ListItem button>
+          <Button href='/pacientes'>
+            <ListItemIcon>
+              <PeopleIcon />
+            </ListItemIcon>
+            <ListItemText primary="Pacientes" /></Button>
+        </ListItem></> : <div></div>}
     <ListItem button>
       <Button href='/listaProfissionais'>
         <ListItemIcon>

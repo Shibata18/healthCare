@@ -14,8 +14,6 @@ function AddEditForm(props) {
     ufConselho: '',
     registro: '',
     especialidade: '',
-    ehMedico: '',
-    ehPaciente: '',
   })
   const cpfUser = localStorage.getItem('cpfUser');
 
@@ -39,18 +37,17 @@ function AddEditForm(props) {
         ufConselho: form.ufConselho,
         registro: form.registro,
         especialidade: form.especialidade,
-        ehMedico: form.ehMedico,
-        ehPaciente: form.ehPaciente,
+        ehMedico: true,
       }, { headers: { cpfUser: cpfUser, } });
       if (response) setTimeout(function () { alert('Atualizado Com sucesso'); window.location.reload() }, 200)
     } catch (error) {
       console.log(error.response.data.error.message);
-      let mensagemErro =error.response.data.error.message;
-      if(mensagemErro === 'update "users" set "email" = $1, "nome" = $2, "password" = $3, "telefone" = $4, "conselho" = $5, "ufConselho" = $6, "registro" = $7, "especialidade" = $8, "ativo" = $9, "ehMedico" = $10, "ehPaciente" = $11, "created_at" = $12, "updated_at" = $13 where "id" = $14 - null value in column "email" violates not-null constraint'){
+      let mensagemErro = error.response.data.error.message;
+      if (mensagemErro === 'update "users" set "email" = $1, "nome" = $2, "password" = $3, "telefone" = $4, "conselho" = $5, "ufConselho" = $6, "registro" = $7, "especialidade" = $8, "ativo" = $9, "ehMedico" = $10, "ehPaciente" = $11, "created_at" = $12, "updated_at" = $13 where "id" = $14 - null value in column "email" violates not-null constraint') {
         alert('Email não pode estar em branco')
-      }else if(mensagemErro ==='update "users" set "nome" = $1, "password" = $2, "telefone" = $3, "conselho" = $4, "ufConselho" = $5, "registro" = $6, "especialidade" = $7, "ativo" = $8, "ehMedico" = $9, "ehPaciente" = $10, "created_at" = $11, "updated_at" = $12 where "id" = $13 - null value in column "nome" violates not-null constraint'){
+      } else if (mensagemErro === 'update "users" set "nome" = $1, "password" = $2, "telefone" = $3, "conselho" = $4, "ufConselho" = $5, "registro" = $6, "especialidade" = $7, "ativo" = $8, "ehMedico" = $9, "ehPaciente" = $10, "created_at" = $11, "updated_at" = $12 where "id" = $13 - null value in column "nome" violates not-null constraint') {
         alert('Nome não pode estar em Branco')
-      }else if(mensagemErro === 'update "users" set "email" = $1, "nome" = $2, "password" = $3, "telefone" = $4, "conselho" = $5, "ufConselho" = $6, "registro" = $7, "especialidade" = $8, "ativo" = $9, "ehMedico" = $10, "ehPaciente" = $11, "created_at" = $12, "updated_at" = $13 where "id" = $14 - null value in column "password" violates not-null constraint'){
+      } else if (mensagemErro === 'update "users" set "email" = $1, "nome" = $2, "password" = $3, "telefone" = $4, "conselho" = $5, "ufConselho" = $6, "registro" = $7, "especialidade" = $8, "ativo" = $9, "ehMedico" = $10, "ehPaciente" = $11, "created_at" = $12, "updated_at" = $13 where "id" = $14 - null value in column "password" violates not-null constraint') {
         alert('Senha não pode estar em Branco')
       }
     }
@@ -61,23 +58,28 @@ function AddEditForm(props) {
     <form onSubmit={submitFormEdit}>
 
       <label htmlFor='nomeProf'>Nome</label>
-      <input type='text' name="nomeProf" id="nomeProf" onChange={onChange} value={form.nomeProf === null ? '' : form.nomeProf} required  />
+      <input type='text' name="nomeProf" id="nomeProf" onChange={onChange} value={form.nomeProf === null ? '' : form.nomeProf} required />
       <label htmlFor="emailProf">Email</label>
       <input type="email" name="emailProf" id="emailProf" onChange={onChange} value={form.emailProf === null ? '' : form.emailProf} required />
       <label htmlFor="telefoneProf">Telefone</label>
-      <input type="text" name="telefoneProf" id="telefoneProf"  onChange={onChange} value={form.telefoneProf === null ? '' : form.telefoneProf} placeholder="(11) 12345-1234" required />
+      <input type="text" name="telefoneProf" id="telefoneProf" onChange={onChange} value={form.telefoneProf === null ? '' : form.telefoneProf} placeholder="(11) 12345-1234" required />
       <label htmlFor="senha">Senha</label>
-      <input type="password" name="senha" id="senha" onChange={onChange}  value={form.senha === null ? '' : form.senha} required />
+      <input type="password" name="senha" id="senha" onChange={onChange} value={form.senha === null ? '' : form.senha} required />
       <label htmlFor="registro">registro</label>
-      <input type="text" name="registro" id="registro" onChange={onChange} value={form.registro}  required />
+      <input type="text" name="registro" id="registro" onChange={onChange} value={form.registro} required />
       <Row form>
         <Col md={6}>
           <label htmlFor="conselho">Conselho</label>
           <Select type="select" fullWidth name="conselho" id="conselho" onChange={onChange} value={form.conselho} required>
-            <MenuItem value='Teste1'>Teste 1</MenuItem>
-            <MenuItem value='Teste2'>Teste 2</MenuItem>
-            <MenuItem value='Teste3'>Teste 3</MenuItem>
-            <MenuItem value='Teste4'>Teste 4</MenuItem>
+            <MenuItem value='CRM'>CRM</MenuItem>
+            <MenuItem value='COEM'>COEM</MenuItem>
+            <MenuItem value='CRESS'>ASSISTENCIA SOCIAL-CRESS</MenuItem>
+            <MenuItem value='CRP'>CRP</MenuItem>
+            <MenuItem value='CRN'>CRN</MenuItem>
+            <MenuItem value='CRO'>CRO</MenuItem>
+            <MenuItem value='CFF'>CFF</MenuItem>
+            <MenuItem value='CRF'>CRF</MenuItem>
+            <MenuItem value='Administrador'>Administrador</MenuItem>
           </Select>
         </Col>
         <Col md={6}>
@@ -114,28 +116,18 @@ function AddEditForm(props) {
         </Col>
       </Row>
       <label htmlFor="especialidade">Especialidade</label>
-        <Select type="select" name="especialidade" fullWidth id="especialidade" onChange={onChange} value={form.especialidade} required >
-          <MenuItem value='Teste1'>Teste 1</MenuItem>
-          <MenuItem value='Teste2'>Teste 2</MenuItem>
-          <MenuItem value='Teste3'>Teste 3</MenuItem>
-          <MenuItem value='Teste4'>Teste 4</MenuItem>
-        </Select>
+      <Select type="select" name="especialidade" fullWidth id="especialidade" onChange={onChange} value={form.especialidade} required >
+        <MenuItem value='Teste1'>Teste 1</MenuItem>
+        <MenuItem value='Teste2'>Teste 2</MenuItem>
+        <MenuItem value='Teste3'>Teste 3</MenuItem>
+        <MenuItem value='Teste4'>Teste 4</MenuItem>
+      </Select>
       <label htmlFor="ativo">Status</label>
       <Select type="select" name='ativo' id='ativo' fullWidth value={form.ativo} onChange={onChange}>
         <MenuItem value={true}>Ativo</MenuItem>
         <MenuItem value={false} >Inativar</MenuItem>
       </Select>
-      <label htmlFor="ehMedico">É Médico ?</label>
-      <Select type="select" name='ehMedico' id='ehMedico' fullWidth value={form.ehMedico} onChange={onChange} required>
-        <MenuItem value={true}>Sim</MenuItem>
-        <MenuItem value={false} >Não</MenuItem>
-      </Select>
-      <label htmlFor="ehPaciente">Será um Paciente Também ?</label>
-      <Select type="select" name='ehPaciente' id='ehPaciente' fullWidth value={form.ehPaciente} onChange={onChange} required>
-        <MenuItem value={true}>Sim</MenuItem>
-        <MenuItem value={false} >Não</MenuItem>
-      </Select>
-      <Button type='submit' color='secondary' fullWidth variant="contained" style={{marginTop:10}}>Enviar</Button>
+      <Button type='submit' color='secondary' fullWidth variant="contained" style={{ marginTop: 10 }}>Enviar</Button>
     </form>
   )
 }

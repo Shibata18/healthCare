@@ -24,7 +24,7 @@ class AgendaController {
          .query().where(function(){this
       .where('paciente_cpf',request.header('cpfPaciente'))
       .orWhere('doctor_cpf',request.header('cpfDoctor'))
-    }).with('prontuario').fetch() 
+    }).orderBy('horario').with('prontuario').fetch() 
     return user
   }
 

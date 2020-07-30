@@ -42,7 +42,10 @@ const useStyles = makeStyles((theme) => ({
         marginTop: theme.spacing(1),
     },
     submit: {
-        margin: theme.spacing(3, 0, 2),
+        margin: theme.spacing(3, 2, 3),
+    },
+    reset: {
+        margin: theme.spacing(3, 2, 3),
     },
 }));
 
@@ -55,23 +58,23 @@ export default function SignIn() {
     const history = useHistory();
     async function handleSubmit(e) {
         e.preventDefault();
-        const data = { cpfUser, email, password ,nome}
-            try {
-                const response = await api.post('/user', data);
-                login(response.data.token);
-                alert('Cadastro Realizado com sucesso')
-                history.push('/')
-            } catch (error) {
-                let mensagemErro = error.response.data.error.message;
-                if (mensagemErro === 'insert into "users" ("cpfUser", "created_at", "email", "password", "updated_at") values ($1, $2, $3, $4, $5) returning "id" - null value in column "cpfUser" violates not-null constraint') { alert('CPF não pode estar em branco') }
-                else if (mensagemErro === 'insert into "users" ("cpfUser", "created_at", "email", "nome", "password", "updated_at") values ($1, $2, $3, $4, $5, $6) returning "id" - duplicate key value violates unique constraint "users_cpfuser_unique"') { alert('CPF já cadastrado') }
-                else if (mensagemErro === 'insert into "users" ("cpfUser", "created_at", "email", "password", "updated_at") values ($1, $2, $3, $4, $5) returning "id" - null value in column "email" violates not-null constraint') { alert('Email não pode estar em branco') }
-                else if (mensagemErro === 'insert into "users" ("cpfUser", "created_at", "email", "password", "updated_at") values ($1, $2, $3, $4, $5) returning "id" - null value in column "nome" violates not-null constraint') { alert('Nome não pode estar em Branco') }
-                else if (mensagemErro === 'insert into "users" ("cpfUser", "created_at", "email", "password", "updated_at") values ($1, $2, $3, $4, $5) returning "id" - null value in column "password" violates not-null constraint') { alert('Senha não pode estar em branco') }
-                else if(mensagemErro ==='insert into "users" ("cpfUser", "created_at", "email", "nome", "password", "updated_at") values ($1, $2, $3, $4, $5, $6) returning "id" - duplicate key value violates unique constraint "users_email_unique"'){alert('Email já Cadastrado')}
+        const data = { cpfUser, email, password, nome }
+        try {
+            const response = await api.post('/user', data);
+            login(response.data.token);
+            alert('Cadastro Realizado com sucesso')
+            history.push('/')
+        } catch (error) {
+            let mensagemErro = error.response.data.error.message;
+            if (mensagemErro === 'insert into "users" ("cpfUser", "created_at", "email", "password", "updated_at") values ($1, $2, $3, $4, $5) returning "id" - null value in column "cpfUser" violates not-null constraint') { alert('CPF não pode estar em branco') }
+            else if (mensagemErro === 'insert into "users" ("cpfUser", "created_at", "email", "nome", "password", "updated_at") values ($1, $2, $3, $4, $5, $6) returning "id" - duplicate key value violates unique constraint "users_cpfuser_unique"') { alert('CPF já cadastrado') }
+            else if (mensagemErro === 'insert into "users" ("cpfUser", "created_at", "email", "password", "updated_at") values ($1, $2, $3, $4, $5) returning "id" - null value in column "email" violates not-null constraint') { alert('Email não pode estar em branco') }
+            else if (mensagemErro === 'insert into "users" ("cpfUser", "created_at", "email", "password", "updated_at") values ($1, $2, $3, $4, $5) returning "id" - null value in column "nome" violates not-null constraint') { alert('Nome não pode estar em Branco') }
+            else if (mensagemErro === 'insert into "users" ("cpfUser", "created_at", "email", "password", "updated_at") values ($1, $2, $3, $4, $5) returning "id" - null value in column "password" violates not-null constraint') { alert('Senha não pode estar em branco') }
+            else if (mensagemErro === 'insert into "users" ("cpfUser", "created_at", "email", "nome", "password", "updated_at") values ($1, $2, $3, $4, $5, $6) returning "id" - duplicate key value violates unique constraint "users_email_unique"') { alert('Email já Cadastrado') }
 
-            }
-        
+        }
+
     }
     return (
         <Container component="main" maxWidth="xs">
@@ -83,7 +86,7 @@ export default function SignIn() {
                 <Typography component="h1" variant="h5">
                     Cadastro
         </Typography>
-                <form className={classes.form} noValidate onSubmit={handleSubmit}>
+                <form className={classes.form} onSubmit={handleSubmit}>
                     <input
                         type="text"
                         placeholder='CPF*' minLength='11' maxLength='11' required
@@ -131,12 +134,21 @@ export default function SignIn() {
 
                     <Button
                         type="submit"
-                        fullWidth
+
                         variant="contained"
                         color="primary"
                         className={classes.submit}
                     >
                         Cadastrar
+          </Button>
+                    <Button
+                        type='button'
+                        href='/'
+                        variant="contained"
+                        color="secondary"
+                        className={classes.reset}
+                    >
+                        Ir para login
           </Button>
                 </form>
             </div>

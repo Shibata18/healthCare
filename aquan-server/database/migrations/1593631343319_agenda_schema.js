@@ -1,5 +1,5 @@
 'use strict'
-
+//Esquema da tabela agenda
 /** @type {import('@adonisjs/lucid/src/Schema')} */
 const Schema = use('Schema')
 

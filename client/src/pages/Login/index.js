@@ -49,61 +49,62 @@ export default function SignIn() {
     const [cpfUser, setCpfUser] = useState('');
     const [password, setPassword] = useState('');
     const history = useHistory();
-    localStorage.setItem('cpfUser',cpfUser);
+    localStorage.setItem('cpfUser', cpfUser);
 
     async function handleSubmit(e) {
         e.preventDefault();
-        const data = { cpfUser,  password }
-            try {
-                const response = await api.post('/sessions', data);
-                login(response.data.token);
-                history.push('/perfil')
-            } catch (error) {
-                if(error.response.data[0].field === 'cpfUser'){
-                    alert('CPF não encontrado')
-                }else if(error.response.data[0].field === 'password')alert('Senha inválida')
-            }
+        const data = { cpfUser, password }
+        try {
+            const response = await api.post('/sessions', data);
+            login(response.data.token);
+            history.push('/perfil')
+        } catch (error) {
+            if (error.response.data[0].field === 'cpfUser') {
+                alert('CPF não encontrado')
+            } else if (error.response.data[0].field === 'password') alert('Senha inválida')
+        }
     }
+
     return (
         <Container component="main" maxWidth="xs">
-                <form className={classes.form} noValidate onSubmit={handleSubmit}>
-                        <input
-                        type="text"
-                        placeholder='CPF*' minLength='11' maxLength='11' required
-                        value={cpfUser}
-                        onChange={e=>setCpfUser(e.target.value)}
-                    />
-                    <TextField
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        name="password"
-                        label="Senha"
-                        type="password"
-                        id="password"
-                        value={password}
-                        onChange={e=>setPassword(e.target.value)}
-                        autoComplete="current-password"
-                    />
-               
-                    <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        color="primary"
-                        className={classes.submit}
-                    >
-                      Entrar
+            <form className={classes.form} noValidate onSubmit={handleSubmit}>
+                <input
+                    type="text"
+                    placeholder='CPF*' minLength='11' maxLength='11' required
+                    value={cpfUser}
+                    onChange={e => setCpfUser(e.target.value)}
+                />
+                <TextField
+                    variant="outlined"
+                    margin="normal"
+                    required
+                    fullWidth
+                    name="password"
+                    label="Senha"
+                    type="password"
+                    id="password"
+                    value={password}
+                    onChange={e => setPassword(e.target.value)}
+                    autoComplete="current-password"
+                />
+
+                <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    color="primary"
+                    className={classes.submit}
+                >
+                    Entrar
           </Button>
-                    <Grid container>
-                        <Grid item>
-                            <Link href="/cadastrar" variant="body2">
-                                {"Clique aqui para se Cadastrar"}
-                            </Link>
-                        </Grid>
+                <Grid container>
+                    <Grid item>
+                        <Link href="/cadastrar" variant="body2">
+                            {"Clique aqui para se Cadastrar"}
+                        </Link>
                     </Grid>
-                </form>
+                </Grid>
+            </form>
             <Box mt={8}>
                 <Copyright />
             </Box>

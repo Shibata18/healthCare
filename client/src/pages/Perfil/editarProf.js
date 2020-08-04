@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import { Button, Select, MenuItem } from '@material-ui/core';
+import { Button, Select, MenuItem, TextField } from '@material-ui/core';
 import { Row, Col } from 'reactstrap';
 import api from "../../services/api";
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import conselhos from '../../assets/conselho.json';
 
 function AddEditForm(props) {
   const [form, setValues] = useState({
@@ -10,11 +12,12 @@ function AddEditForm(props) {
     telefoneProf: '',
     senha: '',
     ativo: '',
-    conselho: '',
     ufConselho: '',
     registro: '',
     especialidade: '',
   })
+  const [conselho, setConselho] = React.useState(null);
+
   const cpfUser = localStorage.getItem('cpfUser');
 
   const onChange = e => {
@@ -33,7 +36,7 @@ function AddEditForm(props) {
         telefone: form.telefoneProf,
         password: form.senha,
         ativo: form.ativo,
-        conselho: form.conselho,
+        conselho: conselho,
         ufConselho: form.ufConselho,
         registro: form.registro,
         especialidade: form.especialidade,
@@ -68,19 +71,17 @@ function AddEditForm(props) {
       <label htmlFor="registro">registro</label>
       <input type="text" name="registro" id="registro" onChange={onChange} value={form.registro} required />
       <Row form>
-        <Col md={6}>
-          <label htmlFor="conselho">Conselho</label>
-          <Select type="select" fullWidth name="conselho" id="conselho" onChange={onChange} value={form.conselho} required>
-            <MenuItem value='CRM'>CRM</MenuItem>
-            <MenuItem value='COEM'>COEM</MenuItem>
-            <MenuItem value='CRESS'>ASSISTENCIA SOCIAL-CRESS</MenuItem>
-            <MenuItem value='CRP'>CRP</MenuItem>
-            <MenuItem value='CRN'>CRN</MenuItem>
-            <MenuItem value='CRO'>CRO</MenuItem>
-            <MenuItem value='CFF'>CFF</MenuItem>
-            <MenuItem value='CRF'>CRF</MenuItem>
-            <MenuItem value='Administrador'>Administrador</MenuItem>
-          </Select>
+        <Col md={6}>    <Autocomplete
+          id="combo-box-demo"
+          options={conselhos.conselho}
+          getOptionLabel={(option) => option}
+          value={conselho}
+          onChange={(event, newValue) => {
+            setConselho(newValue);
+          }}
+          renderInput={(params) => <TextField {...params} label="Conselho" variant="outlined" />}
+        />
+
         </Col>
         <Col md={6}>
           <label htmlFor="ufConselho">UF</label>

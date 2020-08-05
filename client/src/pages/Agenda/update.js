@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button} from '@material-ui/core'
 import api from "../../services/api";
+import ListaPacientes from './listaPacientes';
 
 function AddEditForm(props) {
   const [form, setValues] = useState({
@@ -66,7 +67,8 @@ function AddEditForm(props) {
 
       <label htmlFor="doctor_cpf">CPF Médico</label>
       <input type="text" name="doctor_cpf" id="doctor_cpf" onChange={onChange} value={form.doctor_cpf === null ? '' : form.doctor_cpf} required minLength='11' maxLength='11' />
-
+      <label htmlFor="listaPaciente">Lista Pacientes</label>
+      <ListaPacientes/>
       <label htmlFor="paciente_cpf">CPF Paciente</label>
       <input type="text" name="paciente_cpf" id="paciente_cpf" onChange={onChange} value={form.paciente_cpf === null ? '' : form.paciente_cpf} required minLength='11' maxLength='11' />
       <p style={{ marginTop: 15, marginBottom: 20 }}>

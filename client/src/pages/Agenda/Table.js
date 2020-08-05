@@ -21,7 +21,6 @@ function DataTable(props) {
       date,
       "'Dia' dd 'de' MMMM', às ' HH:mm'h'",{locale:ptBR}
     );
-    console.log(formattedDate);
     const diaMarcado = getDate(horario);
     const mesMarcado = getMonth(horario);
     const anoMarcado = getYear(horario);

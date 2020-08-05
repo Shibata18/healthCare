@@ -10,15 +10,15 @@ import uf from '../../assets/ufConselho.json';
 const AddEditForm = (props) => {
 
   const [nomeProf, setNomeProf] = useState('');
-  const [emailProf,setEmailProf] = useState('');
-  const [telefoneProf,setTelefoneProf] = useState('');
-  const [senha,setSenha] = useState('');
-  const [registro,setRegistro] = useState('');
+  const [emailProf, setEmailProf] = useState('');
+  const [telefoneProf, setTelefoneProf] = useState('');
+  const [senha, setSenha] = useState('');
+  const [registro, setRegistro] = useState('');
   const [conselho, setConselho] = useState(null);
   const [ufConselho, setUfconselho] = useState(null);
   const [especialidade, setEspecialidade] = useState(null);
-  const [ativo,setAtivo] = useState('');
-  
+  const [ativo, setAtivo] = useState('');
+
   const cpfUser = localStorage.getItem('cpfUser');
 
   const submitFormEdit = async e => {
@@ -49,19 +49,19 @@ const AddEditForm = (props) => {
       }
     }
   }
+
   return (
     <form onSubmit={submitFormEdit}>
-
       <label htmlFor='nomeProf'>Nome</label>
-      <input type='text' name="nomeProf" id="nomeProf" onChange={e => setNomeProf(e.target.value)} value={nomeProf} required />
+      <input type='text' name="nomeProf" id="nomeProf" onChange={e => setNomeProf(e.target.value)} value={nomeProf || ""} required />
       <label htmlFor="emailProf">Email</label>
-      <input type="email" name="emailProf" id="emailProf" onChange={e=>setEmailProf(e.target.value)} value={emailProf === null ? '' : emailProf} required />
+      <input type="email" name="emailProf" id="emailProf" onChange={e => setEmailProf(e.target.value)} value={emailProf === null ? '' : emailProf} required />
       <label htmlFor="telefoneProf">Telefone</label>
-      <input type="text" name="telefoneProf" id="telefoneProf" onChange={e=>setTelefoneProf(e.target.value)} value={telefoneProf === null ? '' : telefoneProf} placeholder="(11) 12345-1234" required />
+      <input type="text" name="telefoneProf" id="telefoneProf" onChange={e => setTelefoneProf(e.target.value)} value={telefoneProf === null ? '' : telefoneProf} placeholder="(11) 12345-1234" required />
       <label htmlFor="senha">Senha</label>
-      <input type="password" name="senha" id="senha" onChange={e=>setSenha(e.target.value)} value={senha === null ? '' : senha} required />
+      <input type="password" name="senha" id="senha" onChange={e => setSenha(e.target.value)} value={senha === null ? '' : senha} required />
       <label htmlFor="registro">registro</label>
-      <input type="text" name="registro" id="registro" onChange={e=>setRegistro(e.target.value)} value={registro===null?'':registro} required />
+      <input type="text" name="registro" id="registro" onChange={e => setRegistro(e.target.value)} value={registro === null ? '' : registro} required />
       <Row form >
         <Col md={6}>
           <label htmlFor="conselho">Conselho</label>
@@ -102,7 +102,7 @@ const AddEditForm = (props) => {
         renderInput={(params) => <TextField {...params} label="Especialidade" variant="outlined" />}
       />
       <label htmlFor="ativo">Status</label>
-      <Select type="select" name='ativo' id='ativo' fullWidth value={ativo} onChange={e=>setAtivo(e.target.value)}>
+      <Select type="select" name='ativo' id='ativo' fullWidth value={ativo} onChange={e => setAtivo(e.target.value)}>
         <MenuItem value={true}>Ativo</MenuItem>
         <MenuItem value={false} >Inativar</MenuItem>
       </Select>

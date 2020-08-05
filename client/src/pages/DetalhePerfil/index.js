@@ -56,7 +56,7 @@ function Paciente() {
                             <p>TELEFONE: {medico.telefone}</p>
                         </Typography>
                         <Typography variant="h6" component="h3">
-                            <p>Conselho: {medico.conselho} - {medico.ufConselho}</p>
+                            <p>{medico.conselho} - {medico.ufConselho}</p>
                         </Typography>
                         <Typography variant="h6" component="h3">
                             <p>STATUS: {medico.ativo ? `ATIVO` : `INATIVO`}</p>

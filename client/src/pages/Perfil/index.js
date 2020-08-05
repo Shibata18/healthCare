@@ -113,7 +113,7 @@ function Paciente() {
                             <p>CPF: {pacientes.cpfUser}</p>
                         </Typography>
                         <Typography variant="h6" component="h3">
-                            <p>Conselho: {pacientes.conselho} - {pacientes.ufConselho}</p>
+                            <p>{pacientes.conselho} - {pacientes.ufConselho}</p>
                         </Typography>
                         <Typography variant="h6" component="h3">
                             <p>Especialidade: {pacientes.especialidade}</p>

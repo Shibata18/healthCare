@@ -5,7 +5,7 @@ const Model = use('Model')
 
 class Prontuario extends Model {
     agenda(){
-        return this.belongsToMany('App/Models/Agenda')
+        return this.belongsTo('App/Models/Agenda')
     }
 }
 

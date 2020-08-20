@@ -10,6 +10,9 @@ class Agenda extends Model {
    prontuario(){
        return this.hasOne('App/Models/Prontuario')
    }
+   sessao(){
+       return this.hasOne('App/Models/Sessao');
+   }
 }
 
 module.exports = Agenda

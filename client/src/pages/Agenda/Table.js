@@ -3,8 +3,31 @@ import { Table, TableContainer, Paper, TableHead, TableRow, TableCell, TableBody
 import ModalForm from './Modal'
 import { makeStyles } from '@material-ui/core/styles';
 import DuoIcon from '@material-ui/icons/Duo';
-import { getHours, getMinutes, getDate, getYear, getMonth, format } from 'date-fns'
+import { format, isBefore } from 'date-fns'
 import { ptBR } from "date-fns/locale";
+import { Document, Page, Text, View, PDFDownloadLink, StyleSheet } from '@react-pdf/renderer';
+import Header from './components/Header';
+import Footer from './components/Footer';
+const styles = StyleSheet.create({
+  section: {
+    margin: 10,
+    flexGrow: 5
+  },
+  title: {
+    margin: 20,
+    fontSize: 25,
+    textAlign: 'center',
+    backgroundColor: '#e4e4e4',
+  },
+  body: {
+    flexGrow: 1,
+  },
+  text: {
+    width: '60%',
+    margin: 10,
+    textAlign: 'justify',
+  },
+});
 const useStyles = makeStyles({
   table: {
     minWidth: 350,
@@ -19,35 +42,37 @@ function DataTable(props) {
     const horario = date.getTime();
     const formattedDate = format(
       date,
-      "'Dia' dd 'de' MMMM', às ' HH:mm'h'",{locale:ptBR}
+      "'Dia' dd 'de' MMMM', às ' HH:mm'h'", { locale: ptBR }
     );
-    const diaMarcado = getDate(horario);
-    const mesMarcado = getMonth(horario);
-    const anoMarcado = getYear(horario);
-    const horaMarcada = getHours(horario);
-    const minutoMarcado = getMinutes(horario);
-
-    const diaAtualAgora = getDate(dataAtual)
-    const mesAtual = getMonth(dataAtual)
-    const anoAtual = getYear(dataAtual);
-    const horaAtual = getHours(dataAtual);
-    const minutoAtual = getMinutes(dataAtual);
-
-    const validar = () => {
-      if ((diaMarcado === diaAtualAgora) && (mesMarcado === mesAtual) && (anoMarcado === anoAtual) && (horaMarcada === horaAtual) && (minutoMarcado === minutoAtual)) {
-        return true;
-      } else {
-        return false;
-      }
-    }
+    const horarioAgendado = isBefore(horario, dataAtual);
     localStorage.setItem('idAgenda', item.id)
     return (
       <TableRow key={item.id}>
         <TableCell>{item.doctor_cpf}</TableCell>
         <TableCell>{item.paciente_cpf}</TableCell>
         <TableCell>{formattedDate}</TableCell>
-        <TableCell>{item.prontuario === null ? '' : item.prontuario.prontuario}</TableCell>
-        <TableCell align='justify'>{validar() ? <Button href='/chat' color='primary'><DuoIcon /></Button> : <Button disabled color='inherit'><DuoIcon /></Button>}</TableCell>
+        <TableCell>{/* {item.prontuario === null ? '' : item.prontuario.prontuario} */}
+          <PDFDownloadLink document={
+            <Document>
+              <Page size="A4">
+                <View>
+                  <Header />
+                </View>
+                <View style={styles.title}>
+                  <Text>CPF Médico : {item.doctor_cpf} </Text>
+                  <Text>CPF Paciente : {item.paciente_cpf} </Text>
+                </View>
+                <View style={styles.body}>
+                  <Text style={styles.text}>Prontuário: {item.prontuario === null ? '' : item.prontuario.prontuario}</Text>
+                </View>
+                <Footer />
+              </Page>
+            </Document>} fileName={`${date.toUTCString()}.pdf`}>
+            {item.prontuario === null ?
+              '' : ({ blob, url, loading, error }) => (loading ? 'Carregando os dados...' : 'Baixar Prontuário!')}
+          </PDFDownloadLink>
+        </TableCell>
+        <TableCell align='justify'>{horarioAgendado ? <Button href='/chat' color='primary'><DuoIcon /></Button> : <Button disabled color='inherit'><DuoIcon /></Button>}</TableCell>
         {ehMedico === 'true' ?
           <TableCell>
             <div style={{ width: "10%" }}>

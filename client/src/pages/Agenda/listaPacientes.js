@@ -21,7 +21,7 @@ export default function ListaPacientes() {
         <Autocomplete
             id="lista_pacientes"
             options={dadosPaciente}
-            getOptionLabel={(option) => option.nome}
+            getOptionLabel={(option) => option.cpfUser}
             renderOption={(option) => (
                 <React.Fragment>
                     {option.cpfUser} - {option.nome} 

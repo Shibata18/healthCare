@@ -19,41 +19,41 @@ const useStyles = makeStyles({
 function DataTable(props) {
   const classes = useStyles();
   const items = props.items.map(item => {
-    if(item.ehMedico){
-      localStorage.setItem('idDetalhe',item.id)
-    return (
-      <Grid container spacing={3} key={item.id}>
-        <Grid item xs={3} >
-          <Card className={classes.root}>
-            <CardContent>
-              <Typography className={classes.title} color="textSecondary" gutterBottom>
-                Email: {item.email}
-              </Typography>
-              <Typography variant="h5" component="h2">
-                Nome: {item.nome}
-              </Typography>
-              <Typography className={classes.pos} color="textSecondary">
-                Especialidade {item.especialidade}
-              </Typography>
-              <Typography variant="body2" component="p">
-                Avaliação:
+    if (item.ehMedico) {
+      localStorage.setItem('idDetalhe', item.id)
+      return (
+        <Grid container spacing={3} key={item.id}>
+          <Grid item xs={3} >
+            <Card className={classes.root}>
+              <CardContent>
+                <Typography className={classes.title} color="textSecondary" gutterBottom>
+                  Email: {item.email}
+                </Typography>
+                <Typography variant="h5" component="h2">
+                  Nome: {item.nome}
+                </Typography>
+                <Typography className={classes.pos} color="textSecondary">
+                  Especialidade {item.especialidade}
+                </Typography>
+                <Typography variant="body2" component="p">
+                  Avaliação:
           </Typography>
-            </CardContent>
-            <CardActions>
-              <Button size="small"><BookmarkBorderRoundedIcon  color='disabled' /></Button>
-              <Button size="small" href={`/detalhePerfil/${item.id}`}><AccountCircleRoundedIcon  color='primary' /></Button>
-              <Button size="small"><ThumbUpIcon  color='disabled' /></Button>
-            </CardActions>
-          </Card>
+              </CardContent>
+              <CardActions>
+                <Button size="small"><BookmarkBorderRoundedIcon color='disabled' /></Button>
+                <Button size="small" href={`/detalhePerfil/${item.id}`}><AccountCircleRoundedIcon color='primary' /></Button>
+                <Button size="small"><ThumbUpIcon color='disabled' /></Button>
+              </CardActions>
+            </Card>
+          </Grid>
         </Grid>
-      </Grid>
-    )}else{
+      )
+    } else {
       return (<Grid key={item.id}></Grid>)
     }
   })
 
   return (
-
     <Grid item xs={3}>
       {items}
     </Grid>

@@ -4,12 +4,12 @@ body {
     padding: 0;
     box-sizing: border-box;
 }
-
 *,
 *:before,
 *:after {
     box-sizing: inherit;
 }
+
 textarea{
     min-height: auto;
     min-width: 100%;
@@ -18,6 +18,6 @@ textarea{
 }
 iframe{
     width: 100%;
-    height: 90vh;
+    height: 90vh; 
     object-fit: fill;
 }

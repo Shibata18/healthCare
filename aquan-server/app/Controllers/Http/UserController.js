@@ -81,7 +81,7 @@ class UserController {
     return user
   }
   async dadosPaciente(){
-    const dados = await Database.select('users.nome','users.cpfUser','users.ehMedico').from('users');
+    const dados = await Database.select('*').from('users');
     return dados;
   }
 }

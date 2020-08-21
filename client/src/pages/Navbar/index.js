@@ -2,7 +2,7 @@ import React from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { Drawer,  AppBar,  Button } from '@material-ui/core';
+import { Drawer, AppBar, Button } from '@material-ui/core';
 import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
@@ -97,7 +97,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Dashboard() {
+export default function Navbar() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const handleDrawerOpen = () => {
@@ -111,7 +111,6 @@ export default function Dashboard() {
     window.location.href = '/';
   };
   const ehMedico = localStorage.getItem('ehMedico');
-
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -127,17 +126,17 @@ export default function Dashboard() {
             <MenuIcon />
           </IconButton>
           <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-            {ehMedico === 'true'?
-            <a href='/main'><img alt='logo' src={logo} width='50px' height='80px' /></a>
-            :<a href='/perfil'><img alt='logo' src={logo} width='50px' height='80px' /></a>}
+            {ehMedico === 'true' ?
+              <a href='/main'><img alt='logo' src={logo} width='50px' height='80px' /></a>
+              : <a href='/perfil'><img alt='logo' src={logo} width='50px' height='80px' /></a>}
           </Typography>
 
-            <Badge color="secondary">
-              <Button color='primary' onClick={handleLogout}>
-                Sair <ExitToAppIcon />
-              </Button>
-            </Badge>
-         
+          <Badge color="secondary">
+            <Button color='primary' onClick={handleLogout}>
+              Sair <ExitToAppIcon />
+            </Button>
+          </Badge>
+
         </Toolbar>
       </AppBar>
       <Drawer

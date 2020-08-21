@@ -36,7 +36,6 @@ function App(props) {
     return (
         <>
             <Navbar />
-
             <Container>
                 <h1 style={{ margin: 20 }}>Agenda</h1>
                 {ehMedico === 'true'?

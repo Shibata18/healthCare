@@ -51,8 +51,9 @@ function DataTable(props) {
         <TableCell>{item.doctor_cpf}</TableCell>
         <TableCell>{item.paciente_cpf}</TableCell>
         <TableCell>{formattedDate}</TableCell>
+        {ehMedico === 'true' ? <>
         <TableCell>{/* {item.prontuario === null ? '' : item.prontuario.prontuario} */}
-          <PDFDownloadLink document={
+         <PDFDownloadLink document={
             <Document>
               <Page size="A4">
                 <View>
@@ -63,7 +64,8 @@ function DataTable(props) {
                   <Text>CPF Paciente : {item.paciente_cpf} </Text>
                 </View>
                 <View style={styles.body}>
-                  <Text style={styles.text}>Prontuário: {item.prontuario === null ? '' : item.prontuario.prontuario}</Text>
+                <Text>Observações </Text>
+                  <Text style={styles.text}>{item.prontuario === null ? '' : item.prontuario.prontuario}</Text>
                 </View>
                 <Footer />
               </Page>
@@ -71,7 +73,7 @@ function DataTable(props) {
             {item.prontuario === null ?
               '' : ({ blob, url, loading, error }) => (loading ? 'Carregando os dados...' : 'Baixar Prontuário!')}
           </PDFDownloadLink>
-        </TableCell>
+        </TableCell></>: <TableCell></TableCell>}
         <TableCell align='justify'>{horarioAgendado ? <Button href='/chat' color='primary'><DuoIcon /></Button> : <Button disabled color='inherit'><DuoIcon /></Button>}</TableCell>
         {ehMedico === 'true' ?
           <TableCell>
@@ -91,7 +93,8 @@ function DataTable(props) {
             <TableCell>CPF Médico</TableCell>
             <TableCell>CPF Paciente</TableCell>
             <TableCell>Horario</TableCell>
-            <TableCell>Prontuário</TableCell>
+            {ehMedico === 'true' ?
+              <TableCell>Prontuário</TableCell> : <TableCell></TableCell>}
             <TableCell>Vídeo</TableCell>
             {ehMedico === 'true' ?
               <TableCell>Editar</TableCell> : <TableCell></TableCell>}

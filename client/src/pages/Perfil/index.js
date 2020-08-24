@@ -42,17 +42,33 @@ function Profile(props) {
         <>
             <Navbar />
             <Container>
-                <div onChange={setFunc}>
-                    <input type='radio' value='paciente' name="func" defaultChecked /> Paciente
+                {items.ehMedico ?
+                    <>
+                        <div onChange={setFunc}>
+                            <input type='radio' value='paciente' name="func" /> Paciente
+                      <input type="radio" value='profissional' name="func" defaultChecked /> Sou Profissional de Saúde
+                  </div>
+                    </> : <>
+                        <div onChange={setFunc}>
+                            <input type='radio' value='paciente' name="func" defaultChecked /> Paciente
                      <input type="radio" value='profissional' name="func" /> Sou Profissional de Saúde
                  </div>
+                    </>}
                 <h2 style={{ margin: 20, color: '#00BCD4' }}>Olá, {items.nome}</h2>
-                <div id="usuarioPaciente">
-                    <DataProfile items={items} updateState={updateState} />
-                </div>
-                <div id='usuarioProfissional' style={{ display: 'none' }}>
-                    <DataProfessional items={items} updateState={updateState} />
-                </div>
+                {items.ehMedico ?
+                    <>
+                        <div id="usuarioPaciente" style={{ display: 'none' }}>
+                            <DataProfile items={items} updateState={updateState} />
+                        </div>
+                        <div id='usuarioProfissional' >
+                            <DataProfessional items={items} updateState={updateState} />
+                        </div></> : <>
+                        <div id="usuarioPaciente">
+                            <DataProfile items={items} updateState={updateState} />
+                        </div>
+                        <div id='usuarioProfissional' style={{ display: 'none' }}>
+                            <DataProfessional items={items} updateState={updateState} />
+                        </div></>}
             </Container>
         </>
     )

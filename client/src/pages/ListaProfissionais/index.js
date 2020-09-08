@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { Container, Grid } from '@material-ui/core'
-import DataCard from './card';
+import DataProfissional from './card';
 import Navbar from '../Navbar/index';
 import api from '../../services/api';
 
-function App(props) {
+function FullListProfissional(props) {
 
   const [items, setItems] = useState([])
 
@@ -30,13 +30,11 @@ function App(props) {
             <h1 style={{ margin: "20px 0", color: "#589303" }}>Profisionais</h1>
             <h6 style={{ margin: "20px 0", color: "#000" }}>Encontre o profissional certo para você</h6>
           </Grid>
-          <Grid item xs={3}>
-            <DataCard items={items} />
-          </Grid>
+            <DataProfissional items={items} />
         </Grid>
       </Container>
     </>
   )
 }
 
-export default App
+export default FullListProfissional

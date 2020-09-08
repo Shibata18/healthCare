@@ -9,7 +9,7 @@ import ListaPacientes from './pages/Pacientes';
 import Agenda from './pages/Agenda'
 import Chat from './pages/Chat';
 import Perfil from './pages/Perfil';
-import DetalhePerfil from './pages/DetalhePerfil';
+import ErrorPage from './pages/Error';
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
@@ -35,8 +35,7 @@ const Routes = () => (
       <PrivateRoute path='/agenda' component={Agenda}/> 
       <PrivateRoute path='/perfil' component={Perfil}/>
       <PrivateRoute path='/chat' component={Chat}/>
-      <PrivateRoute path='/detalhePerfil/:id' component={DetalhePerfil}/>
-      <Route path="*" component={() => <h1>Página não encontrada ou não existe</h1>} />
+      <Route path="*" component={ErrorPage} />
     </Switch>
   </BrowserRouter>
 );

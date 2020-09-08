@@ -5,10 +5,11 @@
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script src="https://static.opentok.com/v2/js/opentok.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/rasa-webchat/lib/index.min.js"></script>
     <meta name="theme-color" content="#000000" />
     <meta
       name="description"
-      content="Aquann App, Protótipo para a realização de teleconsultas médica"
+      content="Fabbrini App, Protótipo para a realização de teleconsultas médica"
     />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <!--
@@ -25,20 +26,23 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>Aquann App</title>
+    <title>Fabbrini App</title>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
+    <div id="webchat"></div>
+    <script>
+        WebChat.default.init({
+            selector: "#webchat",
+            initPayload: "/get_started",
+            customData: { "language": "pt" }, // arbitrary custom data. Stay minimal as this will be added to the socket
+            socketUrl: "http://34.122.229.34",
+            socketPath: "/socket.io/",
+            title: "Anamnese",
+            subtitle: "Digite Olá para começarmos",
+            params: { "storage": "session" } // can be set to "local"  or "session". details in storage section.
+        })
+    </script>
   </body>
 </html>

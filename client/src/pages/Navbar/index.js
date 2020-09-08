@@ -127,8 +127,8 @@ export default function Navbar() {
           </IconButton>
           <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
             {ehMedico === 'true' ?
-              <a href='/main'><img alt='logo' src={logo} width='50px' height='80px' /></a>
-              : <a href='/perfil'><img alt='logo' src={logo} width='50px' height='80px' /></a>}
+              <a href='/main'><img alt='logo' src={logo} width='10%' height='10%' /></a>
+              : <a href='/perfil'><img alt='logo' src={logo} width='10%' height='15%' /></a>}
           </Typography>
 
           <Badge color="secondary">

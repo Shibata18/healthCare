@@ -41,7 +41,7 @@ function Header() {
         <View style={styles.container}>
                 <Image source={logo} style={styles.image} />
             <View style={styles.detailColumn}>
-                <Text style={styles.name}>Aquann</Text>
+                <Text style={styles.name}>Fabbrini</Text>
             </View>
             <View style={styles.linkColumn}>
             </View>

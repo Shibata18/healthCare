@@ -10,6 +10,8 @@ import Agenda from './pages/Agenda'
 import Chat from './pages/Chat';
 import Perfil from './pages/Perfil';
 import ErrorPage from './pages/Error';
+import About from './pages/About';
+import Help from "./pages/Help";
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
@@ -35,6 +37,8 @@ const Routes = () => (
       <PrivateRoute path='/agenda' component={Agenda}/> 
       <PrivateRoute path='/perfil' component={Perfil}/>
       <PrivateRoute path='/chat' component={Chat}/>
+      <PrivateRoute path='/about' component={About}/>
+      <PrivateRoute path='/help' component={Help}/>
       <Route path="*" component={ErrorPage} />
     </Switch>
   </BrowserRouter>

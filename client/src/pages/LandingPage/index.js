@@ -21,10 +21,6 @@ const useStyles = makeStyles((theme) => ({
     backgroundSize: '100% 100%',
     backgroundPosition: 'center',
   },
-  logo:{
-    width:"100%",
-    height:"100%",
-  },
   paper: {
     margin: theme.spacing(8, 4),
     display: 'flex',

@@ -26,6 +26,31 @@
       "src": "favicon-32x32.png",
       "sizes": "32x32",
       "type": "image/png"
+  },
+  {
+      "src": "tile70.png",
+      "sizes": "70x70",
+      "type": "image/png"
+  },
+  {
+      "src": "tile150.png",
+      "sizes": "150x150",
+      "type": "image/png"
+  },
+  {
+      "src": "tile310x150.png",
+      "sizes": "310x150",
+      "type": "image/png"
+  },
+  {
+      "src": "tile310x310.png",
+      "sizes": "310x310",
+      "type": "image/png"
+  },
+  {
+      "src": "apple-touch-icon-180x180.png",
+      "sizes": "180x180",
+      "type": "image/png"
   }
   ],
   "start_url": ".",

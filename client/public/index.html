@@ -32,13 +32,17 @@
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
     <div id="webchat"></div>
+    <script src="https://cdn.jsdelivr.net/npm/rasa-webchat/lib/index.min.js"></script>
+    <!-- // you can add a version tag if you need, e.g for version 0.11.5
+    https://cdn.jsdelivr.net/npm/rasa-webchat@0.11.5/lib/index.min.js -->
     <script>
         WebChat.default.init({
             selector: "#webchat",
-            initPayload: "/get_started",
+            initPayload: "/start",
             customData: { "language": "pt" }, // arbitrary custom data. Stay minimal as this will be added to the socket
-            socketUrl: "http://34.122.229.34",
+            socketUrl: "https://058fbdc38f51.ngrok.io",
             socketPath: "/socket.io/",
+            showFullScreenButton: true,
             title: "Anamnese",
             subtitle: "Digite Olá para começarmos",
             params: { "storage": "session" } // can be set to "local"  or "session". details in storage section.

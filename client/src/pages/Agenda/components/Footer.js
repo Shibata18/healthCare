@@ -38,7 +38,7 @@ function Footer() {
     return (
         <View style={styles.container}>
             <Text style={styles.footer}>Criado em {formattedDate}</Text>
-            <Link style={styles.link} to='https://aquann.herokuapp.com/'>https://aquann.herokuapp.com/</Link>
+            <Link style={styles.link} to='https://fabbrini.herokuapp.com/'>https://fabbrini.herokuapp.com/</Link>
         </View>
     );
 }

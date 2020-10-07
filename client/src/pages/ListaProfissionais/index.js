@@ -27,7 +27,7 @@ function FullListProfissional(props) {
       <Container>
         <Grid container spacing={3}>
           <Grid item xs={12}>
-            <h1 style={{ margin: "20px 0", color: "#589303" }}>Profisionais</h1>
+            <h1 style={{ margin: "20px 0", color: "#589303" }}>Profissionais</h1>
             <h6 style={{ margin: "20px 0", color: "#000" }}>Encontre o profissional certo para você</h6>
           </Grid>
             <DataProfissional items={items} />

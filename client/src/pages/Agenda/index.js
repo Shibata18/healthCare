@@ -40,16 +40,16 @@ function App(props) {
                 <h1 style={{ margin: 20 }}>Agenda</h1>
                 {ehMedico === 'true'?
                 <>
+                <ModalForm addItemToState={addItemToState} />
                 <CSVLink
                     filename={`db_agenda_${items.doctor_cpf}.csv`}
-                    color="primary"
-                    style={{ float: "left", marginRight: "10px" }}
-                    className="btn btn-primary"
+                    style={{ float: "left", marginRight: "10px"}}
+                    className="btn btn-secondary"
                     data={items}>
-                    <GetAppIcon />
+                    <GetAppIcon/>
                 </CSVLink>
-                <ModalForm addItemToState={addItemToState} />
-                <DataTable items={items} updateState={updateState} /> </>:  <DataTable items={items}/>  }
+                <DataTable items={items} updateState={updateState} /> 
+                </>:  <DataTable items={items}/>  }
             </Container>
         </>
     )

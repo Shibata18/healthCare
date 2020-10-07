@@ -4,7 +4,6 @@ import AddEditForm from './update'
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import { red } from '@material-ui/core/colors';
 import EditIcon from '@material-ui/icons/Edit';
-import ListaCompleta from './ListaCompleta';
 
 function ModalForm(props) {
   const [modal, setModal] = useState(false)
@@ -28,6 +27,7 @@ function ModalForm(props) {
   } else {
     button = <Button
       onClick={toggle}
+      color='primary'
       style={{ float: "left", marginRight: "10px" ,}}>{label}
     <AddCircleIcon/></Button>
     title = 'Adicionar'
@@ -40,7 +40,6 @@ function ModalForm(props) {
       <Modal isOpen={modal} toggle={toggle} className={props.className}>
         <ModalHeader toggle={toggle} >{title}</ModalHeader>
         <ModalBody>
-          <ListaCompleta/>
           <AddEditForm
             addItemToState={props.addItemToState}
             updateState={props.updateState}

@@ -53,16 +53,16 @@ export const mainListItems = (
     <ListItem button>
       <Button href='#'>
         <ListItemIcon>
-          <HelpOutlineRoundedIcon />
+          <InfoRoundedIcon />
         </ListItemIcon>
-        <ListItemText primary="Ajuda" /></Button>
+        <ListItemText primary="Sobre" /></Button>
     </ListItem>
     <ListItem button>
       <Button href='#'>
         <ListItemIcon>
-          <InfoRoundedIcon />
+          <HelpOutlineRoundedIcon />
         </ListItemIcon>
-        <ListItemText primary="Sobre" /></Button>
+        <ListItemText primary="Ajuda" /></Button>
     </ListItem>
   </div>
 );

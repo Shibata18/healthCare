@@ -3,6 +3,7 @@ import Navbar from '../Navbar'
 import { Container } from '@material-ui/core';
 import './App.css'
 import Prontuario from './prontuario'
+import ModalForm from "./modalForm";
 function Iframe(props) {
     return (<div dangerouslySetInnerHTML={{ __html: props.iframe ? props.iframe : "" }} />);
 }
@@ -34,6 +35,7 @@ class ChatApp extends Component {
                     {ehMedico === 'true'?
                     <Prontuario />
                     :<div></div>}
+                    <ModalForm/>
                 </Container>
             </>
         );

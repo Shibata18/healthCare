@@ -20,8 +20,6 @@ function DataTable(props){
           <TableCell align='center'>{item.email}</TableCell>
           <TableCell align='center'>{item.telefone}</TableCell>
           <TableCell align='center'>{item.ativo?`Ativo`:`Inativo`}</TableCell>
-          <TableCell align='center'>{item.created_at}</TableCell>
-          <TableCell align='center'>{item.updated_at}</TableCell>
           <TableCell align='center'>
             <div style={{ widTableCell: "10%" }}>
               <ModalForm buttonLabel="Editar" item={item} updateState={props.updateState}/>
@@ -44,8 +42,6 @@ function DataTable(props){
             <TableCell align='center'>Email</TableCell>
             <TableCell align='center'>Telefone</TableCell>
             <TableCell align='center'>Status</TableCell>
-            <TableCell align='center'>Criado</TableCell>
-            <TableCell align='center'>Atualizado</TableCell>
             <TableCell align='center'>Editar</TableCell>
           </TableRow>
         </TableHead>

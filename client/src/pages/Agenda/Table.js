@@ -44,6 +44,10 @@ function DataTable(props) {
       date,
       "'Dia' dd 'de' MMMM', às ' HH:mm'h'", { locale: ptBR }
     );
+    const formattedDate2 = format(
+      dataAtual,
+      "'Dia' dd 'de' MMMM', às ' HH:mm'h'", { locale: ptBR }
+    );
     const horarioAgendado = isBefore(horario, dataAtual);
     localStorage.setItem('idAgenda', item.id)
     return (
@@ -66,6 +70,14 @@ function DataTable(props) {
                 <View style={styles.body}>
                 <Text>Observações </Text>
                   <Text style={styles.text}>{item.prontuario === null ? '' : item.prontuario.prontuario}</Text>
+                </View>
+                <View style={styles.body}>
+                <Text>Data e Hora da Consulta</Text>
+                  <Text style={styles.text}>{formattedDate}</Text>
+                </View>
+                <View style={styles.body}>
+                <Text>Data e Hora </Text>
+                  <Text style={styles.text}>{formattedDate2}</Text>
                 </View>
                 <Footer />
               </Page>

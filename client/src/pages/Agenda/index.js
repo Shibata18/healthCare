@@ -41,14 +41,12 @@ function App(props) {
                 {ehMedico === 'true'?
                 <>
                 <ModalForm addItemToState={addItemToState} />
+                <DataTable items={items} updateState={updateState} /> 
                 <CSVLink
                     filename={`db_agenda_${items.doctor_cpf}.csv`}
-                    style={{ float: "left", marginRight: "10px"}}
-                    className="btn btn-secondary"
                     data={items}>
-                    <GetAppIcon/>
+                    <GetAppIcon color='error'/>
                 </CSVLink>
-                <DataTable items={items} updateState={updateState} /> 
                 </>:  <DataTable items={items}/>  }
             </Container>
         </>

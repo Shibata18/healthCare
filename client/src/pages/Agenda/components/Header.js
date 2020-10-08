@@ -1,7 +1,7 @@
 import React from 'react';
-import logo from '../../../assets/logo.png'
+import logo from '../../../assets/slogan.png'
 
-import { Text, View, StyleSheet, Image } from '@react-pdf/renderer'
+import {  View, StyleSheet, Image } from '@react-pdf/renderer'
 
 const styles = StyleSheet.create({
     container: {
@@ -12,9 +12,8 @@ const styles = StyleSheet.create({
         alignItems: 'stretch',
     },
     image: {
-        width: 40,
-        height: 50,
-        justifyContent:"flex-start"
+        width: '100%',
+        height: '80%',
     },
     detailColumn: {
         flexDirection: 'column',
@@ -40,9 +39,6 @@ function Header() {
     return (
         <View style={styles.container}>
                 <Image source={logo} style={styles.image} />
-            <View style={styles.detailColumn}>
-                <Text style={styles.name}>Fabbrini</Text>
-            </View>
             <View style={styles.linkColumn}>
             </View>
         </View>

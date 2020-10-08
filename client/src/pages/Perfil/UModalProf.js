@@ -17,17 +17,14 @@ function ModalProfessional(props) {
   let title = ''
 
   if (label === 'Editar') {
-    button = <Button
-      onClick={toggle}
-      style={{ float: "left", marginRight: "10px" }} color='primary'>{label}<EditIcon/>
-    </Button>
+    button =  <EditIcon>{label}</EditIcon>
     title = 'Editar Perfil Profissional'
   } 
 
 
   return (
     <div>
-      {button}
+      <Button color='inhert' onClick={toggle}>{button}</Button>
       <Modal isOpen={modal} toggle={toggle} className={props.className}>
         <ModalHeader toggle={toggle} >{title}</ModalHeader>
         <ModalBody>

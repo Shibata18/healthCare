@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { Modal, ModalHeader, ModalBody, Button } from 'reactstrap'
 import AddEditForm from './update'
 import AddCircleIcon from '@material-ui/icons/AddCircle';
-import { red } from '@material-ui/core/colors';
 import EditIcon from '@material-ui/icons/Edit';
 
 function ModalForm(props) {
@@ -19,24 +18,17 @@ function ModalForm(props) {
   let title = ''
 
   if (label === 'Editar') {
-    button = <EditIcon
-      onClick={toggle}
-      style={{ float: "left", marginRight: "10px" , color: red[500]}}>{label}
-    </EditIcon>
+    button = <EditIcon>{label} </EditIcon>
     title = 'Editar Agenda'
   } else {
-    button = <Button
-      onClick={toggle}
-      color='primary'
-      style={{ float: "left", marginRight: "10px" ,}}>{label}
-    <AddCircleIcon/></Button>
+    button = <AddCircleIcon >{label}</AddCircleIcon>
     title = 'Adicionar'
   }
 
 
   return (
     <div>
-      {button}
+      <Button color='primary' onClick={toggle}>{button}</Button>
       <Modal isOpen={modal} toggle={toggle} className={props.className}>
         <ModalHeader toggle={toggle} >{title}</ModalHeader>
         <ModalBody>

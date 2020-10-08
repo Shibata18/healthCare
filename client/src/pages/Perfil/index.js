@@ -42,18 +42,6 @@ function Profile(props) {
         <>
             <Navbar />
             <Container>
-                {items.ehMedico ?
-                    <>
-                        <div onChange={setFunc}>
-                            <input type='radio' value='paciente' name="func" /> Paciente
-                      <input type="radio" value='profissional' name="func" defaultChecked /> Sou Profissional de Saúde
-                  </div>
-                    </> : <>
-                        <div onChange={setFunc}>
-                            <input type='radio' value='paciente' name="func" defaultChecked /> Paciente
-                     <input type="radio" value='profissional' name="func" /> Sou Profissional de Saúde
-                 </div>
-                    </>}
                 <h2 style={{ margin: 20, color: '#00BCD4' }}>Olá, {items.nome}</h2>
                 {items.ehMedico ?
                     <>
@@ -69,6 +57,18 @@ function Profile(props) {
                         <div id='usuarioProfissional' style={{ display: 'none' }}>
                             <DataProfessional items={items} updateState={updateState} />
                         </div></>}
+                        {items.ehMedico ?
+                    <>
+                        <div onChange={setFunc}>
+                            <input type='radio' value='paciente' name="func" /> Paciente
+                      <input type="radio" value='profissional' name="func" defaultChecked /> Sou Profissional de Saúde
+                  </div>
+                    </> : <>
+                        <div onChange={setFunc}>
+                            <input type='radio' value='paciente' name="func" defaultChecked /> Paciente
+                     <input type="radio" value='profissional' name="func" /> Sou Profissional de Saúde
+                 </div>
+                    </>}
             </Container>
         </>
     )

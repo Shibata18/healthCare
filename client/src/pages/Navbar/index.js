@@ -110,7 +110,7 @@ export default function Navbar() {
     logout();
     window.location.href = '/';
   };
-  const ehMedico = localStorage.getItem('ehMedico');
+  //const ehMedico = localStorage.getItem('ehMedico');
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -126,9 +126,7 @@ export default function Navbar() {
             <MenuIcon />
           </IconButton>
           <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-            {ehMedico === 'true' ?
-              <a href='/main'><img alt='logo' src={logo} width='10%' height='10%' /></a>
-              : <a href='/perfil'><img alt='logo' src={logo} width='10%' height='15%' /></a>}
+               <a href='/perfil'><img alt='logo' src={logo} width='10%' height='15%' /></a>
           </Typography>
 
           <Badge color="secondary">

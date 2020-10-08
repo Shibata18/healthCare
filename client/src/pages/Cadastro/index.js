@@ -7,7 +7,7 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import Cadastro from "./index2.js";
+import Cadastro from "./cadastro.js";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -31,11 +31,10 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '24px',
     fontStyle: 'normal',
     fontWeight: 700,
-    lineHeight: '28px',
     letterSpacing: '0em',
     textAlign: 'left',
     left: '876px',
-    marginTop: '90px',
+    marginTop: '60px',
     marginBottom: '23px',
     color: '#000000',
   }
@@ -52,7 +51,6 @@ export default function Register() {
         <div className={classes.paper}>
           <Typography component="h4" variant="h5" className={classes.text_login}>
             Faça o seu Cadastro
-            
           </Typography>
             <Cadastro/>
         </div>

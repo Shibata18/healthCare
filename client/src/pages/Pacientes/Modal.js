@@ -18,25 +18,18 @@ function ModalForm(props) {
   let title = ''
 
   if(label === 'Editar'){
-    button = <EditIcon
-              color="action"
-              onClick={toggle}
-              style={{float: "left", marginRight:"10px"}}>{label}
+    button = <EditIcon>{label}
             </EditIcon>
     title = 'Editar Paciente'
   } else {
-    button = <Button
-              color="success"
-              onClick={toggle}
-              style={{float: "left", marginRight:"10px"}}><AddCircleIcon/>
-            </Button>
+    button = <AddCircleIcon>{label}</AddCircleIcon>
     title = 'Cadastrar Paciente'
   }
 
 
   return (
     <div>
-      {button}
+      <Button color='primary' onClick={toggle}>{button}</Button>
       <Modal isOpen={modal} toggle={toggle} className={props.className}>
         <ModalHeader toggle={toggle} close={closeBtn}>{title}</ModalHeader>
         <ModalBody>

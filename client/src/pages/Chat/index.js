@@ -16,10 +16,11 @@ function Iframe(props) {
 `; */
 const iframe1 = `
 <iframe
-  src="https://tokbox.com/embed/embed/ot-embed.js?embedId=17fb3998-7b3b-4808-8e23-411f391cc522&room=DEFAULT_ROOM&iframe=true"
-  scrolling="auto"
-  allow="microphone; camera"
+src="https://tokbox.com/embed/embed/ot-embed.js?embedId=1c9ba970-9e31-423a-a7ad-27c15d4ab4b3&room=DEFAULT_ROOM&iframe=true"
+scrolling="auto"
+allow="microphone; camera"
 ></iframe>
+
 `;
 const agendaId = localStorage.getItem('idAgenda')
 const newIframe = iframe1.replace('DEFAULT_ROOM', `sala${agendaId}`);

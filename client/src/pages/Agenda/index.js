@@ -14,8 +14,8 @@ function App(props) {
         const cpf = localStorage.getItem('cpfUser')
         const getItems = async () => {
             try {
-                const response = await api.get('/agenda', { headers: { cpfPaciente: cpf, cpfDoctor: cpf } });
-                setItems(response.data)
+                const response = await api.get('/agendaCompleta', { headers: { cpfUser: cpf } });
+                setItems(response.data.rows)
             } catch (error) {
                 console.log(error);
                 alert("Erro em carregar os dados")
@@ -43,9 +43,9 @@ function App(props) {
                 <ModalForm addItemToState={addItemToState} />
                 <DataTable items={items} updateState={updateState} /> 
                 <CSVLink
-                    filename={`db_agenda_${items.doctor_cpf}.csv`}
+                    filename={`agenda_${items.profissionalCpf}.csv`}
                     data={items}>
-                    <GetAppIcon color='error'/>
+                    <GetAppIcon color='primary'/>Download Agenda
                 </CSVLink>
                 </>:  <DataTable items={items}/>  }
             </Container>

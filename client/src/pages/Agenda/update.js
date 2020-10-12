@@ -79,7 +79,7 @@ function AddEditForm(props) {
   return (
     <form onSubmit={props.item ? submitFormEdit : submitFormAdd}>
       {props.item ? <>
-        <label htmlFor="doctor_cpf">CPF Médico</label>
+        <label htmlFor="doctor_cpf">CPF Profissional</label>
         <input type="text" name="doctor_cpf" id="doctor_cpf" onChange={onChange} value={form.doctor_cpf === null ? '' : form.doctor_cpf} required minLength='11' maxLength='11' />
         <label htmlFor="paciente_cpf">CPF Paciente</label>
         <input type="text" name="paciente_cpf" id="paciente_cpf" onChange={onChange} value={form.paciente_cpf === null ? '' : form.paciente_cpf} required minLength='11' maxLength='11' />

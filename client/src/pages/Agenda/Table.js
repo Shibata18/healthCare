@@ -5,29 +5,27 @@ import { makeStyles } from '@material-ui/core/styles';
 import DuoIcon from '@material-ui/icons/Duo';
 import { format, isBefore } from 'date-fns'
 import { ptBR } from "date-fns/locale";
-import { Document, Page, Text, View, PDFDownloadLink, StyleSheet } from '@react-pdf/renderer';
+/*import { Document, Page, Text, View, PDFDownloadLink, StyleSheet } from '@react-pdf/renderer';
 import Header from './components/Header';
 import Footer from './components/Footer';
-const styles = StyleSheet.create({
-  section: {
-    margin: 10,
-    flexGrow: 5
-  },
-  title: {
-    margin: 20,
-    fontSize: 25,
-    textAlign: 'center',
-    backgroundColor: '#e4e4e4',
-  },
+ const styles = StyleSheet.create({
   body: {
     flexGrow: 1,
+    marginLeft: 10,
   },
   text: {
     width: '60%',
     margin: 10,
     textAlign: 'justify',
   },
-});
+  data: {
+   color:'red'
+  },
+  container: {
+    flexDirection: 'row',
+    alignItems: 'stretch',
+},
+}); */
 const useStyles = makeStyles({
   table: {
     minWidth: 350,
@@ -44,48 +42,43 @@ function DataTable(props) {
       date,
       "'Dia' dd 'de' MMMM', às ' HH:mm'h'", { locale: ptBR }
     );
-    const formattedDate2 = format(
-      dataAtual,
-      "'Dia' dd 'de' MMMM', às ' HH:mm'h'", { locale: ptBR }
-    );
     const horarioAgendado = isBefore(horario, dataAtual);
     localStorage.setItem('idAgenda', item.id)
     return (
       <TableRow key={item.id}>
-        <TableCell>{item.doctor_cpf}</TableCell>
-        <TableCell>{item.paciente_cpf}</TableCell>
+        <TableCell>{item.profissionalNome}</TableCell>
+        <TableCell>{item.pacienteNome}</TableCell>
         <TableCell>{formattedDate}</TableCell>
-        {ehMedico === 'true' ? <>
-        <TableCell>{/* {item.prontuario === null ? '' : item.prontuario.prontuario} */}
+       {/* {ehMedico === 'true' ? <>
+        <TableCell>
          <PDFDownloadLink document={
-            <Document>
-              <Page size="A4">
-                <View>
-                  <Header />
-                </View>
-                <View style={styles.title}>
-                  <Text>CPF Médico : {item.doctor_cpf} </Text>
-                  <Text>CPF Paciente : {item.paciente_cpf} </Text>
-                </View>
-                <View style={styles.body}>
-                <Text>Observações </Text>
-                  <Text style={styles.text}>{item.prontuario === null ? '' : item.prontuario.prontuario}</Text>
-                </View>
-                <View style={styles.body}>
-                <Text>Data e Hora da Consulta</Text>
-                  <Text style={styles.text}>{formattedDate}</Text>
-                </View>
-                <View style={styles.body}>
-                <Text>Data e Hora </Text>
-                  <Text style={styles.text}>{formattedDate2}</Text>
-                </View>
-                <Footer />
-              </Page>
+                <Document>
+                  <Page size="A4">
+                    <Header />
+                    <View>
+                      <Text style={styles.data}>Dados do Paciente </Text>
+                      <Text style={styles.text}>Paciente : {item.paciente_cpf} </Text>
+                    </View>
+                    <View style={styles.body}>
+                      <Text style={styles.data}>Dados do Médico </Text>
+                      <Text style={styles.text}>Médico : {item.doctor_cpf} </Text>
+                      <Text style={styles.text}>Especialidade: </Text>
+                      <Text style={styles.text}></Text>
+                      <Text style={styles.text}>Registro: </Text>
+                      <Text style={styles.text}>Telefone: </Text>
+                      <Text style={styles.text}>Email: </Text>
+                      <Text style={styles.data}>Observações </Text>
+                      <Text style={styles.text}>{item.prontuario === null ? '' : item.prontuario.prontuario}</Text>
+                      <Text style={styles.data}>Data e Hora da Consulta</Text>
+                      <Text style={styles.text}>{formattedDate}</Text>
+                    </View>
+                    <Footer />
+                  </Page>
             </Document>} fileName={`${date.toUTCString()}.pdf`}>
             {item.prontuario === null ?
               '' : ({ blob, url, loading, error }) => (loading ? 'Carregando os dados...' : 'Baixar Prontuário!')}
-          </PDFDownloadLink>
-        </TableCell></>: <TableCell></TableCell>}
+          </PDFDownloadLink> 
+        </TableCell></>: <TableCell></TableCell>}*/}
         <TableCell align='justify'>{horarioAgendado ? <Button href='/chat' color='primary'><DuoIcon /></Button> : <Button disabled color='inherit'><DuoIcon /></Button>}</TableCell>
         {ehMedico === 'true' ?
           <TableCell>
@@ -102,12 +95,12 @@ function DataTable(props) {
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>CPF Médico</TableCell>
-            <TableCell>CPF Paciente</TableCell>
+            <TableCell>Profissional</TableCell>
+            <TableCell>Paciente</TableCell>
             <TableCell>Horario</TableCell>
-            {ehMedico === 'true' ?
+{/*             {ehMedico === 'true' ?
               <TableCell>Prontuário</TableCell> : <TableCell></TableCell>}
-            <TableCell>Vídeo</TableCell>
+ */}            <TableCell>Vídeo</TableCell>
             {ehMedico === 'true' ?
               <TableCell>Editar</TableCell> : <TableCell></TableCell>}
           </TableRow>

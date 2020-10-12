@@ -37,7 +37,16 @@ function Profile(props) {
     }
     localStorage.setItem('nome', items.nome);
     localStorage.setItem('ehMedico', items.ehMedico);
-
+    function alertData(){
+        let answer = window.confirm("Para Se cadastrar como profissional, é necessário completar os seus dados.\n Deseja Continuar?")
+        if(answer){ 
+            document.getElementById('paciente').checked = false
+            document.getElementById('profissional').checked = true
+        }else{
+           // document.getElementById('paciente').checked = true
+            //document.getElementById('profissional').checked = false
+        }
+    }
     return (
         <>
             <Navbar />
@@ -65,8 +74,8 @@ function Profile(props) {
                   </div>
                     </> : <>
                         <div onChange={setFunc}>
-                            <input type='radio' value='paciente' name="func" defaultChecked /> Paciente
-                     <input type="radio" value='profissional' name="func" /> Sou Profissional de Saúde
+                            <input type='radio' value='paciente' id='paciente' name="func" defaultChecked /> Paciente
+                     <input type="radio" value='profissional' id='profissional' name="func" onClick={alertData} /> Sou Profissional de Saúde
                  </div>
                     </>}
             </Container>

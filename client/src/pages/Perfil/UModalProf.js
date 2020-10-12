@@ -24,7 +24,7 @@ function ModalProfessional(props) {
 
   return (
     <div>
-      <Button color='inhert' onClick={toggle}>{button}</Button>
+      <Button color='primary' onClick={toggle}>{button}</Button>
       <Modal isOpen={modal} toggle={toggle} className={props.className}>
         <ModalHeader toggle={toggle} >{title}</ModalHeader>
         <ModalBody>

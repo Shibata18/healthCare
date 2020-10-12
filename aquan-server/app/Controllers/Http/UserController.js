@@ -84,6 +84,18 @@ class UserController {
     const dados = await Database.select('*').from('users');
     return dados;
   }
+  async agendaCompleta({request}){
+    const user = await User.findByOrFail('cpfUser',request.header('cpfUser'))
+    if(user.ehMedico){
+      const data = await Database
+      .raw('WITH N1 AS (select users."cpfUser" as "doctor_cpf", users.email as "profissionalEmail", users.nome as "profissionalNome", users.telefone as "profissionalTelefone", users.conselho, users."ufConselho" , users.registro , agenda.id, users.especialidade , agenda.horario FROM users inner join agenda on agenda.doctor_cpf = users."cpfUser" ),   N2 AS ( select users."cpfUser" as "paciente_cpf", users.email as "pacienteEmail",  users.nome as "pacienteNome", agenda.id , agenda.horario FROM users inner join agenda on agenda.paciente_cpf = users."cpfUser" ) SELECT distinct n2.*,n1.* from N2 inner join n1 on n2.id = n1.id  where n1."doctor_cpf" = ? ;',[user.cpfUser])  
+      return data
+    }else{
+      const data = await Database
+      .raw('WITH N1 AS (select users."cpfUser" as "doctor_cpf", users.email as "profissionalEmail", users.nome as "profissionalNome", users.telefone as "profissionalTelefone", users.conselho, users."ufConselho" , users.registro , agenda.id, users.especialidade , agenda.horario FROM users inner join agenda on agenda.doctor_cpf = users."cpfUser" ),   N2 AS ( select users."cpfUser" as "paciente_cpf", users.email as "pacienteEmail",  users.nome as "pacienteNome", agenda.id , agenda.horario FROM users inner join agenda on agenda.paciente_cpf = users."cpfUser" ) SELECT distinct n2.*,n1.* from N2 inner join n1 on n2.id = n1.id  where n2."paciente_cpf" = ? ;',[user.cpfUser])  
+      return data
+    }
+  }
 }
 
 module.exports = UserController

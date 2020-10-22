@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Button, TextField } from '@material-ui/core'
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import api from "../../services/api";
-
+import DateFnsUtils from '@date-io/date-fns'; 
+import brLocale from 'date-fns/locale/pt-BR';
+import { DateTimePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 function AddEditForm(props) {
   const [dadosPaciente, setDadosPaciente] = useState([]);
   useEffect(() => {
@@ -19,11 +21,12 @@ function AddEditForm(props) {
   }, []);
   const [cpfPaciente, setCpfPaciente] = useState('');
   const [cpfProfissional, setcpfProfissional] = useState('');
+  const [horario, setHorario] = useState(new Date());
+
   const [form, setValues] = useState({
     id: 0,
     doctor_cpf: '',
     paciente_cpf: '',
-    horario: '',
   })
   const onChange = e => {
     setValues({
@@ -37,7 +40,7 @@ function AddEditForm(props) {
       const response = await api.post('/agenda', {
         doctor_cpf: cpfProfissional,
         paciente_cpf: cpfPaciente,
-        horario: form.horario,
+        horario: horario,
       })
       if (response) setTimeout(function () { alert('Agendado Com sucesso'); window.location.reload() }, 100)
 
@@ -62,7 +65,7 @@ function AddEditForm(props) {
       await api.put(`/agenda/${form.id}`, {
         doctor_cpf: form.doctor_cpf,
         paciente_cpf: form.paciente_cpf,
-        horario: form.horario,
+        horario: horario,
       })
       setTimeout(function () { alert('Atualizado Com sucesso'); window.location.reload() }, 2000)
     } catch (error) {
@@ -73,7 +76,8 @@ function AddEditForm(props) {
   useEffect(() => {
     if (props.item) {
       const { id, doctor_cpf, paciente_cpf, horario } = props.item
-      setValues({ id, doctor_cpf, paciente_cpf, horario })
+      setValues({ id, doctor_cpf, paciente_cpf })
+      setHorario(horario)
     }
   }, [props.item])
   return (
@@ -85,9 +89,9 @@ function AddEditForm(props) {
         <input type="text" name="paciente_cpf" id="paciente_cpf" onChange={onChange} value={form.paciente_cpf === null ? '' : form.paciente_cpf} required minLength='11' maxLength='11' />
         <p style={{ marginTop: 15, marginBottom: 20 }}>
           <label htmlFor='horario'>Data e Hora: </label></p>
-        <input
-          type='datetime-local'
-          name="horario" id="horario" onChange={onChange} value={form.horario} required />
+          <MuiPickersUtilsProvider utils={DateFnsUtils} locale={brLocale}>
+            <DateTimePicker onChange={setHorario} value={horario} />
+          </MuiPickersUtilsProvider>
         <div style={{ marginTop: 15, marginBottom: 20 }}>
           <Button type='submit' fullWidth color='primary' variant='contained' >Enviar</Button>
         </div></> :
@@ -122,9 +126,12 @@ function AddEditForm(props) {
           />
           <p style={{ marginTop: 15, marginBottom: 20 }}>
             <label htmlFor='horario'>Data e Hora: </label></p>
-          <input
+          {/*  <input
             type='datetime-local'
-            name="horario" id="horario" onChange={onChange} value={form.horario} required />
+            name="horario" id="horario" onChange={onChange} value={form.horario} required /> */}
+          <MuiPickersUtilsProvider utils={DateFnsUtils} locale={brLocale}>
+            <DateTimePicker onChange={setHorario} value={horario} />
+          </MuiPickersUtilsProvider>
           <div style={{ marginTop: 15, marginBottom: 20 }}>
             <Button type='submit' fullWidth color='primary' variant='contained' >Enviar</Button>
           </div>

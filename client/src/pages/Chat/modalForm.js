@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
-import { logout } from '../../services/auth';
+//import { logout } from '../../services/auth';
 
 function rand() {
   return Math.round(Math.random() * 20) - 10;
@@ -41,10 +41,10 @@ export default function ModalForm() {
   // getModalStyle is not a pure function, we roll the style only on the first render
   const [modalStyle] = React.useState(getModalStyle);
   const [open, setOpen] = React.useState(false);
-  const handleLogout = e => {
+  /* const handleLogout = e => {
     logout();
     window.location.href = '/';
-  };
+  }; */
   const handleOpen = () => {
     setOpen(true);
   };
@@ -59,9 +59,12 @@ export default function ModalForm() {
       <p id="encerrar-consulta-description">
       Muito Obrigado Por se Consultar pelo Fabbrini
       </p>
-      <a href='/'><p  onClick={handleLogout} id="encerrar-consulta-description">
+      {/* <a href='/'><p  onClick={handleLogout} id="encerrar-consulta-description">
         Avalie a Consulta
-      </p></a>
+      </p></a> */}
+      <a href='/agenda'>
+        <p>Voltar para a agenda</p>
+      </a>
     </div>
   );
 

@@ -50,6 +50,16 @@ export const mainListItems = (
         </ListItemIcon>
         <ListItemText primary="Agenda" /></Button>
     </ListItem>
+    {ehMedico === 'true' ?
+      <>
+        <ListItem button>
+          <Button href='/prontuario'>
+            <ListItemIcon>
+              <AssignmentIcon />
+            </ListItemIcon>
+            <ListItemText primary="Prontuario" /></Button>
+        </ListItem>
+      </> : <div></div>}
     <ListItem button>
       <Button href='#'>
         <ListItemIcon>

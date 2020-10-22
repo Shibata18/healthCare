@@ -88,11 +88,23 @@ class UserController {
     const user = await User.findByOrFail('cpfUser',request.header('cpfUser'))
     if(user.ehMedico){
       const data = await Database
-      .raw('WITH N1 AS (select users."cpfUser" as "doctor_cpf", users.email as "profissionalEmail", users.nome as "profissionalNome", users.telefone as "profissionalTelefone", users.conselho, users."ufConselho" , users.registro , agenda.id, users.especialidade , agenda.horario FROM users inner join agenda on agenda.doctor_cpf = users."cpfUser" ),   N2 AS ( select users."cpfUser" as "paciente_cpf", users.email as "pacienteEmail",  users.nome as "pacienteNome", agenda.id , agenda.horario FROM users inner join agenda on agenda.paciente_cpf = users."cpfUser" ) SELECT distinct n2.*,n1.* from N2 inner join n1 on n2.id = n1.id  where n1."doctor_cpf" = ? ;',[user.cpfUser])  
+      .raw('WITH N1 AS (select users."cpfUser" as "doctor_cpf", users.email as "profissionalEmail", users.nome as "profissionalNome", users.telefone as "profissionalTelefone", users.conselho, users."ufConselho" , users.registro , agenda.id, users.especialidade , agenda.horario FROM users inner join agenda on agenda.doctor_cpf = users."cpfUser" ),   N2 AS ( select users."cpfUser" as "paciente_cpf", users.email as "pacienteEmail",  users.nome as "pacienteNome", agenda.id as "agendaId", agenda.horario FROM users inner join agenda on agenda.paciente_cpf = users."cpfUser" ) SELECT distinct n2.*,n1.* from N2 inner join n1 on n2."agendaId" = n1.id  where n1."doctor_cpf" = ? ;',[user.cpfUser])  
       return data
     }else{
       const data = await Database
-      .raw('WITH N1 AS (select users."cpfUser" as "doctor_cpf", users.email as "profissionalEmail", users.nome as "profissionalNome", users.telefone as "profissionalTelefone", users.conselho, users."ufConselho" , users.registro , agenda.id, users.especialidade , agenda.horario FROM users inner join agenda on agenda.doctor_cpf = users."cpfUser" ),   N2 AS ( select users."cpfUser" as "paciente_cpf", users.email as "pacienteEmail",  users.nome as "pacienteNome", agenda.id , agenda.horario FROM users inner join agenda on agenda.paciente_cpf = users."cpfUser" ) SELECT distinct n2.*,n1.* from N2 inner join n1 on n2.id = n1.id  where n2."paciente_cpf" = ? ;',[user.cpfUser])  
+      .raw('WITH N1 AS (select users."cpfUser" as "doctor_cpf", users.email as "profissionalEmail", users.nome as "profissionalNome", users.telefone as "profissionalTelefone", users.conselho, users."ufConselho" , users.registro , agenda.id, users.especialidade , agenda.horario FROM users inner join agenda on agenda.doctor_cpf = users."cpfUser" ),   N2 AS ( select users."cpfUser" as "paciente_cpf", users.email as "pacienteEmail",  users.nome as "pacienteNome", agenda.id as "agendaId", agenda.horario FROM users inner join agenda on agenda.paciente_cpf = users."cpfUser" ) SELECT distinct n2.*,n1.* from N2 inner join n1 on n2."agendaId" = n1.id  where n2."paciente_cpf" = ? ;',[user.cpfUser])  
+      return data
+    }
+  }
+  async prontuarioCompleto({request}){
+    const user = await User.findByOrFail('cpfUser',request.header('cpfUser'))
+    if(user.ehMedico){
+      const data = await Database
+      .raw('WITH N1 AS (select users."cpfUser" as "doctor_cpf", users.email as "profissionalEmail", users.nome as "profissionalNome", users.telefone as "profissionalTelefone", users.conselho, users."ufConselho" , users.registro , agenda.id, users.especialidade , agenda.horario, prontuarios.prontuario , prontuarios.created_at as "prontuarioCriado" FROM users inner join agenda on agenda.doctor_cpf = users."cpfUser" 	inner join prontuarios on prontuarios.agenda_id= agenda.id ),   N2 AS ( select users."cpfUser" as "paciente_cpf", users.email as "pacienteEmail",  users.nome as "pacienteNome", agenda.id as "agendaId", agenda.horario FROM users inner join agenda on agenda.paciente_cpf = users."cpfUser" ) SELECT distinct n2.*,n1.* from N2 inner join n1 on n2."agendaId" = n1.id  where n1."doctor_cpf" = ? ;',[user.cpfUser])  
+      return data
+    }else{
+      const data = await Database
+      .raw('WITH N1 AS (select users."cpfUser" as "doctor_cpf", users.email as "profissionalEmail", users.nome as "profissionalNome", users.telefone as "profissionalTelefone", users.conselho, users."ufConselho" , users.registro , agenda.id, users.especialidade , agenda.horario,prontuarios.prontuario ,  prontuarios.created_at as "prontuarioCriado" FROM users inner join agenda on agenda.doctor_cpf = users."cpfUser" inner join prontuarios on prontuarios.agenda_id= agenda.id  ),   N2 AS ( select users."cpfUser" as "paciente_cpf", users.email as "pacienteEmail",  users.nome as "pacienteNome", agenda.id as "agendaId", agenda.horario FROM users inner join agenda on agenda.paciente_cpf = users."cpfUser" ) SELECT distinct n2.*,n1.* from N2 inner join n1 on n2."agendaId" = n1.id  where n2."paciente_cpf" = ? ;',[user.cpfUser])  
       return data
     }
   }

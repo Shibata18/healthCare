@@ -31,4 +31,5 @@ Route.get('/agenda','AgendaController.index').middleware('auth:jwt')//Ver toda a
 Route.get('/perfil','UserController.perfil').middleware('auth:jwt')//Mostra o perfil do usuário
 Route.post('/agenda/:id/prontuario','ProntuarioController.store').middleware('auth:jwt')//Criando prontuário
 Route.get("/dadosPaciente",'UserController.dadosPaciente').middleware('auth:jwt');//mostrar lista de pacientes
-Route.get("/agendaCompleta",'UserController.agendaCompleta').middleware('auth:jwt');//mostrar lista de pacientes
+Route.get("/agendaCompleta",'UserController.agendaCompleta').middleware('auth:jwt');
+Route.get("/prontuario",'UserController.prontuarioCompleto').middleware('auth:jwt');

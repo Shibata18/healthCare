@@ -7,7 +7,7 @@ function EditProfile(props) {
     nome: '',
     email: '',
     telefone: '',
-    password: '',
+   // password: '',
     ativo: '',
   })
   const cpfUser = localStorage.getItem('cpfUser');
@@ -26,7 +26,7 @@ function EditProfile(props) {
         nome: form.nome,
         email: form.email,
         telefone: form.telefone,
-        password: form.password,
+       // password: form.password,
         ativo: form.ativo
       }, { headers: { cpfUser: cpfUser, } });
       if (response) setTimeout(function () { alert('Atualizado Com sucesso'); window.location.reload() }, 200)
@@ -46,8 +46,8 @@ function EditProfile(props) {
 
   useEffect(() => {
     if (props.item) {
-      const { nome, email, telefone, password, ativo, } = props.item
-      setValues({ nome, email, telefone, password, ativo, })
+      const { nome, email, telefone,  ativo, } = props.item
+      setValues({ nome, email, telefone,  ativo, })
     }
   }, [props.item])
   return (
@@ -59,9 +59,9 @@ function EditProfile(props) {
       <input type="email" name="email" id="email" onChange={onChange} value={form.email === null ? '' : form.email} required />
       <label htmlFor="telefone">Telefone</label>
       <input type="text" name="telefone" id="telefone" onChange={onChange} value={form.telefone === null ? '' : form.telefone} placeholder="(11) 12345-1234" required />
-      <label htmlFor="password">Senha</label>
+      {/* <label htmlFor="password">Senha</label>
       <input type="password" name="password" id="password" onChange={onChange} value={form.password === null ? '' : form.password} required />
-      <label htmlFor="ativo">Status</label>
+       */}<label htmlFor="ativo">Status</label>
       <Select type="select" name='ativo' id='ativo' fullWidth value={form.ativo} onChange={onChange}>
         <MenuItem value={true}>Ativo</MenuItem>
         <MenuItem value={false} >Inativar</MenuItem>

@@ -12,7 +12,7 @@ const EditProfissional = (props) => {
   const [nomeProf, setNomeProf] = useState('');
   const [emailProf, setEmailProf] = useState('');
   const [telefoneProf, setTelefoneProf] = useState('');
-  const [senha, setSenha] = useState('');
+  //const [senha, setSenha] = useState('');
   const [registro, setRegistro] = useState('');
   const [conselho, setConselho] = useState(null);
   const [ufConselho, setUfconselho] = useState(null);
@@ -28,7 +28,7 @@ const EditProfissional = (props) => {
         nome: nomeProf,
         email: emailProf,
         telefone: telefoneProf,
-        password: senha,
+       // password: senha,
         ativo: ativo,
         conselho: conselho,
         ufConselho: ufConselho,
@@ -52,11 +52,11 @@ const EditProfissional = (props) => {
 
   useEffect(() => {
     if (props.item) {
-      const { nome, email, telefone, password, ativo, conselho, ufConselho, registro, especialidade, } = props.item
+      const { nome, email, telefone,  ativo, conselho, ufConselho, registro, especialidade, } = props.item
       setNomeProf(nome);
       setEmailProf(email);
       setTelefoneProf(telefone);
-      setSenha(password);
+   //   setSenha(password);
       setAtivo(ativo);
       setConselho(conselho);
       setUfconselho(ufConselho);
@@ -72,8 +72,8 @@ const EditProfissional = (props) => {
       <input type="email" name="emailProf" id="emailProf" onChange={e => setEmailProf(e.target.value)} value={emailProf === null ? '' : emailProf} required />
       <label htmlFor="telefoneProf">Telefone</label>
       <input type="text" name="telefoneProf" id="telefoneProf" onChange={e => setTelefoneProf(e.target.value)} value={telefoneProf === null ? '' : telefoneProf} placeholder="(11) 12345-1234" required />
-      <label htmlFor="senha">Senha</label>
-      <input type="password" name="senha" id="senha" onChange={e => setSenha(e.target.value)} value={senha === null ? '' : senha} required />
+      {/* <label htmlFor="senha">Senha</label>
+      <input type="password" name="senha" id="senha" onChange={e => setSenha(e.target.value)} value={senha === null ? '' : senha} required /> */}
       <label htmlFor="registro">registro</label>
       <input type="text" name="registro" id="registro" onChange={e => setRegistro(e.target.value)} value={registro === null ? '' : registro} required />
       <Row form >

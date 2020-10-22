@@ -1,5 +1,6 @@
 {
     "conselho": [
+        "Sem Registro em Conselho Regional",
         "Conselho Federal de Medicina (CRM)",
         "Conselho Federal de Enfermagem (COREN)",
         "Conselho Regional Fisioterapia e Terapia Ocupacional (CREFITO)",
@@ -8,7 +9,6 @@
         "Conselho Regional de Fonoaudiologia (CRFa)",
         "Conselho Regional de Odontologia (CRO)",
         "Conselho Regional de Administração (CRA)",
-        "Conselho Regional de Engenharia e Arquitetura (CREA)",
-        "Sem Registro em Conselho Regional"
+        "Conselho Regional de Engenharia e Arquitetura (CREA)"
     ]
 }

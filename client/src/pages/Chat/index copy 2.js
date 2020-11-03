@@ -10,8 +10,7 @@ import config from './config.json';
 import './App.css';
 import Navbar from '../Navbar'
 import Prontuario from './prontuario';
-import ChatBot from '../Chatbot';
-//import ModalForm from './modalForm';
+import ModalForm from './modalForm';
 
 let otCore;
 
@@ -35,7 +34,7 @@ const otCoreOptions = {
     }[pubSub][type];
   },
   controlsContainer: '#controls',
-  //packages: ['textChat', 'screenSharing', 'annotation'],
+  packages: ['textChat', 'screenSharing', 'annotation'],
   communication: {
     callProperties: null, // Using default
   },
@@ -193,16 +192,16 @@ class App extends Component {
             <div id="screenSubscriberContainer" className={screenSubscriberClass} />
             <div id="chat" className="App-chat-container" />
           </div>
+        </div>
         <div id="controls" className={controlClass}>
           <div className={localAudioClass} onClick={this.toggleLocalAudio} />
           <div className={localVideoClass} onClick={this.toggleLocalVideo} />
           <div className={localCallClass} onClick={this.endCall} />
         </div>
-          {ehMedico === 'true'?
+        {ehMedico === 'true'?
                     <Prontuario />
                     :<div></div>}
-                    <ChatBot/>
-        </div>
+        <ModalForm/>
       </div>
     );
   }

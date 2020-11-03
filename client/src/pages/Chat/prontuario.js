@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import api from '../../services/api';
 import { Button } from '@material-ui/core';
-import './App.css'
+//import './App.css'
 function Prontuario() {
     const [textoProntuario, setTextoProntuario] = useState('');
     const idAgenda = localStorage.getItem('idAgenda');
@@ -13,7 +13,7 @@ function Prontuario() {
             return alert("Enviado com sucesso");
         } catch (error) {
             console.log(error.response);
-            alert('Houve um erro ao enviar')
+            alert('Houve um erro ao Salvar')
         }
     }
     return (
@@ -25,7 +25,7 @@ function Prontuario() {
                     placeholder="Prontuario: Escreva aqui o feedback para o paciente"
                     onChange={e => setTextoProntuario(e.target.value)}
                 />
-                <Button variant="contained" color='primary' fullWidth type='submit'>Enviar</Button>
+                <Button variant="contained" color='primary'  type='submit'>Salvar</Button>
             </form>
     )
 }

@@ -27,7 +27,7 @@ function AddEditForm(props) {
         nome: form.nome,
         email: form.email,
         telefone: form.telefone,
-        password: form.password,
+      //  password: form.password,
       })
       if (response) setTimeout(function () { alert('Cadastrado Com sucesso'); window.location.reload() }, 1000)
     } catch (error) {
@@ -43,7 +43,7 @@ function AddEditForm(props) {
         nome: form.nome,
         email: form.email,
         telefone: form.telefone,
-        password: form.password,
+       // password: form.password,
         ativo: form.ativo
       }, { headers: { cpfUser: form.cpfUser, } });
       if (response) setTimeout(function () { alert('Atualizado Com sucesso'); window.location.reload() }, 2000)
@@ -79,10 +79,10 @@ function AddEditForm(props) {
         <Label for="telefone">Telefone</Label>
         <Input type="text" name="telefone" id="telefone" onChange={onChange} value={form.telefone === null ? '' : form.telefone} placeholder="(11) 12345-1234" />
       </FormGroup>
-      <FormGroup>
+     {/*  <FormGroup>
         <Label for="password">Senha</Label>
         <Input type="password" name="password" id="password" onChange={onChange} value={form.password === null ? '' : form.password} />
-      </FormGroup>
+      </FormGroup> */}
       <FormGroup>
         <Label for="ativo">Status</Label>
         <Input type="select" name='ativo' id='ativo' value={form.ativo} onChange={onChange}>
@@ -90,7 +90,7 @@ function AddEditForm(props) {
           <option value={false} >Inativar</option>
         </Input>
       </FormGroup>
-      <Button>Enviar</Button>
+      <Button>Salvar</Button>
     </Form>
   )
 }

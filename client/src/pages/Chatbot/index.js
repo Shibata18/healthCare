@@ -13,9 +13,9 @@ export default function ChatBot() {
             socketUrl={"https://e75a636b051c.ngrok.io"}
             socketPath={"/socket.io/"}
             title={"Anamna Bot"}
-            subtitle={"Digite Olá para começarmos :D"}
-            inputTextFieldHint={"Digite Olá"}
-            connectingText={"Digite Olá"}
+            subtitle={"Digite 'Oi' para começarmos"}
+            inputTextFieldHint={"Sua mensagem..."}
+            connectingText={"Conectando..."}
             hideWhenNotConnected={true}
             fullScreenMode={true}
             showFullScreenButton={true}

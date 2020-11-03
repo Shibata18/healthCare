@@ -66,7 +66,7 @@ function EditProfile(props) {
         <MenuItem value={true}>Ativo</MenuItem>
         <MenuItem value={false} >Inativar</MenuItem>
       </Select>
-      <Button type='submit' color='primary' fullWidth variant="contained" style={{ marginTop: 10 }}>Enviar</Button>
+      <Button type='submit' color='primary' fullWidth variant="contained" style={{ marginTop: 10 }}>Salvar</Button>
     </form>
   )
 }

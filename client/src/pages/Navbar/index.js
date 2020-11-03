@@ -126,7 +126,7 @@ export default function Navbar() {
             <MenuIcon />
           </IconButton>
           <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-               <a href='/perfil'><img alt='logo' src={logo} width='10%' height='15%' /></a>
+               <a href='/perfil'><img alt='logo' src={logo} width='100vh' height='15%' /></a>
           </Typography>
 
           <Badge color="secondary">

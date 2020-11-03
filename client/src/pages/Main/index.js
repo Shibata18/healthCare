@@ -5,6 +5,7 @@ import Navbar from '../Navbar';
 import api from '../../services/api';
 import { Skeleton } from '@material-ui/lab';
 import { LineChart, Line } from 'recharts';
+import ChatBot from '../Chatbot';
 const data = [{name: 'Page A', uv: 400, pv: 2400, amt: 2400},{name: 'Page A', uv: 100, pv: 1400, amt: 1400},{name: 'Page A', uv: 300, pv: 2400, amt: 2400},{name: 'Page A', uv: 200, pv: 2400, amt: 2400},{name: 'Page A', uv: 400, pv: 2400, amt: 2400},{name: 'Page A', uv: 100, pv: 1400, amt: 1400},{name: 'Page A', uv: 300, pv: 2400, amt: 2400},{name: 'Page A', uv: 200, pv: 2400, amt: 2400},{name: 'Page A', uv: 400, pv: 2400, amt: 2400},{name: 'Page A', uv: 100, pv: 1400, amt: 1400},{name: 'Page A', uv: 300, pv: 2400, amt: 2400},{name: 'Page A', uv: 200, pv: 2400, amt: 2400}];
 
 const renderLineChart = (
@@ -118,6 +119,7 @@ const Main = (props) => {
                     </Grid>
                 </Container>
             </main>
+            <ChatBot/>
         </>
     );
 };

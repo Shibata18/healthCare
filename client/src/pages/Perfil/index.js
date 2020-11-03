@@ -4,6 +4,7 @@ import DataProfile from './DataProfile';
 import Navbar from '../Navbar';
 import api from '../../services/api'
 import DataProfessional from './UCardProf';
+import ChatBot from '../Chatbot';
 
 function Profile(props) {
     const [items, setItems] = useState([])
@@ -20,7 +21,6 @@ function Profile(props) {
         }
         getItems()
     }, []);
-
     const updateState = (item) => {
         const itemIndex = items.findIndex(data => data.id === item.id)
         const newArray = [...items.slice(0, itemIndex), item, ...items.slice(itemIndex + 1)]
@@ -38,7 +38,7 @@ function Profile(props) {
     localStorage.setItem('nome', items.nome);
     localStorage.setItem('ehMedico', items.ehMedico);
     function alertData(){
-        let answer = window.confirm("Para Se cadastrar como profissional, é necessário completar os seus dados.\n Deseja Continuar?")
+        let answer = window.confirm("Para Se cadastrar como profissional, é necessário completar os seus dados. \n E Editar o Perfil para habilitar as permissões de profissionais da saúde\n Deseja Continuar?")
         if(answer){ 
             document.getElementById('paciente').checked = false
             document.getElementById('profissional').checked = true
@@ -51,6 +51,7 @@ function Profile(props) {
         <>
             <Navbar />
             <Container>
+            <ChatBot/>
                 <h2 style={{ margin: 20, color: '#00BCD4' }}>Olá, {items.nome}</h2>
                 {items.ehMedico ?
                     <>

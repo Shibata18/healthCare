@@ -4,6 +4,7 @@ import ModalForm from './Modal';
 import DataTable from './Table';
 import Navbar from '../Navbar/index';
 import api from '../../services/api'
+import ChatBot from '../Chatbot';
 
 function App(props) {
   const [items, setItems] = useState([]);
@@ -52,6 +53,7 @@ function App(props) {
           </Col>
         </Row>
       </Container>
+      <ChatBot/>
     </>
   )
 }

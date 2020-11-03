@@ -3,6 +3,7 @@ import { Container } from '@material-ui/core'
 import DataTable from './Table';
 import Navbar from '../Navbar';
 import api from '../../services/api'
+import ChatBot from '../Chatbot';
 
 function Prontuario(props) {
     const [items, setItems] = useState([])
@@ -26,6 +27,7 @@ function Prontuario(props) {
                 <h1 style={{ margin: 20 }}>Prontuario</h1>
                 <DataTable items={items}/>
             </Container>
+            <ChatBot/>
         </>
     )
 }

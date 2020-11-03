@@ -1,6 +1,7 @@
 import React from 'react';
 import { Container,Grid } from '@material-ui/core';
 import Navbar from '../Navbar';
+import ChatBot from '../Chatbot';
 
 
 export default function About() {
@@ -20,6 +21,7 @@ export default function About() {
           </Grid>
         </Grid>
             </Container>
+            <ChatBot/>
         </>
     );
 }

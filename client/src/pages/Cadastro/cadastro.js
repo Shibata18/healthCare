@@ -52,6 +52,7 @@ export default function Cadastro() {
             alert('Cadastro Realizado com sucesso')
             history.push('/')
         } catch (error) {
+            console.log(error.response.data);
             let mensagemErro = error.response.data.error.message;
             if (mensagemErro === 'insert into "users" ("cpfUser", "created_at", "email", "password", "updated_at") values ($1, $2, $3, $4, $5) returning "id" - null value in column "cpfUser" violates not-null constraint') { alert('CPF não pode estar em branco') }
             else if (mensagemErro === 'insert into "users" ("cpfUser", "created_at", "email", "nome", "password", "updated_at") values ($1, $2, $3, $4, $5, $6) returning "id" - duplicate key value violates unique constraint "users_cpfuser_unique"') { alert('CPF já cadastrado') }
@@ -119,7 +120,7 @@ export default function Cadastro() {
                     color="primary"
                     className={classes.submit}
                 >
-                    Entrar
+                    Cadastre-se
           </Button>
                 <Grid container>
                     <Grid item>

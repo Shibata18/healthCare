@@ -93,7 +93,7 @@ function AddEditForm(props) {
             <DateTimePicker onChange={setHorario} value={horario} />
           </MuiPickersUtilsProvider>
         <div style={{ marginTop: 15, marginBottom: 20 }}>
-          <Button type='submit' fullWidth color='primary' variant='contained' >Enviar</Button>
+          <Button type='submit' fullWidth color='primary' variant='contained' >Salvar</Button>
         </div></> :
         <>
           <label htmlFor="doctor_cpf">Profisisonal</label>
@@ -133,7 +133,7 @@ function AddEditForm(props) {
             <DateTimePicker onChange={setHorario} value={horario} />
           </MuiPickersUtilsProvider>
           <div style={{ marginTop: 15, marginBottom: 20 }}>
-            <Button type='submit' fullWidth color='primary' variant='contained' >Enviar</Button>
+            <Button type='submit' fullWidth color='primary' variant='contained' >Salvar</Button>
           </div>
         </>}
     </form>

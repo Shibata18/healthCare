@@ -6,6 +6,7 @@ import Navbar from '../Navbar';
 import { CSVLink } from "react-csv";
 import GetAppIcon from '@material-ui/icons/GetApp';
 import api from '../../services/api'
+import ChatBot from '../Chatbot';
 
 function App(props) {
     const [items, setItems] = useState([])
@@ -49,6 +50,7 @@ function App(props) {
                 </CSVLink>
                 </>:  <DataTable items={items}/>  }
             </Container>
+            <ChatBot/>
         </>
     )
 }

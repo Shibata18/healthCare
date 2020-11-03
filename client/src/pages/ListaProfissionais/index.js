@@ -3,6 +3,7 @@ import { Container, Grid } from '@material-ui/core'
 import DataProfissional from './card';
 import Navbar from '../Navbar/index';
 import api from '../../services/api';
+import ChatBot from '../Chatbot';
 
 function FullListProfissional(props) {
 
@@ -33,6 +34,7 @@ function FullListProfissional(props) {
             <DataProfissional items={items} />
         </Grid>
       </Container>
+      <ChatBot/>
     </>
   )
 }

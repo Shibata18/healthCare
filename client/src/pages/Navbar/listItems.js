@@ -57,18 +57,18 @@ export const mainListItems = (
             <ListItemIcon>
               <AssignmentIcon />
             </ListItemIcon>
-            <ListItemText primary="Prontuario" /></Button>
+            <ListItemText primary="Prontuário" /></Button>
         </ListItem>
       </> : <div></div>}
     <ListItem button>
-      <Button href='#'>
+      <Button href='/about'>
         <ListItemIcon>
           <InfoRoundedIcon />
         </ListItemIcon>
         <ListItemText primary="Sobre" /></Button>
     </ListItem>
     <ListItem button>
-      <Button href='#'>
+      <Button href='/help'>
         <ListItemIcon>
           <HelpOutlineRoundedIcon />
         </ListItemIcon>

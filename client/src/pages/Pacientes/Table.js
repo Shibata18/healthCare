@@ -15,8 +15,8 @@ function DataTable(props){
       if(item.ehPaciente){
       return (
         <TableRow key={item.id}>
-          <TableCell align='center'>{item.cpfUser}</TableCell>
-          <TableCell align='center'>{item.nome}</TableCell>
+{/*           <TableCell align='center'>{item.cpfUser}</TableCell>
+ */}          <TableCell align='center'>{item.nome}</TableCell>
           <TableCell align='center'>{item.email}</TableCell>
           <TableCell align='center'>{item.telefone}</TableCell>
           <TableCell align='center'>{item.ativo?`Ativo`:`Inativo`}</TableCell>
@@ -37,8 +37,8 @@ function DataTable(props){
     <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell align='center'>CPF</TableCell>
-            <TableCell align='center'>Nome</TableCell>
+{/*             <TableCell align='center'>CPF</TableCell>
+ */}            <TableCell align='center'>Nome</TableCell>
             <TableCell align='center'>Email</TableCell>
             <TableCell align='center'>Telefone</TableCell>
             <TableCell align='center'>Status</TableCell>
